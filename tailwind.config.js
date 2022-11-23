@@ -8,16 +8,16 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        "custom-radial-gradient":
+        "gradient-radial":
           "radial-gradient(76.97% 83.67% at 100% 100%, #0D4477 0%, #3E92CE 100%)",
 
-        "player-card-gradient":
+        "gradient-player-card":
           "linear-gradient(160.65deg, rgba(255, 255, 255, 0.6) 0.74%, rgba(255, 255, 255, 0.1) 102.03%)",
 
-        "decorator-circle-gradient":
+        "gradient-decorator-circle":
           "radial-gradient(157.07% 157.07% at 171.6% 173.4%, #FFFFFF 0%, #3E92CE 100%)",
 
-        "glassy-gradient":
+        "gradient-glassy":
           "linear-gradient(107.62deg, rgba(255, 255, 255, 0.6) -0.7%, rgba(255, 255, 255, 0.1) 102.18%)",
       },
     },
