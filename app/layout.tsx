@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html className={customFont.className}>
       <head />
-      <body className="w-screen h-screen p-8 bg-no-repeat bg-custom-radial-gradient">
+      <body className="w-screen h-screen p-8 text-white bg-no-repeat bg-custom-radial-gradient">
         <Header />
         {children}
       </body>
