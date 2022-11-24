@@ -29,7 +29,7 @@ export default function RootLayout({
         {/* bottom right decoration */}
         <div className="absolute top-[688px] -right-48 -z-10 h-[664px] w-[664px] rounded-full bg-white bg-gradient-decorator-circle blur-2xl"></div>
 
-        {/* <Header /> */}
+        <Header />
 
         {children}
       </body>

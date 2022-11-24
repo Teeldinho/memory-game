@@ -21,7 +21,7 @@ const Card = ({ id, name, symbol, color, image }: ICard) => {
 
   return (
     <div
-      className="relative h-20 ease-in-out cursor-pointer hover:scale-110 hover:opacity-80"
+      className="relative h-20 overflow-hidden ease-in-out rounded-sm cursor-pointer hover:scale-110 hover:opacity-80"
       onClick={flipCard}
     >
       {flipped ? (
