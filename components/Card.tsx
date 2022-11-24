@@ -10,13 +10,14 @@ export interface ICard {
   symbol: string;
   color: string;
   image: string;
+  flipped: boolean;
 }
 
-const Card = ({ id, name, symbol, color, image }: ICard) => {
-  const [flipped, setFlipped] = useState(false);
+const Card = ({ id, name, symbol, color, image, flipped }: ICard) => {
+  const [isFlipped, setIsFlipped] = useState(false);
 
   const flipCard = () => {
-    setFlipped((flip) => !flip);
+    setIsFlipped((flip) => !flip);
   };
 
   return (
@@ -24,7 +25,7 @@ const Card = ({ id, name, symbol, color, image }: ICard) => {
       className="relative h-20 overflow-hidden ease-in-out rounded-sm cursor-pointer hover:scale-110 hover:opacity-80"
       onClick={flipCard}
     >
-      {flipped ? (
+      {isFlipped ? (
         <Image src={image} fill alt="Card Front" />
       ) : (
         <Image src={CardBack} fill alt="Card Back" />

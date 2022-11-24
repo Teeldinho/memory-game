@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const Header = () => {
@@ -13,9 +14,11 @@ const Header = () => {
             Restart Game
           </button>
 
-          <button className="rounded-lg bg-[#D4190C] p-4 text-xl font-bold hover:opacity-90">
-            Exit Game
-          </button>
+          <Link href="/" passHref>
+            <button className="rounded-lg bg-[#D4190C] p-4 text-xl font-bold hover:opacity-90">
+              Exit Game
+            </button>
+          </Link>
         </div>
       </div>
     </header>
