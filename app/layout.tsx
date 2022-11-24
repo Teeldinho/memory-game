@@ -19,17 +19,17 @@ export default function RootLayout({
     <html className={customFont.className}>
       <head />
 
-      <body className="relative h-screen p-8 mx-auto overflow-hidden text-white bg-no-repeat bg-gradient-radial max-w-[1440px]">
+      <body className="relative mx-auto h-screen max-w-[1440px] overflow-hidden bg-gradient-radial bg-no-repeat p-8 text-white">
         {/* top right decoration */}
-        <div className="absolute h-[915px] w-[915px] -top-72 -right-24 rounded-full bg-white -z-10 bg-gradient-decorator-circle blur-2xl"></div>
+        <div className="absolute -top-72 -right-48 -z-10 h-[915px] w-[915px] rounded-full bg-white bg-gradient-decorator-circle blur-2xl"></div>
 
         {/* top left decoration */}
-        <div className="absolute h-[637px] w-[637px] -top-40 -left-24 rounded-full bg-white -z-10 bg-gradient-decorator-circle blur-2xl"></div>
+        <div className="absolute -top-40 -left-24 -z-10 h-[637px] w-[637px] rounded-full bg-white bg-gradient-decorator-circle blur-2xl"></div>
 
         {/* bottom right decoration */}
-        <div className="absolute h-[664px] w-[664px] top-[688px] right-0 rounded-full bg-white -z-10 bg-gradient-decorator-circle blur-2xl"></div>
+        <div className="absolute top-[688px] -right-48 -z-10 h-[664px] w-[664px] rounded-full bg-white bg-gradient-decorator-circle blur-2xl"></div>
 
-        <Header />
+        {/* <Header /> */}
 
         {children}
       </body>

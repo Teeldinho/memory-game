@@ -4,6 +4,7 @@ import Image from "next/image";
 
 import AvatarPlayer1 from "@/assets/Player1.png";
 import AvatarPlayer2 from "@/assets/Player2.png";
+import Link from "next/link";
 
 // import { useForm, SubmitHandler } from "react-hook-form";
 
@@ -48,7 +49,7 @@ const Home = () => {
               <input
                 // {...register("namePlayer1", { required: true })}
                 type="text"
-                className="block w-full px-4 py-3 m-0 text-base font-normal text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded form-control bg-clip-padding focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none"
+                className="block w-full px-4 py-3 m-0 text-lg font-normal text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded form-control bg-clip-padding focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none"
                 placeholder="Name of Player 1"
               />
             </div>
@@ -68,7 +69,7 @@ const Home = () => {
               <input
                 // {...register("namePlayer1", { required: true })}
                 type="text"
-                className="block w-full px-4 py-3 m-0 text-base font-normal text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded form-control bg-clip-padding focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none"
+                className="block w-full px-4 py-3 m-0 text-lg font-normal text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded form-control bg-clip-padding focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none"
                 placeholder="Name of Player 2"
               />
             </div>
@@ -77,9 +78,14 @@ const Home = () => {
         </div>
 
         {/* PLAY BUTTON */}
-        <button className="rounded-lg bg-[#0AB169] py-4  px-16 text-xl font-bold hover:opacity-90">
-          Let's Play
-        </button>
+
+        <div className="">
+          <Link href="/game" passHref>
+            <button className="rounded-lg bg-[#0AB169] py-4  px-16 text-xl font-bold hover:opacity-90">
+              Let's Play
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );
