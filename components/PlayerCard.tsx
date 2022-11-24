@@ -14,7 +14,7 @@ const PlayerCard = (player: IPlayer) => {
   return (
     <div className="flex flex-col gap-4">
       {/* Player Card */}
-      <div className="flex h-[350px] flex-col gap-8 rounded-lg bg-gradient-player-card p-7 lg:w-80">
+      <div className="flex h-[350px] flex-col gap-8 rounded-lg bg-gradient-player-card p-7 lg:w-48">
         <div className="relative grid w-full bg-transparent h-52 place-items-center">
           <Image src={avatar} alt="Player Avatar" objectFit="contain" />
         </div>

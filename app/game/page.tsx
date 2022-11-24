@@ -21,9 +21,9 @@ const player2 = {
 
 const Game = () => {
   return (
-    <div className="z-20 flex items-center w-full h-screen gap-8">
+    <div className="z-20 flex items-center w-full h-screen gap-16">
       {/* Player 1 Card showing name and score  */}
-      <PlayerCard {...player1} myTurn={true} />
+      <PlayerCard {...player1} myTurn={false} />
 
       {/* Grid to render the cards: */}
       <div className="w-full p-8 rounded-lg bg-gradient-glassy">
