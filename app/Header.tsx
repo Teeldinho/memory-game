@@ -8,11 +8,11 @@ const Header = () => {
       </div>
 
       <div className="flex gap-8">
-        <button className="text-xl font-bold bg-[#F4A236] p-4 rounded-lg">
+        <button className="rounded-lg bg-[#F4A236] p-4 text-xl font-bold hover:opacity-90">
           Restart Game
         </button>
 
-        <button className="text-xl font-bold bg-[#D4190C] p-4 rounded-lg">
+        <button className="rounded-lg bg-[#D4190C] p-4 text-xl font-bold hover:opacity-90">
           Exit Game
         </button>
       </div>

@@ -10,13 +10,8 @@ interface ICard {
   name: string;
   symbol: Symbol;
   color: Color;
-  imageSrc: StaticImageData;
+  imageSrc: any;
 }
-
-// Card_A_Club,
-// Card_A_Diamond,
-// Card_A_Heart,
-// Card_A_Spade,
 
 const CardsArray: ICard[] = [
   {
