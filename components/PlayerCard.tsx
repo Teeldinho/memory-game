@@ -1,24 +1,43 @@
 import Image from "next/image";
 
 interface IPlayer {
+  id: number;
   name: string;
   score: number;
   avatar: any;
+  myTurn: boolean;
 }
 
 const PlayerCard = (player: IPlayer) => {
-  const { name, score, avatar } = player;
+  const { id, name, score, avatar, myTurn } = player;
 
   return (
-    <div className="flex h-[350px] w-80 flex-col gap-8 rounded-lg bg-gradient-player-card p-7">
-      <div className="relative grid w-full bg-transparent h-52 place-items-center">
-        <Image src={avatar} alt="Player Avatar" objectFit="contain" />
+    <div className="flex flex-col gap-4">
+      {/* Player Card */}
+      <div className="flex h-[350px] flex-col gap-8 rounded-lg bg-gradient-player-card p-7 lg:w-80">
+        <div className="relative grid w-full bg-transparent h-52 place-items-center">
+          <Image src={avatar} alt="Player Avatar" objectFit="contain" />
+        </div>
+
+        <div className="flex flex-col items-center w-full gap-4">
+          <h2 className="text-xl font-extrabold">{name}</h2>
+          <h2 className="text-xl font-semibold">Score: {score}</h2>
+        </div>
       </div>
 
-      <div className="flex flex-col items-center w-full gap-4">
-        <h2 className="text-xl font-extrabold">{name}</h2>
-        <h2 className="text-xl font-semibold">Score: {score}</h2>
-      </div>
+      {/* Player Turn Indicator: */}
+      {/* Conditionally render the output based on whose turn it is: */}
+
+      {myTurn &&
+        (id === 1 ? (
+          <div className="rounded-lg bg-[#0AB169] py-4 text-white">
+            <h2 className="text-2xl font-bold text-center">It's Your Turn</h2>
+          </div>
+        ) : (
+          <div className="rounded-lg bg-white py-4 text-[#489DDA]">
+            <h2 className="text-2xl font-bold text-center">It's Your Turn</h2>
+          </div>
+        ))}
     </div>
   );
 };
