@@ -1,7 +1,7 @@
 import PlayerCard from "components/PlayerCard";
 import AvatarPlayer1 from "@/assets/Player1.png";
 import AvatarPlayer2 from "@/assets/Player2.png";
-import Card from "components/Card";
+import Card, { ICard } from "components/Card";
 
 const player1 = {
   id: 1,
@@ -28,12 +28,6 @@ const getCardsFromCMS = async () => {
   return cards.json();
 };
 
-// id: number;
-// name: string;
-// symbol: string;
-// color: string;
-// image: string;
-
 const Game = async () => {
   // destructure response data object as cards array:
   const { data: cardsArrayWithAllInformation } = await getCardsFromCMS();
@@ -59,7 +53,8 @@ const Game = async () => {
       name: card.attributes.name,
       symbol: card.attributes.symbol,
       color: card.attributes.color,
-      image: card.attributes.image.data.attributes.url,
+      image:
+        "http://localhost:1337" + card.attributes.image.data.attributes.url,
     }),
   );
 
@@ -71,9 +66,9 @@ const Game = async () => {
       {/* Grid to render the cards: */}
       <div className="w-full p-8 rounded-lg bg-gradient-glassy">
         <div className="grid grid-cols-9 grid-rows-6 gap-8">
-          {/* {cards?.map((card) => (
-            <Card {...card} />
-          ))} */}
+          {cards?.map((card: ICard, count: number) => (
+            <Card key={count} {...card} />
+          ))}
         </div>
       </div>
 
