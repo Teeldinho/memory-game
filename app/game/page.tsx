@@ -1,31 +1,14 @@
 import PlayerCard from "components/PlayerCard";
-import AvatarPlayer1 from "@/assets/Player1.png";
-import AvatarPlayer2 from "@/assets/Player2.png";
 import Card, { ICard } from "components/Card";
 import { ShuffleCards } from "utils/ShuffleCards";
-
-const player1 = {
-  id: 1,
-  name: "Player 1",
-  score: 10,
-  avatar: AvatarPlayer1,
-};
-
-const player2 = {
-  id: 2,
-  name: "Player 2",
-  score: 12,
-  avatar: AvatarPlayer2,
-};
+import { StripCardDetails } from "utils/StripCardDetails";
+import { player1, player2 } from "data/PlayerData";
 
 // Fetch card data from CMS on the server side:
 const getCardsFromCMS = async () => {
   const cards = await fetch(
     `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/cards?populate=*`,
   );
-
-  console.log(cards);
-
   return cards.json();
 };
 
@@ -34,31 +17,7 @@ const Game = async () => {
   const { data: cardsArrayWithAllInformation } = await getCardsFromCMS();
 
   // capture data that is needed from the card:
-  const orderedCards = cardsArrayWithAllInformation.map(
-    (card: {
-      id: number;
-      attributes: {
-        name: string;
-        symbol: string;
-        color: string;
-        image: {
-          data: {
-            attributes: {
-              url: string;
-            };
-          };
-        };
-      };
-    }) => ({
-      id: card.id,
-      name: card.attributes.name,
-      symbol: card.attributes.symbol,
-      color: card.attributes.color,
-      image:
-        process.env.NEXT_PUBLIC_STRAPI_URL +
-        card.attributes.image.data.attributes.url,
-    }),
-  );
+  const orderedCards = StripCardDetails(cardsArrayWithAllInformation);
 
   // Shuffle the cards:
   const cards = ShuffleCards(orderedCards);
