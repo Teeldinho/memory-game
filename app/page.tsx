@@ -38,11 +38,7 @@ const Home = () => {
           {/* CARD 1 */}
           <div className="flex flex-col items-center gap-8">
             <div className="relative grid w-full bg-transparent h-60 place-items-center">
-              <Image
-                src={AvatarPlayer1}
-                alt="Player 1 Avatar"
-                objectFit="contain"
-              />
+              <Image src={AvatarPlayer1} alt="Player 1 Avatar" />
             </div>
 
             <div className="w-full">
@@ -58,11 +54,7 @@ const Home = () => {
           {/* CARD 2 */}
           <div className="flex flex-col items-center gap-8">
             <div className="relative grid w-full bg-transparent h-60 place-items-center">
-              <Image
-                src={AvatarPlayer2}
-                alt="Player 2 Avatar"
-                objectFit="contain"
-              />
+              <Image src={AvatarPlayer2} alt="Player 2 Avatar" />
             </div>
 
             <div className="w-full">
