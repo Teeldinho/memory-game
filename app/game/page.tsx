@@ -10,9 +10,11 @@ import { useMemoryStore } from "store/store";
 const Game = () => {
   // get players from our global state:
   const players = useMemoryStore((state) => state.players);
+  const setGlobalCards = useMemoryStore((state) => state.setCards);
+  const getCards = useMemoryStore((state) => state.cards);
 
   // our card states
-  const [cards, setCards] = useState<any>([]);
+  const [cards, setCards] = useState<ICard[]>([]);
 
   // run once to fetch card data and shuffle them:
   useEffect(() => {
@@ -32,18 +34,26 @@ const Game = () => {
 
       // update the state:
       setCards(cards);
+
+      // update the global state:
+      setGlobalCards(cards);
     };
 
     getCardsFromCMS();
   }, []);
 
+  // use effect to run when cards are reshuffled:
+  useEffect(() => {
+    setCards(getCards);
+  }, [cards]);
+
   return (
-    <div className="z-20 flex items-center w-full h-screen gap-16">
+    <div className="z-20 flex h-screen w-full items-center gap-16">
       {/* Player 1 Card showing name and score  */}
       <PlayerCard {...players[0]} />
 
       {/* Grid to render the cards: */}
-      <div className="w-full p-8 rounded-lg bg-gradient-glassy">
+      <div className="w-full rounded-lg bg-gradient-glassy p-8">
         <div className="grid grid-cols-9 grid-rows-6 gap-8">
           {cards?.map((card: ICard, count: number) => (
             <Card key={count} {...card} />

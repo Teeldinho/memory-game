@@ -4,6 +4,8 @@ import AvatarPlayer1 from "@/assets/Player1.png";
 import AvatarPlayer2 from "@/assets/Player2.png";
 import { StaticImageData } from "next/image";
 import { persist, PersistOptions } from "zustand/middleware";
+import { ICard } from "components/Card";
+import { ShuffleCards } from "utils/ShuffleCards";
 
 export type TPlayer = {
   id: number;
@@ -16,13 +18,20 @@ export type TPlayer = {
 // typings for our store:
 type MemoryStore = {
   players: TPlayer[];
+  cards: ICard[];
 };
 
 type Actions = {
+  // Player actions:
   increasePlayerScore: (playerId: number) => void;
   setNames: (playerNames: string[]) => void;
   toggleTurn: () => void;
   resetStore: () => void;
+  resetScores: () => void;
+
+  // Card actions:
+  setCards: (cards: ICard[]) => void;
+  shuffleCards: () => void;
 };
 
 type MemoryState = MemoryStore & Actions;
@@ -50,7 +59,10 @@ const initialMemoryState = {
       turnToPlay: false,
     },
   ] as TPlayer[],
+  cards: [] as ICard[],
 };
+
+// const clearStorage
 
 export const useMemoryStore = create<MemoryState>(
   (persist as MyPersist)(
@@ -89,11 +101,38 @@ export const useMemoryStore = create<MemoryState>(
         }));
       },
 
+      // reset player scores when restarting game:
+      resetScores: () => {
+        set((state) => ({
+          players: state.players.map((player) => ({
+            ...player,
+            score: 0,
+          })),
+        }));
+      },
+
+      // shuffle cards:
+      shuffleCards: () => {
+        set((state) => ({
+          cards: ShuffleCards(state.cards),
+        }));
+      },
+
+      // set all cards:
+      setCards: async (arrCards: ICard[]) => {
+        set((state) => ({
+          cards: [...arrCards],
+        }));
+      },
+
       // reset the values of the store:
       resetStore: () => {
         set(initialMemoryState);
       },
     }),
-    { name: "memory-store" },
+
+    { name: "memory-store", getStorage: () => sessionStorage },
   ),
 );
+
+// useMemoryStore.persist.clearStorage();

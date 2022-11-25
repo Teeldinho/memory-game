@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-
 import AvatarPlayer1 from "@/assets/Player1.png";
 import AvatarPlayer2 from "@/assets/Player2.png";
 import Link from "next/link";
