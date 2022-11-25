@@ -7,19 +7,14 @@ import { StripCardDetails } from "utils/StripCardDetails";
 import { useEffect, useState } from "react";
 import { useMemoryStore } from "store/store";
 
-// Fetch card data from CMS on the server side:
-// const getCardsFromCMS = async () => {
-//   const cards = await fetch(
-//     `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/cards?populate=*`,
-//   );
-//   return cards.json();
-// };
-
 const Game = () => {
   // get players from our global state:
   const players = useMemoryStore((state) => state.players);
+
+  // our card states
   const [cards, setCards] = useState<any>([]);
 
+  // run once to fetch card data and shuffle them:
   useEffect(() => {
     const getCardsFromCMS = async () => {
       const cardsArrayWithAllInformation = await fetch(
@@ -35,6 +30,7 @@ const Game = () => {
       // Shuffle the cards:
       const cards = ShuffleCards(orderedCards);
 
+      // update the state:
       setCards(cards);
     };
 
@@ -47,7 +43,7 @@ const Game = () => {
   return (
     <div className="z-20 flex items-center w-full h-screen gap-16">
       {/* Player 1 Card showing name and score  */}
-      {/* <PlayerCard {...players[0]} /> */}
+      <PlayerCard {...players[0]} />
 
       {/* Grid to render the cards: */}
       <div className="w-full p-8 rounded-lg bg-gradient-glassy">
@@ -59,7 +55,7 @@ const Game = () => {
       </div>
 
       {/* Player 2 Card showing name and score  */}
-      {/* <PlayerCard {...players[1]} /> */}
+      <PlayerCard {...players[1]} />
     </div>
   );
 };

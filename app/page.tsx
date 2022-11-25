@@ -32,12 +32,14 @@ const Home = () => {
 
   const onSubmit: SubmitHandler<TInputs> = (data) => {
     // save the user input:
-    // console.log(data);
+    console.log(data);
 
-    updateNames([
-      JSON.stringify(data.namePlayer1),
-      JSON.stringify(data.namePlayer2),
-    ]);
+    updateNames(["Tshepang", "Mogaila"]);
+
+    // updateNames([
+    //   JSON.stringify(data.namePlayer1),
+    //   JSON.stringify(data.namePlayer2),
+    // ]);
 
     // navigate to start game:
     router.push("/game");

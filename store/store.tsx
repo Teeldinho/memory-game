@@ -1,9 +1,9 @@
-import create from "zustand";
+import create, { StateCreator } from "zustand";
 
 import AvatarPlayer1 from "@/assets/Player1.png";
 import AvatarPlayer2 from "@/assets/Player2.png";
 import { StaticImageData } from "next/image";
-import { player1 } from "data/PlayerData";
+import { persist, PersistOptions } from "zustand/middleware";
 
 export type TPlayer = {
   id: number;
@@ -25,6 +25,13 @@ type Actions = {
   resetStore: () => void;
 };
 
+type MemoryState = MemoryStore & Actions;
+
+type MyPersist = (
+  config: StateCreator<MemoryState>,
+  options: PersistOptions<MemoryState>,
+) => StateCreator<MemoryState>;
+
 // Initialize state initial:
 const initialMemoryState = {
   players: [
@@ -45,43 +52,48 @@ const initialMemoryState = {
   ] as TPlayer[],
 };
 
-export const useMemoryStore = create<MemoryStore & Actions>((set) => ({
-  // spread the initial state:
-  ...initialMemoryState,
+export const useMemoryStore = create<MemoryState>(
+  (persist as MyPersist)(
+    (set) => ({
+      // spread the initial state:
+      ...initialMemoryState,
 
-  // increse the score:
-  increasePlayerScore: (playerId: number) => {
-    set((state) => ({
-      players: state.players.map((player) =>
-        player.id === playerId
-          ? { ...player, score: player.score + 1 }
-          : player,
-      ),
-    }));
-  },
+      // increse the score:
+      increasePlayerScore: (playerId: number) => {
+        set((state) => ({
+          players: state.players.map((player) =>
+            player.id === playerId
+              ? { ...player, score: player.score + 1 }
+              : player,
+          ),
+        }));
+      },
 
-  // Set the name of the players:
-  setNames: (playerNames: string[]) => {
-    set((state) => ({
-      players: [
-        { ...state.players[0], name: playerNames[0] },
-        { ...state.players[1], name: playerNames[1] },
-      ],
-    }));
-  },
+      // Set the name of the players:
+      setNames: (playerNames: string[]) => {
+        set((state) => ({
+          players: [
+            { ...state.players[0], name: playerNames[0] },
+            { ...state.players[1], name: playerNames[1] },
+          ],
+        }));
+      },
 
-  // toggle player turn:
-  toggleTurn: () => {
-    set((state) => ({
-      players: state.players.map((player) => ({
-        ...player,
-        turnToPlay: !player.turnToPlay,
-      })),
-    }));
-  },
+      // toggle player turn:
+      toggleTurn: () => {
+        set((state) => ({
+          players: state.players.map((player) => ({
+            ...player,
+            turnToPlay: !player.turnToPlay,
+          })),
+        }));
+      },
 
-  // reset the values of the store:
-  resetStore: () => {
-    set(initialMemoryState);
-  },
-}));
+      // reset the values of the store:
+      resetStore: () => {
+        set(initialMemoryState);
+      },
+    }),
+    { name: "memory-store" },
+  ),
+);
