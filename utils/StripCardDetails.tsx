@@ -1,7 +1,7 @@
 import { ICard } from "components/Card";
 
 const StripCardDetails = (cards: any[]) => {
-  return cards.map(
+  const strippedCards = cards?.map(
     (card: {
       id: number;
       attributes: {
@@ -28,6 +28,8 @@ const StripCardDetails = (cards: any[]) => {
       flipped: false,
     }),
   );
+
+  return strippedCards;
 };
 
 export { StripCardDetails };

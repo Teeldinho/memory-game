@@ -1,12 +1,14 @@
 "use client";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 import AvatarPlayer1 from "@/assets/Player1.png";
 import AvatarPlayer2 from "@/assets/Player2.png";
 import Link from "next/link";
 
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useMemoryStore } from "store/store";
 
 type TInputs = {
   namePlayer1: string;
@@ -14,7 +16,13 @@ type TInputs = {
 };
 
 const Home = () => {
-  // Use React Hook Form to capture and valdiate input:
+  // router for navigating pages:
+  const router = useRouter();
+
+  // Get our global state functions:
+  const updateNames = useMemoryStore((state) => state.setNames);
+
+  // Use React Hook Form to capture and validate input:
   const {
     register,
     handleSubmit,
@@ -23,7 +31,16 @@ const Home = () => {
   } = useForm<TInputs>();
 
   const onSubmit: SubmitHandler<TInputs> = (data) => {
-    console.log(data);
+    // save the user input:
+    // console.log(data);
+
+    updateNames([
+      JSON.stringify(data.namePlayer1),
+      JSON.stringify(data.namePlayer2),
+    ]);
+
+    // navigate to start game:
+    router.push("/game");
   };
 
   return (
@@ -33,51 +50,55 @@ const Home = () => {
         <h1 className="text-6xl font-bold">Are you ready to play?</h1>
 
         {/* AVATARS AND NAME INPUT BOX */}
-        <div className="grid w-full grid-cols-2 gap-16">
-          {/* <form onSubmit={handleSubmit(onSubmit)}> */}
-          {/* CARD 1 */}
-          <div className="flex flex-col items-center gap-8">
-            <div className="relative grid w-full bg-transparent h-60 place-items-center">
-              <Image src={AvatarPlayer1} alt="Player 1 Avatar" />
+
+        <form
+          className="flex flex-col items-center gap-16"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <div className="grid w-full grid-cols-2 gap-16">
+            {/* CARD 1 */}
+            <div className="flex flex-col items-center gap-8">
+              <div className="relative grid w-full bg-transparent h-60 place-items-center">
+                <Image src={AvatarPlayer1} alt="Player 1 Avatar" />
+              </div>
+
+              <div className="w-full">
+                <input
+                  {...register("namePlayer1", { required: true })}
+                  type="text"
+                  className="block w-full px-4 py-4 m-0 font-normal text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded-lg form-control bg-clip-padding focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none"
+                  placeholder="Name of Player 1"
+                />
+              </div>
             </div>
 
-            <div className="w-full">
-              <input
-                {...register("namePlayer1", { required: true })}
-                type="text"
-                className="block w-full px-4 py-4 m-0 text-lg font-normal text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded-lg form-control bg-clip-padding focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none"
-                placeholder="Name of Player 1"
-              />
+            {/* CARD 1 */}
+            <div className="flex flex-col items-center gap-8">
+              <div className="relative grid w-full bg-transparent h-60 place-items-center">
+                <Image src={AvatarPlayer2} alt="Player 2 Avatar" />
+              </div>
+
+              <div className="w-full">
+                <input
+                  {...register("namePlayer2", { required: true })}
+                  type="text"
+                  className="block w-full px-4 py-4 m-0 font-normal text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded-lg form-control bg-clip-padding focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none"
+                  placeholder="Name of Player 2"
+                />
+              </div>
             </div>
           </div>
+          {/* PLAY BUTTON */}
 
-          {/* CARD 2 */}
-          <div className="flex flex-col items-center gap-8">
-            <div className="relative grid w-full bg-transparent h-60 place-items-center">
-              <Image src={AvatarPlayer2} alt="Player 2 Avatar" />
-            </div>
-
-            <div className="w-full">
-              <input
-                {...register("namePlayer1", { required: true })}
-                type="text"
-                className="block w-full px-4 py-4 m-0 text-lg font-normal text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded-lg form-control bg-clip-padding focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none"
-                placeholder="Name of Player 2"
-              />
-            </div>
-          </div>
-          {/* </form> */}
-        </div>
-
-        {/* PLAY BUTTON */}
-
-        <div className="">
-          <Link href="/game" passHref>
-            <button className="rounded-lg bg-[#0AB169] py-4  px-16 text-xl font-bold hover:opacity-90">
+          <div className="mx-auto">
+            <button
+              type="submit"
+              className="rounded-lg bg-[#0AB169]  py-4 px-16 text-xl font-bold hover:opacity-90"
+            >
               Let's Play
             </button>
-          </Link>
-        </div>
+          </div>
+        </form>
       </div>
     </div>
   );

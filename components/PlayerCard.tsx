@@ -1,15 +1,8 @@
 import Image from "next/image";
+import { TPlayer } from "store/store";
 
-interface IPlayer {
-  id: number;
-  name: string;
-  score: number;
-  avatar: any;
-  myTurn: boolean;
-}
-
-const PlayerCard = (player: IPlayer) => {
-  const { id, name, score, avatar, myTurn } = player;
+const PlayerCard = (player: TPlayer) => {
+  const { id, name, score, avatar, turnToPlay } = player;
 
   return (
     <div className="flex flex-col gap-4">
@@ -28,7 +21,7 @@ const PlayerCard = (player: IPlayer) => {
       {/* Player Turn Indicator: */}
       {/* Conditionally render the output based on whose turn it is: */}
 
-      {myTurn &&
+      {turnToPlay &&
         (id === 1 ? (
           <div className="rounded-lg bg-[#0AB169] py-4 text-white">
             <h2 className="text-2xl font-bold text-center">It's Your Turn</h2>
