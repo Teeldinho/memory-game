@@ -9,6 +9,7 @@ const Header = () => {
   const restartGame = useMemoryStore((state) => state.resetScores);
   const stopGame = useMemoryStore((state) => state.toggleStartGame);
   const gameStarted = useMemoryStore((state) => state.gameStarted);
+  const shuffleCards = useMemoryStore((state) => state.shuffleCards);
 
   // router for navigating pages:
   const router = useRouter();
@@ -20,16 +21,17 @@ const Header = () => {
 
   const handleRestartGame = () => {
     restartGame();
+    shuffleCards();
 
     // router.replace("/game");
-    router.push("/");
-    router.push("/game");
+    // router.push("/");
+    // router.push("/game");
     router.refresh();
   };
 
   return (
     <header className="absolute top-0 right-0 w-full">
-      <div className="relative flex w-full justify-end py-8 ">
+      <div className="relative flex justify-end w-full py-8 ">
         <div className="absolute right-[46%]">
           <h1 className="text-4xl font-bold">Memory</h1>
         </div>

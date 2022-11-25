@@ -9,9 +9,11 @@ import { useMemoryStore } from "store/store";
 
 const Game = () => {
   // get players from our global state:
-  const players = useMemoryStore((state) => state.players);
-  const setGlobalCards = useMemoryStore((state) => state.setCards);
-  const getCards = useMemoryStore((state) => state.cards);
+  const storePlayers = useMemoryStore((state) => state.players);
+  // const storeGetCards = useMemoryStore((state) => state.cards);
+  // const storeSetCards = useMemoryStore((state) => state.setCards);
+
+  const storeResetScores = useMemoryStore((state) => state.resetScores);
 
   // our card states
   const [cards, setCards] = useState<ICard[]>([]);
@@ -32,28 +34,25 @@ const Game = () => {
       // Shuffle the cards:
       const cards = ShuffleCards(orderedCards);
 
-      // update the state:
-      setCards(cards);
+      // update the local state:
+      setCards(orderedCards);
+
+      // reset the scores on rerender:
+      storeResetScores();
 
       // update the global state:
-      setGlobalCards(cards);
+      // storeSetCards(cards);
     };
-
     getCardsFromCMS();
   }, []);
 
-  // use effect to run when cards are reshuffled:
-  useEffect(() => {
-    setCards(getCards);
-  }, [getCards]);
-
   return (
-    <div className="z-20 flex h-screen w-full items-center gap-16">
+    <div className="z-20 flex items-center w-full h-screen gap-16">
       {/* Player 1 Card showing name and score  */}
-      <PlayerCard {...players[0]} />
+      <PlayerCard {...storePlayers[0]} />
 
       {/* Grid to render the cards: */}
-      <div className="w-full rounded-lg bg-gradient-glassy p-8">
+      <div className="w-full p-8 rounded-lg bg-gradient-glassy">
         <div className="grid grid-cols-9 grid-rows-6 gap-8">
           {cards?.map((card: ICard, count: number) => (
             <Card key={count} {...card} />
@@ -62,7 +61,7 @@ const Game = () => {
       </div>
 
       {/* Player 2 Card showing name and score  */}
-      <PlayerCard {...players[1]} />
+      <PlayerCard {...storePlayers[1]} />
     </div>
   );
 };
