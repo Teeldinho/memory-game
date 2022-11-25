@@ -45,7 +45,7 @@ const Game = () => {
   // use effect to run when cards are reshuffled:
   useEffect(() => {
     setCards(getCards);
-  }, [cards]);
+  }, [getCards]);
 
   return (
     <div className="z-20 flex h-screen w-full items-center gap-16">
