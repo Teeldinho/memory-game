@@ -6,18 +6,16 @@ import { useRouter } from "next/navigation";
 
 const Header = () => {
   const players = useMemoryStore((state) => state.players);
-
   const restartGame = useMemoryStore((state) => state.resetScores);
-  // const resetCards = useMemoryStore((state) => state.shuffleCards);
+  const stopGame = useMemoryStore((state) => state.toggleStartGame);
+  const gameStarted = useMemoryStore((state) => state.gameStarted);
 
   // router for navigating pages:
   const router = useRouter();
 
   const handleExitGame = () => {
-    sessionStorage.clear();
+    stopGame();
     router.push("/");
-    // router.replace("/");
-    // router.refresh();
   };
 
   const handleRestartGame = () => {
@@ -39,7 +37,7 @@ const Header = () => {
         <div className="flex gap-8">
           {/* Conditionally render this button when game has already started: */}
 
-          {players[0].name && players[1].name && (
+          {gameStarted && (
             <button
               onClick={handleRestartGame}
               className="rounded-lg bg-[#F4A236] p-4 text-xl font-bold hover:opacity-90"

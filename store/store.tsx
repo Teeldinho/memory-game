@@ -19,6 +19,7 @@ export type TPlayer = {
 type MemoryStore = {
   players: TPlayer[];
   cards: ICard[];
+  gameStarted: boolean;
 };
 
 type Actions = {
@@ -28,6 +29,7 @@ type Actions = {
   toggleTurn: () => void;
   resetStore: () => void;
   resetScores: () => void;
+  toggleStartGame: () => void;
 
   // Card actions:
   setCards: (cards: ICard[]) => void;
@@ -60,6 +62,7 @@ const initialMemoryState = {
     },
   ] as TPlayer[],
   cards: [] as ICard[],
+  gameStarted: false,
 };
 
 // const clearStorage
@@ -98,6 +101,13 @@ export const useMemoryStore = create<MemoryState>(
             ...player,
             turnToPlay: !player.turnToPlay,
           })),
+        }));
+      },
+
+      // toggle start/stop game:
+      toggleStartGame: () => {
+        set((state) => ({
+          gameStarted: !state.gameStarted,
         }));
       },
 

@@ -20,6 +20,7 @@ const Home = () => {
 
   // Get our global state functions:
   const updateNames = useMemoryStore((state) => state.setNames);
+  const startGame = useMemoryStore((state) => state.toggleStartGame);
 
   // Use React Hook Form to capture and validate input:
   const {
@@ -32,13 +33,15 @@ const Home = () => {
   const onSubmit: SubmitHandler<TInputs> = (data) => {
     updateNames([data.namePlayer1, data.namePlayer2]);
 
+    // start game:
+    startGame();
     // navigate to start game:
     router.push("/game");
   };
 
   return (
-    <div className="z-20 grid w-full h-screen mt-32 place-items-center">
-      <div className="flex flex-col items-center w-full h-full max-w-4xl gap-20 py-16">
+    <div className="z-20 mt-32 grid h-screen w-full place-items-center">
+      <div className="flex h-full w-full max-w-4xl flex-col items-center gap-20 py-16">
         {/* HEADING QUESTION: */}
         <h1 className="text-6xl font-bold">Are you ready to play?</h1>
 
@@ -51,7 +54,7 @@ const Home = () => {
           <div className="grid w-full grid-cols-2 gap-16">
             {/* CARD 1 */}
             <div className="flex flex-col items-center gap-8">
-              <div className="relative grid w-full bg-transparent h-60 place-items-center">
+              <div className="relative grid h-60 w-full place-items-center bg-transparent">
                 <Image src={AvatarPlayer1} alt="Player 1 Avatar" />
               </div>
 
@@ -59,7 +62,7 @@ const Home = () => {
                 <input
                   {...register("namePlayer1", { required: true })}
                   type="text"
-                  className="block w-full px-4 py-4 m-0 font-normal text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded-lg form-control bg-clip-padding focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none"
+                  className="form-control m-0 block w-full rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-4 py-4 font-normal text-gray-700 transition ease-in-out focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none"
                   placeholder="Name of Player 1"
                 />
               </div>
@@ -67,7 +70,7 @@ const Home = () => {
 
             {/* CARD 1 */}
             <div className="flex flex-col items-center gap-8">
-              <div className="relative grid w-full bg-transparent h-60 place-items-center">
+              <div className="relative grid h-60 w-full place-items-center bg-transparent">
                 <Image src={AvatarPlayer2} alt="Player 2 Avatar" />
               </div>
 
@@ -75,7 +78,7 @@ const Home = () => {
                 <input
                   {...register("namePlayer2", { required: true })}
                   type="text"
-                  className="block w-full px-4 py-4 m-0 font-normal text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded-lg form-control bg-clip-padding focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none"
+                  className="form-control m-0 block w-full rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-4 py-4 font-normal text-gray-700 transition ease-in-out focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none"
                   placeholder="Name of Player 2"
                 />
               </div>
