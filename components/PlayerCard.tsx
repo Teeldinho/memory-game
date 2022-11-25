@@ -4,10 +4,6 @@ import { TPlayer } from "store/store";
 
 const PlayerCard = (player: TPlayer) => {
   const { id, name, score, avatar, turnToPlay } = player;
-
-  console.log("PLAYER CARD");
-  console.log(player);
-
   return (
     <div className="flex flex-col gap-4">
       {/* Player Card */}

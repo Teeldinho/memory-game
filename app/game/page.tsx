@@ -37,9 +37,6 @@ const Game = () => {
     getCardsFromCMS();
   }, []);
 
-  console.log("Printing Cards:");
-  console.log(cards);
-
   return (
     <div className="z-20 flex items-center w-full h-screen gap-16">
       {/* Player 1 Card showing name and score  */}
