@@ -17,7 +17,7 @@ export type TPlayer = {
 };
 
 // typings for our store:
-type MemoryStore = {
+type Store = {
   players: TPlayer[];
   cards: ICard[];
   gameStarted: boolean;
@@ -30,20 +30,22 @@ type Actions = {
   toggleTurn: () => void;
   resetStore: () => void;
   resetScores: () => void;
-  toggleStartGame: () => void;
+  stopGame: () => void;
+  startGame: () => void;
 
   // Card actions:
   setCards: (cards: ICard[]) => void;
-  // fetchCards: () => void;
+  fetchCards: () => void;
   shuffleCards: () => void;
+  setCardsMatched: (card1: ICard, card2: ICard) => void;
 };
 
-type MemoryState = MemoryStore & Actions;
+type MemoryState = Store & Actions;
 
-// type MyPersist = (
-//   config: StateCreator<MemoryState>,
-//   options: PersistOptions<MemoryState>,
-// ) => StateCreator<MemoryState>;
+type MyPersist = (
+  config: StateCreator<MemoryState>,
+  options: PersistOptions<MemoryState>,
+) => StateCreator<MemoryState>;
 
 // Initialize state initial:
 const initialMemoryState = {
@@ -67,96 +69,116 @@ const initialMemoryState = {
   gameStarted: false,
 };
 
-// const clearStorage
-
 export const useMemoryStore = create<MemoryState>(
-  // (persist as MyPersist)(
-  (set) => ({
-    // spread the initial state:
-    ...initialMemoryState,
+  (persist as MyPersist)(
+    (set) => ({
+      // spread the initial state:
+      ...initialMemoryState,
 
-    // increse the score:
-    increasePlayerScore: (playerId: number) => {
-      set((state) => ({
-        players: state.players.map((player) =>
-          player.id === playerId
-            ? { ...player, score: player.score + 1 }
-            : player,
-        ),
-      }));
-    },
+      // increse the score:
+      increasePlayerScore: (playerId: number) => {
+        set((state) => ({
+          players: state.players.map((player) =>
+            player.id === playerId
+              ? { ...player, score: player.score + 1 }
+              : player,
+          ),
+        }));
+      },
 
-    // Set the name of the players:
-    setNames: (playerNames: string[]) => {
-      set((state) => ({
-        players: [
-          { ...state.players[0], name: playerNames[0] },
-          { ...state.players[1], name: playerNames[1] },
-        ],
-      }));
-    },
+      // Set the name of the players:
+      setNames: (playerNames: string[]) => {
+        set((state) => ({
+          players: [
+            { ...state.players[0], name: playerNames[0] },
+            { ...state.players[1], name: playerNames[1] },
+          ],
+        }));
+      },
 
-    // toggle player turn:
-    toggleTurn: () => {
-      set((state) => ({
-        players: state.players.map((player) => ({
-          ...player,
-          turnToPlay: !player.turnToPlay,
-        })),
-      }));
-    },
+      // toggle player turn:
+      toggleTurn: () => {
+        set((state) => ({
+          players: state.players.map((player) => ({
+            ...player,
+            turnToPlay: !player.turnToPlay,
+          })),
+        }));
+      },
 
-    // toggle start/stop game:
-    toggleStartGame: () => {
-      set((state) => ({
-        gameStarted: !state.gameStarted,
-      }));
-    },
+      // toggle stop game:
+      startGame: () => {
+        set((state) => ({
+          gameStarted: true,
+        }));
+      },
 
-    // reset player scores when restarting game:
-    resetScores: () => {
-      set((state) => ({
-        players: state.players.map((player) => ({
-          ...player,
-          score: 0,
-        })),
-      }));
-    },
+      // toggle stop game:
+      stopGame: () => {
+        set((state) => ({
+          gameStarted: false,
+        }));
+      },
 
-    // shuffle cards:
-    shuffleCards: () => {
-      set((state) => ({
-        cards: ShuffleCards(state.cards),
-      }));
-    },
+      // reset player scores when restarting game:
+      resetScores: () => {
+        set((state) => ({
+          players: state.players.map((player) => ({
+            ...player,
+            score: 0,
+          })),
+        }));
+      },
 
-    // set all cards:
-    setCards: async (arrCards: ICard[]) => {
-      set({ cards: [...arrCards] });
-    },
+      // shuffle cards:
+      shuffleCards: () => {
+        set((state) => ({
+          cards: ShuffleCards(state.cards),
+        }));
+      },
 
-    // set all cards:
-    // fetchCards: async () => {
-    //   const cardsArrayWithAllInformation = await fetch(
-    //     `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/cards?populate=*`,
-    //   );
-    //   // Promise:
-    //   const allCards = await cardsArrayWithAllInformation.json();
-    //   // Capture data that is needed from the card:
-    //   const fetchedCards = await StripCardDetails(allCards.data);
+      // set all cards:
+      setCards: (arrCards: ICard[]) => {
+        set({ cards: [...arrCards] });
+      },
 
-    //   console.log("Hello World");
-    //   console.log(fetchedCards);
+      // set matching cards:
+      setCardsMatched: (card1: ICard, card2: ICard) => {
+        set((state) => ({
+          cards: state.cards.map((card) =>
+            card.id === card1.id || card.id === card2.id
+              ? { ...card, matched: true }
+              : card,
+          ),
+        }));
+      },
 
-    //   await set({ cards: [...fetchedCards] });
-    // },
+      // asynchronously fetch cards from CMS:
+      fetchCards: async () => {
+        const cardsArrayWithAllInformation = await fetch(
+          `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/cards?populate=*`,
+        );
 
-    // reset the values of the store:
-    resetStore: () => {
-      set(initialMemoryState);
-    },
-  }),
+        // Promise:
+        const allCards = await cardsArrayWithAllInformation.json();
 
-  // { name: "memory-store", getStorage: () => sessionStorage },
-  // ),
+        // Capture data that is needed from the card:
+        const orderedCards = StripCardDetails(allCards.data);
+
+        // Shuffle the cards:
+        const cards = ShuffleCards(orderedCards);
+
+        set({
+          cards: [...cards],
+        });
+      },
+
+      // reset the values of the store:
+      resetStore: () => {
+        set(initialMemoryState);
+      },
+    }),
+
+    { name: "memory-store", getStorage: () => sessionStorage },
+  ),
 );

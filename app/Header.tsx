@@ -3,28 +3,42 @@
 import React from "react";
 import { useMemoryStore } from "store/store";
 import { useRouter } from "next/navigation";
+import shallow from "zustand/shallow";
 
 const Header = () => {
-  const players = useMemoryStore((state) => state.players);
-  const restartGame = useMemoryStore((state) => state.resetScores);
-  const stopGame = useMemoryStore((state) => state.toggleStartGame);
-  const gameStarted = useMemoryStore((state) => state.gameStarted);
-  const shuffleCards = useMemoryStore((state) => state.shuffleCards);
+  const {
+    storeStopGame,
+    storeHasGameStarted,
+    storeShuffleCards,
+    storeResetScores,
+  } = useMemoryStore(
+    (state) => ({
+      storeStopGame: state.stopGame,
+      storeResetScores: state.resetScores,
+      storeShuffleCards: state.shuffleCards,
+      storeHasGameStarted: state.gameStarted,
+    }),
+    shallow,
+  );
+
+  // const players = useMemoryStore((state) => state.players);
+  // const restartGame = useMemoryStore((state) => state.resetScores);
+  // const stopGame = useMemoryStore((state) => state.toggleStartGame);
+  // const gameStarted = useMemoryStore((state) => state.gameStarted);
+  // const shuffleCards = useMemoryStore((state) => state.shuffleCards);
 
   // router for navigating pages:
   const router = useRouter();
 
   const handleExitGame = () => {
-    stopGame();
+    storeStopGame();
     router.push("/");
   };
 
   const handleRestartGame = () => {
-    restartGame();
-    shuffleCards();
-
-    // router.replace("/game");
-    // router.push("/");
+    router.replace("/game");
+    storeResetScores();
+    storeShuffleCards();
     // router.push("/game");
     router.refresh();
   };
@@ -39,7 +53,7 @@ const Header = () => {
         <div className="flex gap-8">
           {/* Conditionally render this button when game has already started: */}
 
-          {gameStarted && (
+          {storeHasGameStarted && (
             <button
               onClick={handleRestartGame}
               className="rounded-lg bg-[#F4A236] p-4 text-xl font-bold hover:opacity-90"

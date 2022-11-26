@@ -4,7 +4,8 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import AvatarPlayer1 from "@/assets/Player1.png";
 import AvatarPlayer2 from "@/assets/Player2.png";
-import Link from "next/link";
+
+import shallow from "zustand/shallow";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useMemoryStore } from "store/store";
@@ -19,13 +20,19 @@ const Home = () => {
   // router for navigating pages:
   const router = useRouter();
 
-  // Get our global state functions:
-  const storeUpdateNames = useMemoryStore((state) => state.setNames);
-  const storeStartGame = useMemoryStore((state) => state.toggleStartGame);
+  const { storeSetNames, storeStartGame, storeResetScores } = useMemoryStore(
+    (state) => ({
+      storeSetNames: state.setNames,
+      storeStartGame: state.startGame,
+      storeResetScores: state.resetScores,
+    }),
+    shallow,
+  );
 
-  useEffect(() => {
-    storeStartGame();
-  }, []);
+  // useEffect(() => {
+  //   // reset scores and restart game on rerender:
+  //   storeResetScores();
+  // }, []);
 
   // Use React Hook Form to capture and validate input:
   const {
@@ -36,11 +43,8 @@ const Home = () => {
   } = useForm<TInputs>();
 
   const onSubmit: SubmitHandler<TInputs> = (data) => {
-    storeUpdateNames([data.namePlayer1, data.namePlayer2]);
-
-    // start game:
+    storeSetNames([data.namePlayer1, data.namePlayer2]);
     storeStartGame();
-    // navigate to start game:
     router.push("/game");
   };
 

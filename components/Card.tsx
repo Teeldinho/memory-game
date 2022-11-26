@@ -10,14 +10,18 @@ export interface ICard {
   symbol: string;
   color: string;
   image: string;
-  flipped: boolean;
+  matched: boolean;
 }
 
-const Card = ({ id, name, symbol, color, image, flipped }: ICard) => {
+const Card = ({ id, name, symbol, color, image, matched }: ICard) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   const flipCard = () => {
     setIsFlipped((flip) => !flip);
+
+    // if(){
+
+    // }
   };
 
   return (

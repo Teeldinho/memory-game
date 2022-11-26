@@ -16,7 +16,7 @@ const StripCardDetails = (cards: any[]) => {
           };
         };
       };
-      flipped: boolean;
+      matched: boolean;
     }) => ({
       id: card.id,
       name: card.attributes.name,
@@ -25,7 +25,7 @@ const StripCardDetails = (cards: any[]) => {
       image:
         process.env.NEXT_PUBLIC_STRAPI_URL +
         card.attributes.image.data.attributes.url,
-      flipped: false,
+      matched: false,
     }),
   );
 
