@@ -89,6 +89,7 @@ export const useMemoryStore = create<MemoryState>(
       // Set the name of the players:
       setNames: (playerNames: string[]) => {
         set((state) => ({
+          ...state,
           players: [
             { ...state.players[0], name: playerNames[0] },
             { ...state.players[1], name: playerNames[1] },
@@ -99,6 +100,7 @@ export const useMemoryStore = create<MemoryState>(
       // toggle player turn:
       toggleTurn: () => {
         set((state) => ({
+          ...state,
           players: state.players.map((player) => ({
             ...player,
             turnToPlay: !player.turnToPlay,
@@ -109,6 +111,7 @@ export const useMemoryStore = create<MemoryState>(
       // toggle stop game:
       startGame: () => {
         set((state) => ({
+          ...state,
           gameStarted: true,
         }));
       },
@@ -116,6 +119,7 @@ export const useMemoryStore = create<MemoryState>(
       // toggle stop game:
       stopGame: () => {
         set((state) => ({
+          ...state,
           gameStarted: false,
         }));
       },
@@ -123,6 +127,7 @@ export const useMemoryStore = create<MemoryState>(
       // reset player scores when restarting game:
       resetScores: () => {
         set((state) => ({
+          ...state,
           players: state.players.map((player) => ({
             ...player,
             score: 0,
@@ -133,18 +138,20 @@ export const useMemoryStore = create<MemoryState>(
       // shuffle cards:
       shuffleCards: () => {
         set((state) => ({
+          ...state,
           cards: ShuffleCards(state.cards),
         }));
       },
 
       // set all cards:
       setCards: (arrCards: ICard[]) => {
-        set({ cards: [...arrCards] });
+        set((state) => ({ ...state, cards: [...arrCards] }));
       },
 
       // set matching cards:
       setCardsMatched: (card1: ICard, card2: ICard) => {
         set((state) => ({
+          ...state,
           cards: state.cards.map((card) =>
             card.id === card1.id || card.id === card2.id
               ? { ...card, matched: true }
@@ -168,9 +175,10 @@ export const useMemoryStore = create<MemoryState>(
         // Shuffle the cards:
         const cards = ShuffleCards(orderedCards);
 
-        set({
+        set((state) => ({
+          ...state,
           cards: [...cards],
-        });
+        }));
       },
 
       // reset the values of the store:

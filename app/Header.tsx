@@ -21,26 +21,19 @@ const Header = () => {
     shallow,
   );
 
-  // const players = useMemoryStore((state) => state.players);
-  // const restartGame = useMemoryStore((state) => state.resetScores);
-  // const stopGame = useMemoryStore((state) => state.toggleStartGame);
-  // const gameStarted = useMemoryStore((state) => state.gameStarted);
-  // const shuffleCards = useMemoryStore((state) => state.shuffleCards);
-
   // router for navigating pages:
   const router = useRouter();
 
   const handleExitGame = () => {
+    // stop the game and redirect to home screen:
     storeStopGame();
     router.push("/");
   };
 
   const handleRestartGame = () => {
-    router.replace("/game");
+    // reset the scores and shuffle the cards for restarting game:
     storeResetScores();
     storeShuffleCards();
-    // router.push("/game");
-    router.refresh();
   };
 
   return (

@@ -8,21 +8,18 @@ import shallow from "zustand/shallow";
 
 const Game = () => {
   // get players and cards from our global state:
-  const { storePlayers, storeCards, storeFetchCards, storeResetScores } =
-    useMemoryStore(
-      (state) => ({
-        storePlayers: state.players,
-        storeCards: state.cards,
-        storeFetchCards: state.fetchCards,
-        storeResetScores: state.resetScores,
-      }),
-      shallow,
-    );
+  const { storePlayers, storeCards, storeFetchCards } = useMemoryStore(
+    (state) => ({
+      storePlayers: state.players,
+      storeCards: state.cards,
+      storeFetchCards: state.fetchCards,
+    }),
+    shallow,
+  );
 
   // reset player scores on render:
   // run once to fetch card data and shuffle them:
   useEffect(() => {
-    storeResetScores();
     storeFetchCards();
   }, []);
 

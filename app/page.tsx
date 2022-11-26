@@ -29,11 +29,6 @@ const Home = () => {
     shallow,
   );
 
-  // useEffect(() => {
-  //   // reset scores and restart game on rerender:
-  //   storeResetScores();
-  // }, []);
-
   // Use React Hook Form to capture and validate input:
   const {
     register,
@@ -43,6 +38,7 @@ const Home = () => {
   } = useForm<TInputs>();
 
   const onSubmit: SubmitHandler<TInputs> = (data) => {
+    storeResetScores();
     storeSetNames([data.namePlayer1, data.namePlayer2]);
     storeStartGame();
     router.push("/game");
