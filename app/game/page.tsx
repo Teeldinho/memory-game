@@ -23,9 +23,6 @@ const Game = () => {
     storeFetchCards();
   }, []);
 
-  console.log("This is the console log");
-  console.log(storeCards);
-
   return (
     <div className="z-20 flex items-center w-full h-screen gap-16">
       {/* Player 1 Card showing name and score  */}

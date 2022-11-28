@@ -20,6 +20,7 @@ export type TPlayer = {
 type Store = {
   players: TPlayer[];
   cards: ICard[];
+  selectedCards: ICard[];
   gameStarted: boolean;
 };
 
@@ -67,6 +68,7 @@ const initialMemoryState = {
   ] as TPlayer[],
   cards: [] as ICard[],
   gameStarted: false,
+  selectedCards: [] as ICard[],
 };
 
 export const useMemoryStore = create<MemoryState>(
