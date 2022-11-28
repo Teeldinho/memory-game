@@ -11,8 +11,10 @@ const Header = () => {
     storeHasGameStarted,
     storeShuffleCards,
     storeResetScores,
+    storeFetchCards,
   } = useMemoryStore(
     (state) => ({
+      storeFetchCards: state.fetchCards,
       storeStopGame: state.stopGame,
       storeResetScores: state.resetScores,
       storeShuffleCards: state.shuffleCards,
@@ -32,6 +34,7 @@ const Header = () => {
 
   const handleRestartGame = () => {
     // reset the scores and shuffle the cards for restarting game:
+    storeFetchCards();
     storeResetScores();
     storeShuffleCards();
   };

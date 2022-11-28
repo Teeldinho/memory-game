@@ -13,7 +13,7 @@ export interface ICard {
   color: string;
   image: string;
   matched: boolean;
-  // toggleClickable: () => void;
+  // matchFoundSuccessful?: () => void;
 }
 
 const Card = (card: ICard) => {
@@ -38,8 +38,6 @@ const Card = (card: ICard) => {
 
   // helper function for finding matches:
   const cardsDoMatch = (): boolean => {
-    // console.log(storeSelectedCards);
-
     // check if the selected cards have matching numbers (symbols):
     if (
       storeSelectedCards[0].name.toLowerCase() ===
@@ -59,9 +57,6 @@ const Card = (card: ICard) => {
         ) {
           console.log("The colors are a match!");
           console.log(storeSelectedCards);
-
-          // set the cards to matching, so they can be hidden from board:
-          // storeSetCardsMatched();
 
           return true;
         }
@@ -97,15 +92,14 @@ const Card = (card: ICard) => {
           });
         } else {
           console.log("These cards are NOT matching.");
+          // switch player turns:
+          storeToggleTurn();
         }
 
         // empty the selected cards array:
         while (storeSelectedCards.length) {
           storeSelectedCards.pop();
         }
-
-        // switch player turns:
-        storeToggleTurn();
       }
     }
 

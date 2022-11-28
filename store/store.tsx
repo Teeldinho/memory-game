@@ -22,6 +22,7 @@ type Store = {
   cards: ICard[];
   selectedCards: ICard[];
   gameStarted: boolean;
+  cardsMatchFound: boolean;
 };
 
 type Actions = {
@@ -39,6 +40,7 @@ type Actions = {
   fetchCards: () => void;
   shuffleCards: () => void;
   setCardsMatched: (card1: ICard, card2: ICard) => void;
+  removeCardsMatchedDialog: () => void;
 };
 
 type MemoryState = Store & Actions;
@@ -69,6 +71,7 @@ const initialMemoryState = {
   cards: [] as ICard[],
   gameStarted: false,
   selectedCards: [] as ICard[],
+  cardsMatchFound: false,
 };
 
 export const useMemoryStore = create<MemoryState>(
@@ -160,6 +163,7 @@ export const useMemoryStore = create<MemoryState>(
               ? { ...card, matched: true }
               : card,
           ),
+          cardsMatchFound: true,
         }));
       },
 
@@ -181,6 +185,13 @@ export const useMemoryStore = create<MemoryState>(
         set((state) => ({
           ...state,
           cards: [...cards],
+        }));
+      },
+
+      removeCardsMatchedDialog: () => {
+        set((state) => ({
+          ...state,
+          cardsMatchFound: false,
         }));
       },
 
