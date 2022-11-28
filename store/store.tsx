@@ -80,6 +80,7 @@ export const useMemoryStore = create<MemoryState>(
       // increse the score:
       increasePlayerScore: (playerId: number) => {
         set((state) => ({
+          ...state,
           players: state.players.map((player) =>
             player.id === playerId
               ? { ...player, score: player.score + 1 }

@@ -17,11 +17,19 @@ export interface ICard {
 }
 
 const Card = (card: ICard) => {
-  const { storePlayers, storeSelectedCards, storeToggleTurn } = useMemoryStore(
+  const {
+    storePlayers,
+    storeSelectedCards,
+    storeToggleTurn,
+    storeSetCardsMatched,
+    storeIncreasePlayerScore,
+  } = useMemoryStore(
     (state) => ({
       storePlayers: state.players,
       storeSelectedCards: state.selectedCards,
       storeToggleTurn: state.toggleTurn,
+      storeSetCardsMatched: state.setCardsMatched,
+      storeIncreasePlayerScore: state.increasePlayerScore,
     }),
     shallow,
   );
@@ -50,6 +58,10 @@ const Card = (card: ICard) => {
           storeSelectedCards[1].color.toLowerCase()
         ) {
           console.log("The colors are a match!");
+          console.log(storeSelectedCards);
+
+          // set the cards to matching, so they can be hidden from board:
+          // storeSetCardsMatched();
 
           return true;
         }
@@ -74,9 +86,14 @@ const Card = (card: ICard) => {
           console.log("These cards are matching.");
           console.log(storeSelectedCards);
 
+          // set the cards to matching, so they can be hidden from board:
+          storeSetCardsMatched(storeSelectedCards[0], storeSelectedCards[1]);
+
+          // increase the player's score if they found a match:
           storePlayers.map((player) => {
-            // increase the player's score if they found a match:
-            if (player.turnToPlay) player.score++;
+            if (player.turnToPlay) {
+              storeIncreasePlayerScore(player.id);
+            }
           });
         } else {
           console.log("These cards are NOT matching.");
@@ -101,7 +118,9 @@ const Card = (card: ICard) => {
 
   return (
     <div
-      className={`relative h-20 cursor-pointer overflow-hidden rounded-sm ease-in-out hover:scale-110 hover:opacity-80`}
+      className={`relative h-20 cursor-pointer overflow-hidden rounded-sm ease-in-out hover:scale-110 hover:opacity-80 ${
+        card.matched ? "invisible" : ""
+      }`}
       // className={`relative h-20 cursor-pointer overflow-hidden rounded-sm ease-in-out hover:scale-110 hover:opacity-80 ${
       //   isFlipped ? "pointer-events-none" : "pointer-events-auto"
       // }`}
