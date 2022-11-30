@@ -14,6 +14,7 @@ export type TPlayer = {
   score: number;
   avatar: StaticImageData;
   turnToPlay: boolean;
+  turnsTaken: number;
 };
 
 // typings for our store:
@@ -61,6 +62,7 @@ const initialMemoryState: Store = {
       score: 0,
       avatar: AvatarPlayer1,
       turnToPlay: true,
+      turnsTaken: 0,
     },
     {
       id: 2,
@@ -68,6 +70,7 @@ const initialMemoryState: Store = {
       score: 0,
       avatar: AvatarPlayer2,
       turnToPlay: false,
+      turnsTaken: 0,
     },
   ] as TPlayer[],
   cards: [] as ICard[],
@@ -185,7 +188,7 @@ export const useMemoryStore = create<MemoryState>(
         // Shuffle the cards:
         let cards = ShuffleCards(orderedCards);
         cards = ShuffleCards(cards);
-        cards = ShuffleCards(cards);
+        // cards = ShuffleCards(cards);
 
         set((state) => ({
           ...state,

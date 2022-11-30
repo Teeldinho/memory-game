@@ -72,52 +72,48 @@ const Card = (card: ICard) => {
 
     // push the card into the selected cards array:
     if (storeSelectedCards.length < 2) {
-      storeSelectedCards.push(card);
+      // only push the card into the array if there will not be a duplicate
+      if (!storeSelectedCards.some((c) => c.id === card.id)) {
+        storeSelectedCards.push(card);
 
-      // only check if cards match if the are 2 cards flipped:
-      if (storeSelectedCards.length === 2) {
-        // Determine the result:
-        if (cardsDoMatch()) {
-          console.log("These cards are matching.");
-          console.log(storeSelectedCards);
+        // only check if cards match if the are 2 cards flipped:
+        if (storeSelectedCards.length === 2) {
+          // Determine the result:
+          if (cardsDoMatch()) {
+            console.log("These cards are matching.");
+            console.log(storeSelectedCards);
 
-          // set the cards to matching, so they can be hidden from board:
-          storeSetCardsMatched(storeSelectedCards[0], storeSelectedCards[1]);
+            // set the cards to matching, so they can be hidden from board:
+            storeSetCardsMatched(storeSelectedCards[0], storeSelectedCards[1]);
 
-          // increase the player's score if they found a match:
-          storePlayers.map((player) => {
-            if (player.turnToPlay) {
-              storeIncreasePlayerScore(player.id);
-            }
-          });
-        } else {
-          console.log("These cards are NOT matching.");
-          // switch player turns:
-          storeToggleTurn();
-        }
+            // increase the player's score if they found a match:
+            storePlayers.map((player) => {
+              if (player.turnToPlay) {
+                storeIncreasePlayerScore(player.id);
+              }
+            });
+          } else {
+            console.log("These cards are NOT matching.");
+            // switch player turns:
+            storeToggleTurn();
+          }
 
-        // empty the selected cards array:
-        while (storeSelectedCards.length) {
-          storeSelectedCards.pop();
+          // empty the selected cards array:
+          while (storeSelectedCards.length) {
+            storeSelectedCards.pop();
+          }
         }
       }
+
+      setIsFlipped(false);
     }
-
-    // setTimeout(() => {
-    //   setIsFlipped(false);
-    // }, 2000);
-
-    setIsFlipped(false);
   };
 
   return (
     <div
       className={`relative h-20 cursor-pointer overflow-hidden rounded-sm ease-in-out hover:scale-110 hover:opacity-80 ${
         card.matched ? "invisible" : ""
-      }`}
-      // className={`relative h-20 cursor-pointer overflow-hidden rounded-sm ease-in-out hover:scale-110 hover:opacity-80 ${
-      //   isFlipped ? "pointer-events-none" : "pointer-events-auto"
-      // }`}
+      } ${isFlipped ? "pointer-events-none" : "pointer-events-auto"}`}
       onClick={handleCardFlip}
     >
       {isFlipped ? (
