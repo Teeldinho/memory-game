@@ -23,6 +23,7 @@ type Store = {
   selectedCards: ICard[];
   gameStarted: boolean;
   cardsMatchFound: boolean;
+  winnersList: TPlayer[];
 };
 
 type Actions = {
@@ -41,6 +42,7 @@ type Actions = {
   shuffleCards: () => void;
   setCardsMatched: (card1: ICard, card2: ICard) => void;
   removeCardsMatchedDialog: () => void;
+  generateWinnersList: (players: TPlayer[]) => void;
 };
 
 type MemoryState = Store & Actions;
@@ -72,6 +74,7 @@ const initialMemoryState = {
   gameStarted: false,
   selectedCards: [] as ICard[],
   cardsMatchFound: false,
+  winnersList: [] as TPlayer[],
 };
 
 export const useMemoryStore = create<MemoryState>(
@@ -192,6 +195,18 @@ export const useMemoryStore = create<MemoryState>(
         set((state) => ({
           ...state,
           cardsMatchFound: false,
+        }));
+      },
+
+      generateWinnersList: (players: TPlayer[]) => {
+        // sort the players according to their scores:
+        const arrWinners: TPlayer[] = [...players].sort(
+          (a, b) => a.score - b.score,
+        );
+
+        set((state) => ({
+          ...state,
+          winnersList: [...arrWinners],
         }));
       },
 

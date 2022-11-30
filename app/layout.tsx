@@ -15,11 +15,16 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // display winner message and scores:
+  const winnerHasBeenConfirmed = (): boolean => {
+    return false;
+  };
+
   return (
     <html className={customFont.className}>
       <head />
 
-      <body className="relative mx-auto h-screen max-w-[1440px] overflow-hidden bg-gradient-radial bg-no-repeat p-8 text-white">
+      <body className="relative mx-auto h-screen max-w-[1440px] overflow-hidden bg-gradient-radial bg-no-repeat text-white">
         {/* top right decoration */}
         <div className="absolute -top-72 -right-48 -z-10 h-[915px] w-[915px] rounded-full bg-white bg-gradient-decorator-circle blur-2xl"></div>
 
@@ -30,7 +35,6 @@ export default function RootLayout({
         <div className="absolute top-[688px] -right-48 -z-10 h-[664px] w-[664px] rounded-full bg-white bg-gradient-decorator-circle blur-2xl"></div>
 
         <Header />
-
         {children}
       </body>
     </html>

@@ -39,7 +39,7 @@ const Home = () => {
 
   const onSubmit: SubmitHandler<TInputs> = (data) => {
     storeResetScores();
-    storeSetNames([data.namePlayer1, data.namePlayer2]);
+    storeSetNames([data.namePlayer1.trim(), data.namePlayer2.trim()]);
     storeStartGame();
     router.push("/game");
   };

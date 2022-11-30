@@ -42,17 +42,19 @@ const Game = () => {
       }, 1000);
   }, [storeCardsMatchFound]);
 
+  // useEffect to check if there's a winner:
+
   return (
-    <div className="z-20 flex items-center w-full h-screen gap-16">
+    <div className="z-20 flex h-screen w-full items-center gap-16">
       {/* Player 1 Card showing name and score  */}
       <PlayerCard {...storePlayers[0]} />
 
       {/* Grid to render the cards: */}
-      <div className="relative w-full p-8 rounded-lg bg-gradient-glassy">
+      <div className="relative w-full rounded-lg bg-gradient-glassy p-8">
         {/* CardMatching */}
 
         {storeCardsMatchFound && (
-          <div className="absolute top-0 left-0 z-50 w-full h-full">
+          <div className="absolute top-0 left-0 z-50 h-full w-full">
             <Image src={CardMatching} fill alt="Card Matching" />
           </div>
         )}
