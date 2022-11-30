@@ -2,7 +2,7 @@
 
 import PlayerCard from "components/PlayerCard";
 import Card, { ICard } from "components/Card";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useMemoryStore } from "store/store";
 import shallow from "zustand/shallow";
 import CardMatching from "@/assets/Match.png";
@@ -13,19 +13,21 @@ const Game = () => {
   const {
     storePlayers,
     storeCards,
-    storeFetchCards,
     storeRemoveCardsMatchedDialog,
     storeCardsMatchFound,
     storeResetStore,
     storeStartGame,
+    storeShuffleCards,
+    storeResetCardsProperties,
   } = useMemoryStore(
     (state) => ({
       storePlayers: state.players,
       storeCards: state.cards,
       storeRemoveCardsMatchedDialog: state.removeCardsMatchedDialog,
-      storeFetchCards: state.fetchCards,
       storeResetStore: state.resetStore,
+      storeShuffleCards: state.shuffleCards,
       storeCardsMatchFound: state.cardsMatchFound,
+      storeResetCardsProperties: state.resetCardsProperties,
       storeStartGame: state.startGame,
     }),
     shallow,
@@ -34,12 +36,17 @@ const Game = () => {
   // reset store on render:
   // run once to fetch card data and shuffle them:
   useEffect(() => {
+    // reset the card properties:
+    storeResetCardsProperties(storeCards);
+
     storeResetStore(
       storePlayers.map(
         (player, index) => player.name || "Player " + index.toString(),
       ),
     );
-    storeFetchCards();
+
+    storeShuffleCards();
+    storeShuffleCards();
     storeStartGame();
   }, []);
 

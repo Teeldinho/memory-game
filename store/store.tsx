@@ -14,7 +14,6 @@ export type TPlayer = {
   score: number;
   avatar: StaticImageData;
   turnToPlay: boolean;
-  turnsTaken: number;
 };
 
 // typings for our store:
@@ -25,6 +24,7 @@ type Store = {
   gameStarted: boolean;
   cardsMatchFound: boolean;
   winnersList: TPlayer[];
+  winnerFound: boolean;
 };
 
 type Actions = {
@@ -44,6 +44,7 @@ type Actions = {
   setCardsMatched: (card1: ICard, card2: ICard) => void;
   removeCardsMatchedDialog: () => void;
   generateWinnersList: (players: TPlayer[]) => void;
+  resetCardsProperties: (cards: ICard[]) => void;
 };
 
 type MemoryState = Store & Actions;
@@ -62,7 +63,6 @@ const initialMemoryState: Store = {
       score: 0,
       avatar: AvatarPlayer1,
       turnToPlay: true,
-      turnsTaken: 0,
     },
     {
       id: 2,
@@ -70,13 +70,13 @@ const initialMemoryState: Store = {
       score: 0,
       avatar: AvatarPlayer2,
       turnToPlay: false,
-      turnsTaken: 0,
     },
   ] as TPlayer[],
   cards: [] as ICard[],
   gameStarted: false,
   selectedCards: [] as ICard[],
   cardsMatchFound: false,
+  winnerFound: false,
   winnersList: [] as TPlayer[],
 };
 
@@ -203,6 +203,18 @@ export const useMemoryStore = create<MemoryState>(
         }));
       },
 
+      resetCardsProperties: (cards: ICard[]) => {
+        const defaultCards: ICard[] = cards.map((card) => ({
+          ...card,
+          matched: false,
+        }));
+
+        set((state) => ({
+          ...state,
+          cards: [...defaultCards],
+        }));
+      },
+
       generateWinnersList: (players: TPlayer[]) => {
         // sort the players according to their scores:
         const arrWinners: TPlayer[] = [...players].sort(
@@ -219,13 +231,14 @@ export const useMemoryStore = create<MemoryState>(
       resetStore: (names?: string[]) => {
         if (names) {
           // we reset the whole store excluding names: (restart game):
-          set({
+          set((state) => ({
             ...initialMemoryState,
+            cards: [...state.cards],
             players: [
               { ...initialMemoryState.players[0], name: names[0] },
               { ...initialMemoryState.players[1], name: names[1] },
             ],
-          });
+          }));
         } else {
           // reset the entire state: (exit game):
           set(initialMemoryState);

@@ -13,7 +13,6 @@ export interface ICard {
   color: string;
   image: string;
   matched: boolean;
-  // matchFoundSuccessful?: () => void;
 }
 
 const Card = (card: ICard) => {
