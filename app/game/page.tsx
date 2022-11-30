@@ -16,21 +16,31 @@ const Game = () => {
     storeFetchCards,
     storeRemoveCardsMatchedDialog,
     storeCardsMatchFound,
+    storeResetStore,
+    storeStartGame,
   } = useMemoryStore(
     (state) => ({
       storePlayers: state.players,
       storeCards: state.cards,
       storeRemoveCardsMatchedDialog: state.removeCardsMatchedDialog,
       storeFetchCards: state.fetchCards,
+      storeResetStore: state.resetStore,
       storeCardsMatchFound: state.cardsMatchFound,
+      storeStartGame: state.startGame,
     }),
     shallow,
   );
 
-  // reset player scores on render:
+  // reset store on render:
   // run once to fetch card data and shuffle them:
   useEffect(() => {
+    storeResetStore(
+      storePlayers.map(
+        (player, index) => player.name || "Player " + index.toString(),
+      ),
+    );
     storeFetchCards();
+    storeStartGame();
   }, []);
 
   // useEffect to remove the matched dialog:
@@ -45,16 +55,16 @@ const Game = () => {
   // useEffect to check if there's a winner:
 
   return (
-    <div className="z-20 flex h-screen w-full items-center gap-16">
+    <div className="z-20 flex items-center w-full h-screen gap-16">
       {/* Player 1 Card showing name and score  */}
       <PlayerCard {...storePlayers[0]} />
 
       {/* Grid to render the cards: */}
-      <div className="relative w-full rounded-lg bg-gradient-glassy p-8">
+      <div className="relative w-full p-8 rounded-lg bg-gradient-glassy">
         {/* CardMatching */}
 
         {storeCardsMatchFound && (
-          <div className="absolute top-0 left-0 z-50 h-full w-full">
+          <div className="absolute top-0 left-0 z-50 w-full h-full">
             <Image src={CardMatching} fill alt="Card Matching" />
           </div>
         )}

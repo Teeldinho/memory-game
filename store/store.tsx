@@ -31,7 +31,7 @@ type Actions = {
   increasePlayerScore: (playerId: number) => void;
   setNames: (playerNames: string[]) => void;
   toggleTurn: () => void;
-  resetStore: () => void;
+  resetStore: (names?: string[]) => void;
   resetScores: () => void;
   stopGame: () => void;
   startGame: () => void;
@@ -53,7 +53,7 @@ type MyPersist = (
 ) => StateCreator<MemoryState>;
 
 // Initialize state initial:
-const initialMemoryState = {
+const initialMemoryState: Store = {
   players: [
     {
       id: 1,
@@ -183,7 +183,9 @@ export const useMemoryStore = create<MemoryState>(
         const orderedCards = StripCardDetails(allCards.data);
 
         // Shuffle the cards:
-        const cards = ShuffleCards(orderedCards);
+        let cards = ShuffleCards(orderedCards);
+        cards = ShuffleCards(cards);
+        cards = ShuffleCards(cards);
 
         set((state) => ({
           ...state,
@@ -211,8 +213,20 @@ export const useMemoryStore = create<MemoryState>(
       },
 
       // reset the values of the store:
-      resetStore: () => {
-        set(initialMemoryState);
+      resetStore: (names?: string[]) => {
+        if (names) {
+          // we reset the whole store excluding names: (restart game):
+          set({
+            ...initialMemoryState,
+            players: [
+              { ...initialMemoryState.players[0], name: names[0] },
+              { ...initialMemoryState.players[1], name: names[1] },
+            ],
+          });
+        } else {
+          // reset the entire state: (exit game):
+          set(initialMemoryState);
+        }
       },
     }),
 

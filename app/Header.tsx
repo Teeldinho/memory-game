@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useMemoryStore } from "store/store";
 import { useRouter } from "next/navigation";
 import shallow from "zustand/shallow";
@@ -8,35 +8,48 @@ import shallow from "zustand/shallow";
 const Header = () => {
   const {
     storeStopGame,
+    storeStartGame,
+    storePlayers,
     storeHasGameStarted,
-    storeShuffleCards,
-    storeResetScores,
+    storeResetStore,
     storeFetchCards,
   } = useMemoryStore(
     (state) => ({
       storeFetchCards: state.fetchCards,
+      storePlayers: state.players,
       storeStopGame: state.stopGame,
-      storeResetScores: state.resetScores,
-      storeShuffleCards: state.shuffleCards,
+      storeStartGame: state.startGame,
+      storeResetStore: state.resetStore,
+      // storeShuffleCards: state.shuffleCards,
       storeHasGameStarted: state.gameStarted,
     }),
     shallow,
   );
 
+  // useEffect(() => {}, [storeHasGameStarted]);
+
   // router for navigating pages:
   const router = useRouter();
 
   const handleExitGame = () => {
-    // stop the game and redirect to home screen:
+    // stop the game, reset store and redirect to home screen:
     storeStopGame();
+    storeResetStore();
     router.push("/");
   };
 
   const handleRestartGame = () => {
-    // reset the scores and shuffle the cards for restarting game:
+    // reset the scores:
+    storeResetStore(
+      storePlayers.map(
+        (player, index) => player.name || "Player " + index.toString(),
+      ),
+    );
+
+    storeStartGame();
+
+    // shuffle cards on restart:
     storeFetchCards();
-    storeResetScores();
-    storeShuffleCards();
   };
 
   return (
