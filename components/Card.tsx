@@ -18,14 +18,18 @@ export interface ICard {
 const Card = (card: ICard) => {
   const {
     storePlayers,
+    storeCards,
     storeSelectedCards,
+    storeAnnounceWinner,
     storeToggleTurn,
     storeSetCardsMatched,
     storeIncreasePlayerScore,
   } = useMemoryStore(
     (state) => ({
       storePlayers: state.players,
+      storeCards: state.cards,
       storeSelectedCards: state.selectedCards,
+      storeAnnounceWinner: state.announceWinner,
       storeToggleTurn: state.toggleTurn,
       storeSetCardsMatched: state.setCardsMatched,
       storeIncreasePlayerScore: state.increasePlayerScore,
@@ -55,7 +59,6 @@ const Card = (card: ICard) => {
           storeSelectedCards[1].color.toLowerCase()
         ) {
           console.log("The colors are a match!");
-          console.log(storeSelectedCards);
 
           return true;
         }
@@ -71,7 +74,7 @@ const Card = (card: ICard) => {
 
     // push the card into the selected cards array:
     if (storeSelectedCards.length < 2) {
-      // only push the card into the array if there will not be a duplicate
+      // only push the card into the array if there will not be a duplicate (i.e. double clicking on a card will not match):
       if (!storeSelectedCards.some((c) => c.id === card.id)) {
         storeSelectedCards.push(card);
 
@@ -80,7 +83,6 @@ const Card = (card: ICard) => {
           // Determine the result:
           if (cardsDoMatch()) {
             console.log("These cards are matching.");
-            console.log(storeSelectedCards);
 
             // set the cards to matching, so they can be hidden from board:
             storeSetCardsMatched(storeSelectedCards[0], storeSelectedCards[1]);
@@ -91,8 +93,13 @@ const Card = (card: ICard) => {
                 storeIncreasePlayerScore(player.id);
               }
             });
+
+            // trigger a results overlay when EVERY card has been matched:
+            if (storeCards.every((card) => card.matched === true))
+              storeAnnounceWinner();
           } else {
             console.log("These cards are NOT matching.");
+
             // switch player turns:
             storeToggleTurn();
           }
@@ -103,9 +110,8 @@ const Card = (card: ICard) => {
           }
         }
       }
-
-      setIsFlipped(false);
     }
+    setIsFlipped(false);
   };
 
   return (

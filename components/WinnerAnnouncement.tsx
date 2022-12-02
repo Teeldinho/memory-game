@@ -10,32 +10,35 @@ import shallow from "zustand/shallow";
 import { useEffect } from "react";
 
 const WinnerAnnouncement = () => {
-  const { storePlayers, storeGenerateWinners, storeWinnersList } =
-    useMemoryStore(
-      (state) => ({
-        storePlayers: state.players,
-        storeGenerateWinners: state.generateWinnersList,
-        storeWinnersList: state.winnersList,
-      }),
-      shallow,
-    );
+  const {
+    storePlayers,
+    storeGenerateWinners,
+    storeWinnersList,
+    storeWinnerFound,
+  } = useMemoryStore(
+    (state) => ({
+      storePlayers: state.players,
+      storeGenerateWinners: state.generateWinnersList,
+      storeWinnersList: state.winnersList,
+      storeWinnerFound: state.winnerFound,
+    }),
+    shallow,
+  );
 
-  // Generate winners list upon render:
+  // generate winners by sorting the array in accordance to the scores:
   useEffect(() => {
-    // generate winners:
-    // sort the array in accordance to the scores:
     storeGenerateWinners(storePlayers);
   }, []);
 
   return (
     <>
-      {storeWinnersList.length > 0 ? (
-        <div className="absolute top-0 left-0 z-50 flex w-full h-full max-w-4xl mx-auto">
-          <div className="flex flex-col w-full gap-16 mx-auto">
+      {storeWinnersList.length > 0 && storeWinnerFound ? (
+        <div className="absolute top-0 left-0 z-50 mx-auto flex h-full w-full max-w-4xl">
+          <div className="mx-auto flex w-full flex-col gap-16">
             {/* Winning player name and message: */}
             <div className="text-center">
               <h2 className="text-5xl font-bold">Well Done!</h2>
-              <h1 className="mt-4 font-bold text-7xl">
+              <h1 className="mt-4 text-7xl font-bold">
                 {storeWinnersList[0].name}
               </h1>
             </div>
@@ -48,14 +51,14 @@ const WinnerAnnouncement = () => {
                 <Image src={AvatarPlayer1} alt="Player Avatar" />
 
                 {/* Celebration decoration: */}
-                <div className="absolute top-0 left-0 w-full h-full -z-10">
+                <div className="absolute top-0 left-0 -z-10 h-full w-full">
                   <Image src={WinnerDeco} fill alt="Player Avatar" />
                 </div>
               </div>
             </div>
 
             {/* Player summary of game: */}
-            {/* // <PlayerGameSummary /> */}
+            {}
 
             {/* Play Again call to action:             */}
             <div>
@@ -66,8 +69,8 @@ const WinnerAnnouncement = () => {
           </div>
         </div>
       ) : (
-        <div>
-          <h1 className="font-bold text-7xl">No winners found.</h1>
+        <div className="grid h-full w-full place-items-center">
+          <h1 className="text-7xl font-bold">No winners found.</h1>
         </div>
       )}
     </>

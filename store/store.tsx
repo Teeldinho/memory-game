@@ -41,6 +41,7 @@ type Actions = {
   setCards: (cards: ICard[]) => void;
   fetchCards: () => void;
   shuffleCards: () => void;
+  announceWinner: () => void;
   setCardsMatched: (card1: ICard, card2: ICard) => void;
   removeCardsMatchedDialog: () => void;
   generateWinnersList: (players: TPlayer[]) => void;
@@ -76,8 +77,23 @@ const initialMemoryState: Store = {
   gameStarted: false,
   selectedCards: [] as ICard[],
   cardsMatchFound: false,
-  winnerFound: false,
-  winnersList: [] as TPlayer[],
+  winnerFound: true,
+  winnersList: [
+    {
+      id: 1,
+      name: "Tshepang",
+      score: 21,
+      avatar: AvatarPlayer1,
+      turnToPlay: true,
+    },
+    {
+      id: 2,
+      name: "Mogaila",
+      score: 14,
+      avatar: AvatarPlayer2,
+      turnToPlay: false,
+    },
+  ] as TPlayer[],
 };
 
 export const useMemoryStore = create<MemoryState>(
@@ -200,6 +216,13 @@ export const useMemoryStore = create<MemoryState>(
         set((state) => ({
           ...state,
           cardsMatchFound: false,
+        }));
+      },
+
+      announceWinner: () => {
+        set((state) => ({
+          ...state,
+          winnerFound: true,
         }));
       },
 

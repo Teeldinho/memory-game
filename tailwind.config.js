@@ -19,6 +19,9 @@ module.exports = {
 
         "gradient-glassy":
           "linear-gradient(107.62deg, rgba(255, 255, 255, 0.6) -0.7%, rgba(255, 255, 255, 0.1) 102.18%)",
+
+        "gradient-card-match":
+          "linear-gradient(116.82deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 105.28%)",
       },
     },
   },

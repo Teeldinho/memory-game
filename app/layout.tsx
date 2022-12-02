@@ -1,8 +1,14 @@
+"use client";
+
 import "../styles/globals.css";
 import Header from "./Header";
 
 // Install Poppins font:
 import { Poppins } from "@next/font/google";
+import { useEffect, useState } from "react";
+import { useMemoryStore } from "store/store";
+import shallow from "zustand/shallow";
+import WinnerAnnouncement from "components/WinnerAnnouncement";
 
 // Select font weights:
 const customFont = Poppins({
@@ -15,10 +21,18 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // display winner message and scores:
-  const winnerHasBeenConfirmed = (): boolean => {
-    return false;
-  };
+  const { storeWinnerFound } = useMemoryStore(
+    (state) => ({
+      storeWinnerFound: state.winnerFound,
+    }),
+    shallow,
+  );
+
+  const [showWinner, setShowWinner] = useState(false);
+
+  useEffect(() => {
+    if (storeWinnerFound) setShowWinner(true);
+  }, [storeWinnerFound]);
 
   return (
     <html className={customFont.className}>
@@ -34,8 +48,16 @@ export default function RootLayout({
         {/* bottom right decoration */}
         <div className="absolute top-[688px] -right-48 -z-10 h-[664px] w-[664px] rounded-full bg-white bg-gradient-decorator-circle blur-2xl"></div>
 
-        <Header />
-        {children}
+        {/* If a winner is found, show overlay of results:
+        Otherwise, show the game: */}
+        {!showWinner ? (
+          <WinnerAnnouncement />
+        ) : (
+          <>
+            <Header />
+            {children}
+          </>
+        )}
       </body>
     </html>
   );

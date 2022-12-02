@@ -21,16 +21,23 @@ const PlayerCard = (player: TPlayer) => {
       {/* Player Turn Indicator: */}
       {/* Conditionally render the output based on whose turn it is: */}
 
-      {turnToPlay &&
-        (id === 1 ? (
-          <div className="rounded-lg bg-[#0AB169] py-4 text-white">
-            <h2 className="text-2xl font-bold text-center">It's Your Turn</h2>
-          </div>
-        ) : (
-          <div className="rounded-lg bg-white py-4 text-[#489DDA]">
-            <h2 className="text-2xl font-bold text-center">It's Your Turn</h2>
-          </div>
-        ))}
+      {id === 1 ? (
+        <div
+          className={`rounded-lg bg-[#0AB169] py-4 text-white ${
+            turnToPlay ? "block" : "invisible"
+          }`}
+        >
+          <h2 className="text-2xl font-bold text-center">It's Your Turn</h2>
+        </div>
+      ) : (
+        <div
+          className={`rounded-lg bg-white py-4 text-[#489DDA] ${
+            turnToPlay ? "block" : "invisible"
+          }`}
+        >
+          <h2 className="text-2xl font-bold text-center">It's Your Turn</h2>
+        </div>
+      )}
     </div>
   );
 };

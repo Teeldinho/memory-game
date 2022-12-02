@@ -7,6 +7,7 @@ import { useMemoryStore } from "store/store";
 import shallow from "zustand/shallow";
 import CardMatching from "@/assets/Match.png";
 import Image from "next/image";
+import CardMatchFoundOverlay from "components/CardMatchFoundOverlay";
 
 const Game = () => {
   // get players and cards from our global state:
@@ -59,8 +60,6 @@ const Game = () => {
       }, 1000);
   }, [storeCardsMatchFound]);
 
-  // useEffect to check if there's a winner:
-
   return (
     <div className="z-20 flex items-center w-full h-screen gap-16">
       {/* Player 1 Card showing name and score  */}
@@ -71,12 +70,16 @@ const Game = () => {
         {/* CardMatching */}
 
         {storeCardsMatchFound && (
-          <div className="absolute top-0 left-0 z-50 w-full h-full">
-            <Image src={CardMatching} fill alt="Card Matching" />
+          <div className="absolute top-0 left-0 grid w-full h-full overflow-hidden rounded-lg">
+            <CardMatchFoundOverlay />
           </div>
         )}
 
-        <div className="grid grid-cols-9 grid-rows-6 gap-8">
+        <div
+          className={`grid grid-cols-9 grid-rows-6 gap-8 ${
+            storeCardsMatchFound ? "invisible" : ""
+          }`}
+        >
           {storeCards?.map((card: ICard, count: number) => (
             <Card key={count} {...card} />
           ))}
