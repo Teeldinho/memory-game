@@ -46,8 +46,11 @@ const Game = () => {
       ),
     );
 
+    // shuffle the cards twice:
     storeShuffleCards();
     storeShuffleCards();
+
+    // start the game:
     storeStartGame();
   }, []);
 
@@ -78,9 +81,9 @@ const Game = () => {
         <div
           className={`grid grid-cols-9 grid-rows-6 gap-8 ${
             storeCardsMatchFound ? "invisible" : ""
-          }`}
+          } `}
         >
-          {storeCards?.map((card: ICard, count: number) => (
+          {storeCards.map((card: ICard, count: number) => (
             <Card key={count} {...card} />
           ))}
         </div>

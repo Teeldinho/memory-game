@@ -9,13 +9,15 @@ export type TAnnouncePlayer = {
 };
 
 const PlayerGameSummary = ({ position, player }: TAnnouncePlayer) => {
+  const playerPosition = position === 1 ? "1st Place" : "2nd Place";
+
   return (
     <>
-      <div className="relative flex w-full text-[#0D4477]">
+      <div className="relative flex w-full items-center text-[#0D4477]">
         {/* Display the trophy alongside, only if the player won */}
         {position === 1 ? (
-          <div className="absolute top-4 -left-32">
-            <div className="relative grid w-20 h-20 bg-green-200 place-items-center">
+          <div className="absolute -left-32">
+            <div className="relative grid h-28 w-28 place-items-center">
               <Image src={Trophy} alt="Player Trophy" />
             </div>
           </div>
@@ -23,9 +25,9 @@ const PlayerGameSummary = ({ position, player }: TAnnouncePlayer) => {
 
         {/* Player winner card  */}
         <div
-          className={`flex w-full items-center justify-evenly rounded-lg px-8 py-4 ${
-            position + 1 === 1
-              ? "bg-gradient-to-r from-[#FFD975] to-yellow-50"
+          className={`flex w-full items-center justify-evenly rounded-lg py-5 ${
+            position === 1
+              ? "bg-gradient-to-r from-[#FFD975] to-yellow-100"
               : "bg-white"
           }`}
         >
@@ -35,7 +37,7 @@ const PlayerGameSummary = ({ position, player }: TAnnouncePlayer) => {
           </div>
 
           {/* player position: */}
-          <h3 className="text-xl font-bold">{position + 1}</h3>
+          <h3 className="text-xl font-bold">{playerPosition}</h3>
 
           {/* player name: */}
           <h3 className="text-xl">{player.name}</h3>
@@ -44,7 +46,6 @@ const PlayerGameSummary = ({ position, player }: TAnnouncePlayer) => {
           <h3 className="text-xl">Score: {player.score}</h3>
         </div>
       </div>
-      ))
     </>
   );
 };

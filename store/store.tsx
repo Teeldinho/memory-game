@@ -77,23 +77,8 @@ const initialMemoryState: Store = {
   gameStarted: false,
   selectedCards: [] as ICard[],
   cardsMatchFound: false,
-  winnerFound: true,
-  winnersList: [
-    {
-      id: 1,
-      name: "Tshepang",
-      score: 21,
-      avatar: AvatarPlayer1,
-      turnToPlay: true,
-    },
-    {
-      id: 2,
-      name: "Mogaila",
-      score: 14,
-      avatar: AvatarPlayer2,
-      turnToPlay: false,
-    },
-  ] as TPlayer[],
+  winnerFound: false,
+  winnersList: [],
 };
 
 export const useMemoryStore = create<MemoryState>(
@@ -202,13 +187,14 @@ export const useMemoryStore = create<MemoryState>(
         const orderedCards = StripCardDetails(allCards.data);
 
         // Shuffle the cards:
-        let cards = ShuffleCards(orderedCards);
-        cards = ShuffleCards(cards);
+        // let cards = ShuffleCards(orderedCards);
+        // cards = ShuffleCards(cards);
         // cards = ShuffleCards(cards);
 
         set((state) => ({
           ...state,
-          cards: [...cards],
+          cards: [...orderedCards],
+          // cards: [...cards],
         }));
       },
 
@@ -246,6 +232,7 @@ export const useMemoryStore = create<MemoryState>(
 
         set((state) => ({
           ...state,
+          winnerFound: true,
           winnersList: [...arrWinners],
         }));
       },
