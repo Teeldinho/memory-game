@@ -36,7 +36,7 @@ export default function RootLayout({
     <html className={customFont.className}>
       <head />
 
-      <body className="relative mx-auto grid h-screen w-full max-w-[1440px] place-items-center overflow-hidden bg-gradient-radial bg-no-repeat text-white">
+      <body className="relative mx-auto h-screen w-full max-w-[1440px] overflow-hidden bg-gradient-radial bg-no-repeat text-white">
         {/* top right decoration */}
         <div className="absolute -top-72 -right-48 -z-10 h-[915px] w-[915px] rounded-full bg-white bg-gradient-decorator-circle blur-2xl"></div>
 

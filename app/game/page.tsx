@@ -64,7 +64,7 @@ const Game = () => {
   }, [storeCardsMatchFound]);
 
   return (
-    <div className="z-20 flex items-center w-full h-screen gap-16">
+    <div className="flex items-center w-full h-screen gap-16">
       {/* Player 1 Card showing name and score  */}
       <PlayerCard {...storePlayers[0]} />
 
@@ -72,20 +72,22 @@ const Game = () => {
       <div className="relative w-full p-8 rounded-lg bg-gradient-glassy">
         {/* CardMatching */}
 
-        {storeCardsMatchFound && (
+        {/* {storeCardsMatchFound && (
           <div className="absolute top-0 left-0 grid w-full h-full overflow-hidden rounded-lg">
             <CardMatchFoundOverlay />
           </div>
-        )}
+        )} */}
 
         <div
-          className={`grid grid-cols-9 grid-rows-6 gap-8 ${
+          className={`grid w-full grid-cols-9 grid-rows-6 gap-8 ${
             storeCardsMatchFound ? "invisible" : ""
           } `}
         >
           {storeCards.map((card: ICard, count: number) => (
             <Card key={count} {...card} />
           ))}
+
+          
         </div>
       </div>
 
