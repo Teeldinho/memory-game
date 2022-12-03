@@ -47,8 +47,8 @@ const Game = () => {
     );
 
     // shuffle the cards twice:
-    storeShuffleCards();
-    storeShuffleCards();
+    // storeShuffleCards();
+    // storeShuffleCards();
 
     // start the game:
     storeStartGame();
@@ -60,23 +60,22 @@ const Game = () => {
     if (storeCardsMatchFound)
       setTimeout(() => {
         storeRemoveCardsMatchedDialog();
-      }, 1000);
+      }, 500);
   }, [storeCardsMatchFound]);
 
   return (
-    <div className="flex items-center w-full h-screen gap-16">
+    <div className="flex items-center w-full h-screen gap-16 -mt-16">
       {/* Player 1 Card showing name and score  */}
       <PlayerCard {...storePlayers[0]} />
 
       {/* Grid to render the cards: */}
       <div className="relative w-full p-8 rounded-lg bg-gradient-glassy">
         {/* CardMatching */}
-
-        {/* {storeCardsMatchFound && (
+        {storeCardsMatchFound && (
           <div className="absolute top-0 left-0 grid w-full h-full overflow-hidden rounded-lg">
             <CardMatchFoundOverlay />
           </div>
-        )} */}
+        )}
 
         <div
           className={`grid w-full grid-cols-9 grid-rows-6 gap-8 ${
@@ -86,8 +85,6 @@ const Game = () => {
           {storeCards.map((card: ICard, count: number) => (
             <Card key={count} {...card} />
           ))}
-
-          
         </div>
       </div>
 

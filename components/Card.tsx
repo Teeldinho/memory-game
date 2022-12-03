@@ -95,8 +95,9 @@ const Card = (card: ICard) => {
             });
 
             // trigger a results overlay when EVERY card has been matched:
-            if (storeCards.every((card) => card.matched === true))
-              storeAnnounceWinner();
+            if (storeCards.every((card) => card.matched === true)) {
+              storeAnnounceWinner(true);
+            }
           } else {
             console.log("These cards are NOT matching.");
 
@@ -111,6 +112,7 @@ const Card = (card: ICard) => {
         }
       }
     }
+
     setIsFlipped(false);
   };
 

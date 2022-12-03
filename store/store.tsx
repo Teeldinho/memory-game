@@ -41,7 +41,7 @@ type Actions = {
   setCards: (cards: ICard[]) => void;
   fetchCards: () => void;
   shuffleCards: () => void;
-  announceWinner: () => void;
+  announceWinner: (bAnnounce: boolean) => void;
   setCardsMatched: (card1: ICard, card2: ICard) => void;
   removeCardsMatchedDialog: () => void;
   generateWinnersList: (players: TPlayer[]) => void;
@@ -165,11 +165,13 @@ export const useMemoryStore = create<MemoryState>(
       setCardsMatched: (card1: ICard, card2: ICard) => {
         set((state) => ({
           ...state,
-          cards: state.cards.map((card) =>
-            card.id === card1.id || card.id === card2.id
-              ? { ...card, matched: true }
-              : card,
-          ),
+          cards: [
+            ...state.cards.map((card) =>
+              card.id === card1.id || card.id === card2.id
+                ? { ...card, matched: true }
+                : card,
+            ),
+          ],
           cardsMatchFound: true,
         }));
       },
@@ -184,17 +186,11 @@ export const useMemoryStore = create<MemoryState>(
         const allCards = await cardsArrayWithAllInformation.json();
 
         // Capture data that is needed from the card:
-        const orderedCards = StripCardDetails(allCards.data);
-
-        // Shuffle the cards:
-        // let cards = ShuffleCards(orderedCards);
-        // cards = ShuffleCards(cards);
-        // cards = ShuffleCards(cards);
+        const processedCards = StripCardDetails(allCards.data);
 
         set((state) => ({
           ...state,
-          cards: [...orderedCards],
-          // cards: [...cards],
+          cards: [...processedCards],
         }));
       },
 
@@ -205,10 +201,10 @@ export const useMemoryStore = create<MemoryState>(
         }));
       },
 
-      announceWinner: () => {
+      announceWinner: (bAnnounce: boolean) => {
         set((state) => ({
           ...state,
-          winnerFound: true,
+          winnerFound: bAnnounce,
         }));
       },
 

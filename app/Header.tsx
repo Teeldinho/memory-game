@@ -54,32 +54,33 @@ const Header = () => {
   };
 
   return (
-    <header className="absolute top-0 right-0 w-full">
-      <div className="relative flex justify-end w-full py-8 ">
-        <div className="absolute right-[46%]">
-          <h1 className="text-4xl font-bold">Memory</h1>
-        </div>
-
-        <div className="flex gap-8">
-          {/* Conditionally render this button when game has already started: */}
-
-          {storeHasGameStarted && (
-            <button
-              onClick={handleRestartGame}
-              className="rounded-lg bg-[#F4A236] p-4 text-xl font-bold hover:opacity-90"
-            >
-              Restart Game
-            </button>
-          )}
-
-          <button
-            onClick={handleExitGame}
-            className="rounded-lg bg-[#D4190C] p-4 text-xl font-bold hover:opacity-90"
-          >
-            Exit Game
-          </button>
-        </div>
+    <header className="relative z-10 flex w-full justify-end pt-8">
+      {/* <header className="absolute top-0 right-0 w-full"> */}
+      {/* <div className="relative flex justify-end w-full py-8 "> */}
+      <div className="absolute right-[45%]">
+        <h1 className="text-4xl font-bold">Memory</h1>
       </div>
+
+      <div className="flex gap-8">
+        {/* Conditionally render this button when game has already started: */}
+
+        {storeHasGameStarted && (
+          <button
+            onClick={handleRestartGame}
+            className="rounded-lg bg-[#F4A236] p-4 text-xl font-bold hover:opacity-90"
+          >
+            Restart Game
+          </button>
+        )}
+
+        <button
+          onClick={handleExitGame}
+          className="rounded-lg bg-[#D4190C] p-4 text-xl font-bold hover:opacity-90"
+        >
+          Exit Game
+        </button>
+      </div>
+      {/* </div> */}
     </header>
   );
 };
