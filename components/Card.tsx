@@ -74,6 +74,9 @@ const Card = (card: ICard) => {
   const handleCardFlip = () => {
     setIsFlipped(true);
 
+    console.log("CLICKING!");
+    console.log(storeSelectedCards);
+
     // push the card into the selected cards array:
     if (storeSelectedCards.length < 2) {
       // only push the card into the array if there will not be a duplicate (i.e. double clicking on a card will not match):
@@ -112,6 +115,7 @@ const Card = (card: ICard) => {
 
               // trigger annoucement if both cards are selected:
               if (storeSelectedCards.length === 2) {
+                storeClearSelectedCards();
                 storeAnnounceWinner(true);
               }
             }

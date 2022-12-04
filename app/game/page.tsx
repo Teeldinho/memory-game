@@ -34,8 +34,6 @@ const Game = () => {
     shallow,
   );
 
-  // const [first, setfirst] = useState(second)
-
   // reset store on render:
   // run once to fetch card data and shuffle them:
   useEffect(() => {

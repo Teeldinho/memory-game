@@ -38,7 +38,9 @@ export default function RootLayout({
     <html className={customFont.className}>
       <head />
 
-      <body className="relative mx-auto h-screen w-full max-w-[1440px] overflow-hidden bg-gradient-radial bg-no-repeat text-white">
+      <body className="relative mx-auto h-screen w-full overflow-hidden bg-gradient-radial bg-no-repeat text-white lg:max-w-[1440px]">
+        {/* <body className="relative mx-auto h-screen w-full max-w-[1440px] overflow-hidden bg-gradient-radial bg-no-repeat text-white portrait:hidden"> */}
+
         {/* decorate page with background circles: */}
         <PageDecoration />
 
@@ -52,6 +54,10 @@ export default function RootLayout({
             {children}
           </>
         )}
+
+        {/* <h1 className="portrait:text-center portrait:text-5xl portrait:font-bold">
+          Please turn your phone into landscape mode to play game.
+        </h1> */}
       </body>
     </html>
   );

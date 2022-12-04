@@ -181,18 +181,6 @@ export const useMemoryStore = create<MemoryState>(
           ),
           cardsMatchFound: true,
         }));
-
-        // set((state) => ({
-        //   ...state,
-        //   cards: [
-        //     ...state.cards.map((card) =>
-        //       card.id === card1.id || card.id === card2.id
-        //         ? { ...card, matched: true }
-        //         : card,
-        //     ),
-        //   ],
-        //   cardsMatchFound: true,
-        // }));
       },
 
       // asynchronously fetch cards from CMS:
@@ -236,6 +224,7 @@ export const useMemoryStore = create<MemoryState>(
         set((state) => ({
           ...state,
           cards: [...defaultCards],
+          selectedCards: [] as ICard[],
         }));
       },
 
@@ -261,11 +250,14 @@ export const useMemoryStore = create<MemoryState>(
 
       // reset the values of the store:
       resetStore: (names?: string[]) => {
+        const cardies = useMemoryStore().cards;
+
         if (names) {
           // we reset the whole store excluding names: (restart game):
           set((state) => ({
             ...initialMemoryState,
-            cards: [...state.cards],
+            // cards: ,
+            // cards: [...state.cards],
             players: [
               { ...initialMemoryState.players[0], name: names[0] },
               { ...initialMemoryState.players[1], name: names[1] },

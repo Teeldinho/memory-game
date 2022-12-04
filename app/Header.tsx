@@ -14,6 +14,7 @@ const Header = () => {
     storeShuffleCards,
     storeResetCardsProperties,
     storeCards,
+    storeFetchCards,
   } = useMemoryStore(
     (state) => ({
       storePlayers: state.players,
@@ -24,6 +25,7 @@ const Header = () => {
       storeShuffleCards: state.shuffleCards,
       storeResetCardsProperties: state.resetCardsProperties,
       storeHasGameStarted: state.gameStarted,
+      storeFetchCards: state.fetchCards,
     }),
     shallow,
   );
@@ -40,7 +42,7 @@ const Header = () => {
 
   const handleRestartGame = () => {
     // reset the card properties:
-    storeResetCardsProperties(storeCards);
+    // storeResetCardsProperties(storeCards);
 
     // reset the scores:
     storeResetStore(
@@ -49,12 +51,16 @@ const Header = () => {
       ),
     );
 
+    // fetch the cards:
+    storeFetchCards();
+
     storeStartGame();
+
     storeShuffleCards();
   };
 
   return (
-    <header className="relative z-10 flex w-full justify-end pt-8">
+    <header className="relative z-10 flex justify-end w-full p-8">
       {/* <header className="absolute top-0 right-0 w-full"> */}
       {/* <div className="relative flex justify-end w-full py-8 "> */}
       <div className="absolute right-[45%]">

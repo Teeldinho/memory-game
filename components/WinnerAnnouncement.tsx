@@ -57,11 +57,17 @@ const WinnerAnnouncement = () => {
       ),
     );
 
-    storeStartGame();
+    // shuffle the card deck twice:
+    storeShuffleCards();
     storeShuffleCards();
 
     storeAnnounceWinner(false);
+
+    // start the game:
+    storeStartGame();
+
     router.push("/game");
+    router.refresh();
   };
 
   return (
