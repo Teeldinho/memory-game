@@ -24,6 +24,7 @@ const Card = (card: ICard) => {
     storeToggleTurn,
     storeSetCardsMatched,
     storeIncreasePlayerScore,
+    storeClearSelectedCards,
   } = useMemoryStore(
     (state) => ({
       storePlayers: state.players,
@@ -33,6 +34,7 @@ const Card = (card: ICard) => {
       storeToggleTurn: state.toggleTurn,
       storeSetCardsMatched: state.setCardsMatched,
       storeIncreasePlayerScore: state.increasePlayerScore,
+      storeClearSelectedCards: state.clearSelectedCards,
     }),
     shallow,
   );
@@ -78,6 +80,9 @@ const Card = (card: ICard) => {
       if (!storeSelectedCards.some((c) => c.id === card.id)) {
         storeSelectedCards.push(card);
 
+        console.log("Added a selected card");
+        console.log(storeSelectedCards);
+
         // only check if cards match if the are 2 cards flipped:
         if (storeSelectedCards.length === 2) {
           // Determine the result:
@@ -94,10 +99,26 @@ const Card = (card: ICard) => {
               }
             });
 
+            // check if
+
+            const checkLastCards = storeCards.filter(
+              (c) => c.matched === false,
+            );
+
             // trigger a results overlay when EVERY card has been matched:
-            if (storeCards.every((card) => card.matched === true)) {
-              storeAnnounceWinner(true);
+            if (checkLastCards.length === 2) {
+              console.log("Left with 2 cards:");
+              console.log(checkLastCards);
+
+              // trigger annoucement if both cards are selected:
+              if (storeSelectedCards.length === 2) {
+                storeAnnounceWinner(true);
+              }
             }
+
+            // if (storeCards.every((card) => card.matched === true)) {
+            //   storeAnnounceWinner(true);
+            // }
           } else {
             console.log("These cards are NOT matching.");
 
@@ -105,10 +126,8 @@ const Card = (card: ICard) => {
             storeToggleTurn();
           }
 
-          // empty the selected cards array:
-          while (storeSelectedCards.length) {
-            storeSelectedCards.pop();
-          }
+          // clear the selected cards:
+          storeClearSelectedCards();
         }
       }
     }

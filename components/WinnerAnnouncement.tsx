@@ -18,13 +18,23 @@ const WinnerAnnouncement = () => {
     storeWinnersList,
     storeWinnerFound,
     storeAnnounceWinner,
+    storeResetCardsProperties,
+    storeCards,
+    storeResetStore,
+    storeStartGame,
+    storeShuffleCards,
   } = useMemoryStore(
     (state) => ({
       storePlayers: state.players,
+      storeCards: state.cards,
       storeGenerateWinners: state.generateWinnersList,
       storeWinnersList: state.winnersList,
       storeWinnerFound: state.winnerFound,
       storeAnnounceWinner: state.announceWinner,
+      storeResetCardsProperties: state.resetCardsProperties,
+      storeResetStore: state.resetStore,
+      storeStartGame: state.startGame,
+      storeShuffleCards: state.shuffleCards,
     }),
     shallow,
   );
@@ -37,6 +47,19 @@ const WinnerAnnouncement = () => {
   const router = useRouter();
 
   const handlePlayAgain = () => {
+    // reset the card properties:
+    storeResetCardsProperties(storeCards);
+
+    // reset the scores:
+    storeResetStore(
+      storePlayers.map(
+        (player, index) => player.name || "Player " + index.toString(),
+      ),
+    );
+
+    storeStartGame();
+    storeShuffleCards();
+
     storeAnnounceWinner(false);
     router.push("/game");
   };
@@ -44,7 +67,7 @@ const WinnerAnnouncement = () => {
   return (
     <>
       {/* {storeWinnerFound ? ( */}
-      <div className="absolute top-0 z-50 flex w-full h-full bg-red-200">
+      <div className="absolute top-0 z-50 flex w-full h-full">
         <div className="flex flex-col items-center justify-center w-full max-w-4xl gap-16 mx-auto">
           {/* Winning player name and message: */}
           <div className="flex flex-col gap-4 text-center">

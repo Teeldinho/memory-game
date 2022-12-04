@@ -41,11 +41,13 @@ type Actions = {
   setCards: (cards: ICard[]) => void;
   fetchCards: () => void;
   shuffleCards: () => void;
+  clearSelectedCards: () => void;
   announceWinner: (bAnnounce: boolean) => void;
   setCardsMatched: (card1: ICard, card2: ICard) => void;
   removeCardsMatchedDialog: () => void;
   generateWinnersList: (players: TPlayer[]) => void;
   resetCardsProperties: (cards: ICard[]) => void;
+  addSelectedCard: (card: ICard) => void;
 };
 
 type MemoryState = Store & Actions;
@@ -78,7 +80,7 @@ const initialMemoryState: Store = {
   selectedCards: [] as ICard[],
   cardsMatchFound: false,
   winnerFound: false,
-  winnersList: [],
+  winnersList: [] as TPlayer[],
 };
 
 export const useMemoryStore = create<MemoryState>(
@@ -137,6 +139,13 @@ export const useMemoryStore = create<MemoryState>(
         }));
       },
 
+      clearSelectedCards: () => {
+        set((state) => ({
+          ...state,
+          selectedCards: [] as ICard[],
+        }));
+      },
+
       // reset player scores when restarting game:
       resetScores: () => {
         set((state) => ({
@@ -165,15 +174,25 @@ export const useMemoryStore = create<MemoryState>(
       setCardsMatched: (card1: ICard, card2: ICard) => {
         set((state) => ({
           ...state,
-          cards: [
-            ...state.cards.map((card) =>
-              card.id === card1.id || card.id === card2.id
-                ? { ...card, matched: true }
-                : card,
-            ),
-          ],
+          cards: state.cards.map((card) =>
+            card.id === card1.id || card.id === card2.id
+              ? { ...card, matched: true }
+              : card,
+          ),
           cardsMatchFound: true,
         }));
+
+        // set((state) => ({
+        //   ...state,
+        //   cards: [
+        //     ...state.cards.map((card) =>
+        //       card.id === card1.id || card.id === card2.id
+        //         ? { ...card, matched: true }
+        //         : card,
+        //     ),
+        //   ],
+        //   cardsMatchFound: true,
+        // }));
       },
 
       // asynchronously fetch cards from CMS:
@@ -220,10 +239,17 @@ export const useMemoryStore = create<MemoryState>(
         }));
       },
 
+      addSelectedCard: (card: ICard) => {
+        set((state) => ({
+          ...state,
+          selectedCards: [...state.selectedCards, card],
+        }));
+      },
+
       generateWinnersList: (players: TPlayer[]) => {
         // sort the players according to their scores:
         const arrWinners: TPlayer[] = [...players].sort(
-          (a, b) => a.score - b.score,
+          (a, b) => b.score - a.score,
         );
 
         set((state) => ({

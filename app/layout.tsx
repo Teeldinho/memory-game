@@ -30,11 +30,16 @@ export default function RootLayout({
     shallow,
   );
 
+  useEffect(() => {
+    if (storeWinnerFound) console.log("WINNER FOUND!");
+  }, [storeWinnerFound]);
+
   return (
     <html className={customFont.className}>
       <head />
 
       <body className="relative mx-auto h-screen w-full max-w-[1440px] overflow-hidden bg-gradient-radial bg-no-repeat text-white">
+        {/* decorate page with background circles: */}
         <PageDecoration />
 
         {/* If a winner is found, show overlay of results:
