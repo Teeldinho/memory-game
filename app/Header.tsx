@@ -60,11 +60,9 @@ const Header = () => {
   };
 
   return (
-    <header className="relative z-10 flex justify-end w-full p-8">
-      {/* <header className="absolute top-0 right-0 w-full"> */}
-      {/* <div className="relative flex justify-end w-full py-8 "> */}
+    <header className="relative z-10 flex justify-end w-full p-4 lg:p-8">
       <div className="absolute right-[45%]">
-        <h1 className="text-4xl font-bold">Memory</h1>
+        <h1 className="text-3xl font-bold lg:text-4xl">Memory</h1>
       </div>
 
       <div className="flex gap-8">
@@ -73,7 +71,7 @@ const Header = () => {
         {storeHasGameStarted && (
           <button
             onClick={handleRestartGame}
-            className="rounded-lg bg-[#F4A236] p-4 text-xl font-bold hover:opacity-90"
+            className="rounded-xl bg-[#F4A236] p-4 text-xs font-bold hover:opacity-90 lg:text-xl"
           >
             Restart Game
           </button>
@@ -81,7 +79,7 @@ const Header = () => {
 
         <button
           onClick={handleExitGame}
-          className="rounded-lg bg-[#D4190C] p-4 text-xl font-bold hover:opacity-90"
+          className="rounded-xl bg-[#D4190C] p-4 text-xs font-bold hover:opacity-90 lg:text-xl"
         >
           Exit Game
         </button>

@@ -73,12 +73,12 @@ const WinnerAnnouncement = () => {
   return (
     <>
       {/* {storeWinnerFound ? ( */}
-      <div className="absolute top-0 z-50 flex w-full h-full">
-        <div className="flex flex-col items-center justify-center w-full max-w-4xl gap-16 mx-auto">
+      <div className="absolute top-0 z-50 flex h-full w-full">
+        <div className="mx-auto flex w-full max-w-4xl flex-col items-center justify-center gap-16">
           {/* Winning player name and message: */}
           <div className="flex flex-col gap-4 text-center">
             <h2 className="text-5xl font-bold">Well Done!</h2>
-            <h1 className="font-bold text-7xl">{storeWinnersList[0]?.name}</h1>
+            <h1 className="text-7xl font-bold">{storeWinnersList[0]?.name}</h1>
           </div>
 
           {/* Winning Player Image */}
@@ -89,14 +89,14 @@ const WinnerAnnouncement = () => {
               <Image src={storeWinnersList[0]?.avatar} alt="Player Avatar" />
 
               {/* Celebration decoration: */}
-              <div className="absolute top-0 left-0 w-full h-full -z-10">
+              <div className="absolute top-0 left-0 -z-10 h-full w-full">
                 <Image src={WinnerDeco} alt="Player Avatar" />
               </div>
             </div>
           </div>
 
           {/* Player summary of game: */}
-          <div className="flex flex-col w-full gap-4">
+          <div className="flex w-full flex-col gap-4">
             {storeWinnersList.map((player, position) => {
               const playerSummary: TAnnouncePlayer = {
                 player,
@@ -109,7 +109,7 @@ const WinnerAnnouncement = () => {
           {/* Play Again call to action:             */}
           <div>
             <button
-              className="rounded-lg bg-[#A7DAFF] px-4 py-5 font-bold uppercase text-[#164464] hover:opacity-80"
+              className="rounded-xl bg-[#A7DAFF] px-4 py-5 font-bold uppercase text-[#164464] hover:opacity-80"
               onClick={handlePlayAgain}
             >
               Play Again

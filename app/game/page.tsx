@@ -64,15 +64,15 @@ const Game = () => {
   }, [storeCardsMatchFound]);
 
   return (
-    <div className="flex items-center w-full h-screen gap-16 -mt-16">
+    <div className="-mt-16 flex h-screen w-full items-center gap-16">
       {/* Player 1 Card showing name and score  */}
       <PlayerCard {...storePlayers[0]} />
 
       {/* Grid to render the cards: */}
-      <div className="relative w-full p-8 rounded-lg bg-gradient-glassy">
+      <div className="relative w-full rounded-xl bg-gradient-glassy p-8">
         {/* CardMatching */}
         {storeCardsMatchFound && (
-          <div className="absolute top-0 left-0 grid w-full h-full overflow-hidden rounded-lg">
+          <div className="absolute top-0 left-0 grid h-full w-full overflow-hidden rounded-xl">
             <CardMatchFoundOverlay />
           </div>
         )}

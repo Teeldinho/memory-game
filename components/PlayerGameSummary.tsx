@@ -25,7 +25,7 @@ const PlayerGameSummary = ({ position, player }: TAnnouncePlayer) => {
 
         {/* Player winner card  */}
         <div
-          className={`flex w-full items-center justify-evenly rounded-lg py-5 ${
+          className={`flex w-full items-center justify-evenly rounded-xl py-5 ${
             position === 1
               ? "bg-gradient-to-r from-[#FFD975] to-yellow-100"
               : "bg-white"

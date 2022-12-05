@@ -52,21 +52,23 @@ const Home = () => {
   };
 
   return (
-    <div className="z-20 grid h-screen w-full place-items-center">
-      <div className="flex h-full w-full max-w-4xl flex-col items-center justify-center gap-20 py-48">
+    <div className="z-20 grid w-full h-screen place-items-center">
+      <div className="flex flex-col items-center w-full h-full gap-4 py-4 lg:max-w-4xl lg:justify-center lg:gap-20 lg:py-48">
         {/* HEADING QUESTION: */}
-        <h1 className="text-6xl font-bold">Are you ready to play?</h1>
+        <h1 className="text-2xl font-bold lg:text-6xl">
+          Are you ready to play?
+        </h1>
 
         {/* AVATARS AND NAME INPUT BOX */}
 
         <form
-          className="flex flex-col items-center gap-16"
+          className="flex flex-col items-center gap-8 bg-red-400 lg:gap-16"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <div className="grid w-full grid-cols-2 gap-16">
-            {/* CARD 1 */}
-            <div className="flex flex-col items-center gap-8">
-              <div className="relative grid h-60 w-full place-items-center bg-transparent">
+          <div className="grid w-full grid-cols-2 gap-8 lg:gap-16">
+            {/* CARD 2 */}
+            <div className="flex flex-col items-center gap-4 lg:gap-8">
+              <div className="relative grid w-full h-4 bg-transparent place-items-center lg:h-60">
                 <Image src={AvatarPlayer1} alt="Player 1 Avatar" />
               </div>
 
@@ -74,15 +76,15 @@ const Home = () => {
                 <input
                   {...register("namePlayer1", { required: true })}
                   type="text"
-                  className="form-control m-0 block w-full rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-4 py-4 font-normal text-gray-700 transition ease-in-out focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none"
+                  className="block w-full px-4 py-3 m-0 font-normal text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid form-control rounded-xl bg-clip-padding focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none lg:py-4"
                   placeholder="Name of Player 1"
                 />
               </div>
             </div>
 
-            {/* CARD 1 */}
-            <div className="flex flex-col items-center gap-8">
-              <div className="relative grid h-60 w-full place-items-center bg-transparent">
+            {/* CARD 2 */}
+            <div className="flex flex-col items-center gap-4 lg:gap-8">
+              <div className="relative grid w-full h-4 bg-transparent place-items-center lg:h-60">
                 <Image src={AvatarPlayer2} alt="Player 2 Avatar" />
               </div>
 
@@ -90,7 +92,7 @@ const Home = () => {
                 <input
                   {...register("namePlayer2", { required: true })}
                   type="text"
-                  className="form-control m-0 block w-full rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-4 py-4 font-normal text-gray-700 transition ease-in-out focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none"
+                  className="block w-full px-4 py-3 m-0 font-normal text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid form-control rounded-xl bg-clip-padding focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none lg:py-4"
                   placeholder="Name of Player 2"
                 />
               </div>
@@ -101,7 +103,7 @@ const Home = () => {
           <div className="mx-auto">
             <button
               type="submit"
-              className="rounded-lg bg-[#0AB169]  py-4 px-16 text-xl font-bold hover:opacity-90"
+              className="rounded-xl bg-[#0AB169]  py-4 px-16 text-base font-bold hover:opacity-90 lg:text-xl"
             >
               Let's Play
             </button>
