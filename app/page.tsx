@@ -52,8 +52,8 @@ const Home = () => {
   };
 
   return (
-    <div className="z-20 p-4 lg:mt-28">
-      <div className="mx-auto flex w-[80vw] flex-col items-center justify-center gap-4 rounded-xl bg-gradient-mobile p-8 lg:max-w-4xl lg:gap-16 lg:bg-none">
+    <div className="z-20 p-4 mt-2 lg:mt-28">
+      <div className="mx-auto flex h-[70vh] w-[60vw] flex-col items-center justify-center gap-4 rounded-xl bg-gradient-mobile  p-8 lg:h-full lg:max-w-4xl lg:gap-16 lg:bg-none">
         {/* HEADING QUESTION: */}
         <h1 className="text-2xl font-bold lg:text-6xl">
           Are you ready to play?
@@ -62,13 +62,13 @@ const Home = () => {
         {/* AVATARS AND NAME INPUT BOX */}
 
         <form
-          className="flex flex-col items-center h-full gap-4 mx-auto lg:gap-16"
+          className="flex flex-col items-center w-full h-full gap-8 mx-auto lg:gap-16"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <div className="grid w-full grid-cols-2 gap-16">
+          <div className="grid w-full grid-cols-2 gap-12 lg:gap-16">
             {/* CARD 2 */}
             <div className="flex flex-col items-center gap-4 lg:gap-8">
-              <div className="relative bg-transparent aspect-square h-28 w-28 lg:h-44 lg:w-44">
+              <div className="relative w-24 h-24 bg-transparent aspect-square lg:h-44 lg:w-44">
                 <Image src={AvatarPlayer1} fill alt="Player 1 Avatar" />
               </div>
 
@@ -76,7 +76,7 @@ const Home = () => {
                 <input
                   {...register("namePlayer1", { required: true })}
                   type="text"
-                  className="block w-full px-4 py-3 m-0 font-normal text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid form-control rounded-xl bg-clip-padding focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none lg:py-4"
+                  className="block w-full px-4 py-2 m-0 text-base font-normal text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid shadow-lg form-control rounded-xl bg-clip-padding focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none lg:py-4"
                   placeholder="Name of Player 1"
                 />
               </div>
@@ -84,7 +84,7 @@ const Home = () => {
 
             {/* CARD 2 */}
             <div className="flex flex-col items-center gap-4 lg:gap-8">
-              <div className="relative bg-transparent aspect-square h-28 w-28 lg:h-44 lg:w-44">
+              <div className="relative w-24 h-24 bg-transparent aspect-square lg:h-44 lg:w-44">
                 <Image src={AvatarPlayer2} fill alt="Player 2 Avatar" />
               </div>
 
@@ -92,7 +92,7 @@ const Home = () => {
                 <input
                   {...register("namePlayer2", { required: true })}
                   type="text"
-                  className="block w-full px-4 py-3 m-0 font-normal text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid form-control rounded-xl bg-clip-padding focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none lg:py-4"
+                  className="block w-full px-4 py-2 m-0 text-base font-normal text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid shadow-lg form-control rounded-xl bg-clip-padding focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none lg:py-4"
                   placeholder="Name of Player 2"
                 />
               </div>
@@ -100,14 +100,12 @@ const Home = () => {
           </div>
           {/* PLAY BUTTON */}
 
-          <div className="mx-auto">
-            <button
-              type="submit"
-              className="rounded-xl bg-[#A7DAFF] py-3 px-16 text-base font-bold uppercase text-[#164464] hover:opacity-90 lg:bg-[#0AB169] lg:py-4 lg:text-xl lg:capitalize lg:text-white"
-            >
-              Let's Play
-            </button>
-          </div>
+          <button
+            type="submit"
+            className="mx-auto rounded-xl bg-[#A7DAFF] py-2 px-8 text-base font-bold uppercase text-[#164464] shadow-lg hover:opacity-90 lg:bg-[#0AB169] lg:px-16 lg:py-4 lg:text-xl lg:capitalize lg:text-white"
+          >
+            Let's Play
+          </button>
         </form>
       </div>
     </div>
