@@ -250,14 +250,13 @@ export const useMemoryStore = create<MemoryState>(
 
       // reset the values of the store:
       resetStore: (names?: string[]) => {
-        const cardies = useMemoryStore().cards;
+        // const cardies = useMemoryStore().cards;
 
         if (names) {
           // we reset the whole store excluding names: (restart game):
           set((state) => ({
             ...initialMemoryState,
-            // cards: ,
-            // cards: [...state.cards],
+            cards: [...state.cards],
             players: [
               { ...initialMemoryState.players[0], name: names[0] },
               { ...initialMemoryState.players[1], name: names[1] },

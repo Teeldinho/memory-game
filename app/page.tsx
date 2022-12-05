@@ -52,8 +52,8 @@ const Home = () => {
   };
 
   return (
-    <div className="z-20 grid w-full h-screen place-items-center">
-      <div className="flex flex-col items-center w-full h-full gap-4 py-4 lg:max-w-4xl lg:justify-center lg:gap-20 lg:py-48">
+    <div className="z-20 p-4 lg:mt-28">
+      <div className="mx-auto flex w-[80vw] flex-col items-center justify-center gap-4 rounded-xl bg-gradient-mobile p-8 lg:max-w-4xl lg:gap-16 lg:bg-none">
         {/* HEADING QUESTION: */}
         <h1 className="text-2xl font-bold lg:text-6xl">
           Are you ready to play?
@@ -62,14 +62,14 @@ const Home = () => {
         {/* AVATARS AND NAME INPUT BOX */}
 
         <form
-          className="flex flex-col items-center gap-8 bg-red-400 lg:gap-16"
+          className="flex flex-col items-center h-full gap-4 mx-auto lg:gap-16"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <div className="grid w-full grid-cols-2 gap-8 lg:gap-16">
+          <div className="grid w-full grid-cols-2 gap-16">
             {/* CARD 2 */}
             <div className="flex flex-col items-center gap-4 lg:gap-8">
-              <div className="relative grid w-full h-4 bg-transparent place-items-center lg:h-60">
-                <Image src={AvatarPlayer1} alt="Player 1 Avatar" />
+              <div className="relative bg-transparent aspect-square h-28 w-28 lg:h-44 lg:w-44">
+                <Image src={AvatarPlayer1} fill alt="Player 1 Avatar" />
               </div>
 
               <div className="w-full">
@@ -84,8 +84,8 @@ const Home = () => {
 
             {/* CARD 2 */}
             <div className="flex flex-col items-center gap-4 lg:gap-8">
-              <div className="relative grid w-full h-4 bg-transparent place-items-center lg:h-60">
-                <Image src={AvatarPlayer2} alt="Player 2 Avatar" />
+              <div className="relative bg-transparent aspect-square h-28 w-28 lg:h-44 lg:w-44">
+                <Image src={AvatarPlayer2} fill alt="Player 2 Avatar" />
               </div>
 
               <div className="w-full">
@@ -103,7 +103,7 @@ const Home = () => {
           <div className="mx-auto">
             <button
               type="submit"
-              className="rounded-xl bg-[#0AB169]  py-4 px-16 text-base font-bold hover:opacity-90 lg:text-xl"
+              className="rounded-xl bg-[#A7DAFF] py-3 px-16 text-base font-bold uppercase text-[#164464] hover:opacity-90 lg:bg-[#0AB169] lg:py-4 lg:text-xl lg:capitalize lg:text-white"
             >
               Let's Play
             </button>

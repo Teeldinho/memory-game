@@ -60,12 +60,12 @@ const Header = () => {
   };
 
   return (
-    <header className="relative z-10 flex justify-end w-full p-4 lg:p-8">
+    <header className="relative z-10 flex justify-end w-full p-2 lg:py-8">
       <div className="absolute right-[45%]">
         <h1 className="text-3xl font-bold lg:text-4xl">Memory</h1>
       </div>
 
-      <div className="flex gap-8">
+      <div className="flex gap-4 lg:gap-8">
         {/* Conditionally render this button when game has already started: */}
 
         {storeHasGameStarted && (
@@ -79,7 +79,7 @@ const Header = () => {
 
         <button
           onClick={handleExitGame}
-          className="rounded-xl bg-[#D4190C] p-4 text-xs font-bold hover:opacity-90 lg:text-xl"
+          className="rounded-xl bg-[#D4190C] p-2 text-xs font-bold hover:opacity-90 lg:p-4 lg:text-xl"
         >
           Exit Game
         </button>

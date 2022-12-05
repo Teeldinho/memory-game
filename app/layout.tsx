@@ -38,11 +38,11 @@ export default function RootLayout({
     <html className={customFont.className}>
       <head />
 
-      <body className="relative mx-auto h-screen w-full overflow-hidden bg-gradient-radial bg-no-repeat text-white lg:max-w-[1440px]">
+      <body className="relative mx-auto h-screen w-screen overflow-hidden bg-gradient-radial bg-no-repeat text-white lg:max-w-[1440px]">
         {/* <body className="relative mx-auto h-screen w-full max-w-[1440px] overflow-hidden bg-gradient-radial bg-no-repeat text-white portrait:hidden"> */}
 
         {/* decorate page with background circles: */}
-        <PageDecoration />
+        {/* <PageDecoration /> */}
 
         {/* If a winner is found, show overlay of results:
         Otherwise, show the game: */}
