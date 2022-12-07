@@ -64,8 +64,10 @@ const Game = () => {
   }, [storeCardsMatchFound]);
 
   return (
-    <div className="-mt-16 flex h-screen w-full items-center gap-16">
+    <div className="flex h-full w-full items-center lg:-mt-16 lg:gap-16">
+      {/* <div className="flex items-center w-full h-screen gap-16 -mt-16"> */}
       {/* Player 1 Card showing name and score  */}
+
       <PlayerCard {...storePlayers[0]} />
 
       {/* Grid to render the cards: */}

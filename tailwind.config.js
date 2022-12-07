@@ -25,6 +25,9 @@ module.exports = {
 
         "gradient-mobile":
           "linear-gradient(107.62deg, rgba(255, 255, 255, 0.6) -0.7%, rgba(255, 255, 255, 0.1) 102.18%)",
+
+        "gradient-mobile-player-card":
+          "linear-gradient(90.37deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.1) 99.2%)",
       },
     },
   },
