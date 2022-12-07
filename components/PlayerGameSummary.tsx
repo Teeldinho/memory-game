@@ -12,7 +12,7 @@ const PlayerGameSummary = ({ position, player }: TAnnouncePlayer) => {
   const playerPosition = position === 1 ? "1st Place" : "2nd Place";
 
   return (
-    <>
+    <div className="w-full">
       <div className="relative flex w-full items-center text-[#0D4477]">
         {/* Display the trophy alongside, only if the player won */}
         {position === 1 ? (
@@ -25,7 +25,7 @@ const PlayerGameSummary = ({ position, player }: TAnnouncePlayer) => {
 
         {/* Player winner card  */}
         <div
-          className={`flex w-full items-center justify-evenly rounded-xl py-5 ${
+          className={`flex w-full items-center justify-evenly rounded-xl py-2 lg:py-5 ${
             position === 1
               ? "bg-gradient-to-r from-[#FFD975] to-yellow-100"
               : "bg-white"
@@ -46,7 +46,7 @@ const PlayerGameSummary = ({ position, player }: TAnnouncePlayer) => {
           <h3 className="text-xl">Score: {player.score}</h3>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

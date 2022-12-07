@@ -64,8 +64,6 @@ const Game = () => {
       }, 500);
   }, [storeCardsMatchFound]);
 
-  // flex flex-col items-center w-full h-full gap-4 mx-4 mt-2 lg:mx-0 lg:-mt-16 lg:flex-row lg:gap-16
-
   return (
     <div className="flex flex-col items-center w-full h-full gap-4 lg:-mt-16 lg:flex-row lg:gap-16">
       {/* Player 1 Card showing name and score  */}
