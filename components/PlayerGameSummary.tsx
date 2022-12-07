@@ -13,11 +13,11 @@ const PlayerGameSummary = ({ position, player }: TAnnouncePlayer) => {
 
   return (
     <div className="w-full">
-      <div className="relative mx-auto flex w-[70%] items-center text-[#0D4477]">
+      <div className="relative mx-auto flex w-[70%] items-center justify-between text-[#0D4477]">
         {/* Display the trophy alongside, only if the player won */}
         {position === 1 ? (
-          <div className="absolute -left-16 lg:-left-32">
-            <div className="relative w-12 h-12 lg:h-20 lg:w-20">
+          <div className="absolute -left-14 lg:-left-28">
+            <div className="relative h-10 w-10 lg:h-[70px] lg:w-[70px]">
               <Image fill src={Trophy} alt="Player Trophy" />
             </div>
           </div>
@@ -25,14 +25,14 @@ const PlayerGameSummary = ({ position, player }: TAnnouncePlayer) => {
 
         {/* Player winner card  */}
         <div
-          className={`flex w-full items-center justify-around rounded-xl py-2 lg:py-5 ${
+          className={`flex w-full items-center justify-around rounded-xl p-2 lg:py-5 ${
             position === 1
               ? "bg-gradient-to-r from-[#FFD975] to-yellow-100"
               : "bg-white"
           }`}
         >
           {/* player avatar: */}
-          <div className="relative w-12 h-12 overflow-hidden lg:h-20 lg:w-20">
+          <div className="relative w-10 h-10 overflow-hidden lg:h-20 lg:w-20">
             <Image src={player.avatar} alt="Player Avatar" fill />
           </div>
 

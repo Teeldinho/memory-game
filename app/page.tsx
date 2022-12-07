@@ -76,7 +76,7 @@ const Home = () => {
                 <input
                   {...register("namePlayer1", { required: true })}
                   type="text"
-                  className="block w-full px-4 py-2 m-0 text-base font-normal text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid shadow-lg form-control rounded-xl bg-clip-padding focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none lg:py-4"
+                  className="block w-full px-4 py-2 m-0 text-base font-normal text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid form-control rounded-xl bg-clip-padding focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none lg:py-4"
                   placeholder="Name of Player 1"
                 />
               </div>
@@ -92,7 +92,7 @@ const Home = () => {
                 <input
                   {...register("namePlayer2", { required: true })}
                   type="text"
-                  className="block w-full px-4 py-2 m-0 text-base font-normal text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid shadow-lg form-control rounded-xl bg-clip-padding focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none lg:py-4"
+                  className="block w-full px-4 py-2 m-0 text-base font-normal text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid form-control rounded-xl bg-clip-padding focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none lg:py-4"
                   placeholder="Name of Player 2"
                 />
               </div>

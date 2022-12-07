@@ -96,9 +96,9 @@ const WinnerAnnouncement = () => {
         {/* Inner div */}
         <div className="flex w-full max-w-[60vw] flex-col items-center justify-center gap-4 rounded-xl bg-gradient-mobile p-4 lg:max-w-4xl lg:gap-12 lg:bg-none">
           {/* Winning player name and message: */}
-          <div className="flex flex-col gap-2 text-center lg:gap-4">
+          <div className="flex flex-col text-center lg:gap-4">
             <h2 className="text-2xl font-bold lg:text-5xl">Well Done!</h2>
-            <h1 className="text-3xl font-bold lg:text-7xl">
+            <h1 className="text-4xl font-bold lg:text-7xl">
               {storeWinnersList[0]?.name}
             </h1>
           </div>

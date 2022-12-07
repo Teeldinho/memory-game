@@ -65,7 +65,7 @@ const Game = () => {
   }, [storeCardsMatchFound]);
 
   return (
-    <div className="flex flex-col items-center justify-center w-full h-full gap-4 lg:flex-row lg:gap-16">
+    <div className="flex flex-col items-center justify-center w-full h-full gap-4 mt-2 lg:mt-0 lg:flex-row lg:gap-16">
       {/* Player 1 Card showing name and score  */}
       {/* This card is hidden on mobile: */}
       <PlayerCard {...storePlayers[0]} />
