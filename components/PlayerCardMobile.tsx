@@ -5,14 +5,14 @@ import { TPlayer } from "store/store";
 const PlayerCardMobile = ({ id, name, score, avatar, turnToPlay }: TPlayer) => {
   return (
     <div
-      className={`flex w-full items-center justify-between rounded-xl p-4 lg:hidden ${
+      className={`flex w-full items-center justify-between rounded-xl px-4 py-2 lg:hidden ${
         id === 2
           ? "flex-row-reverse bg-gradient-mobile-player-card-to-l"
           : "bg-gradient-mobile-player-card-to-r"
       }`}
     >
       {/* Player Avatar: */}
-      <div className="relative w-16 h-16 bg-transparent">
+      <div className="relative w-12 h-12 bg-transparent">
         <Image src={avatar} fill alt="Player Avatar" />
       </div>
 

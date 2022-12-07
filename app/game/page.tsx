@@ -64,16 +64,16 @@ const Game = () => {
       }, 500);
   }, [storeCardsMatchFound]);
 
-  return (
-    <div className="flex flex-col items-center w-full h-full gap-4 mx-4 mt-2 lg:mx-0 lg:-mt-16 lg:flex-row lg:gap-16">
-      {/* <div className="flex flex-col items-center w-full h-full gap-4 mx-4 mt-2 lg:mx-0 lg:-mt-16 lg:flex-row lg:gap-16"> */}
+  // flex flex-col items-center w-full h-full gap-4 mx-4 mt-2 lg:mx-0 lg:-mt-16 lg:flex-row lg:gap-16
 
+  return (
+    <div className="flex flex-col items-center w-full h-full gap-4 lg:-mt-16 lg:flex-row lg:gap-16">
       {/* Player 1 Card showing name and score  */}
       {/* This card is hidden on mobile: */}
       <PlayerCard {...storePlayers[0]} />
 
       {/* Grid to render the cards: */}
-      <div className="relative w-full p-4 rounded-xl bg-gradient-glassy lg:p-8">
+      <div className="relative w-full h-full p-3 mt-3 overflow-hidden rounded-xl bg-gradient-glassy lg:mt-0 lg:p-8">
         {/* CardMatching */}
         {storeCardsMatchFound && (
           <div className="absolute top-0 left-0 grid w-full h-full overflow-hidden rounded-xl">
@@ -82,7 +82,7 @@ const Game = () => {
         )}
 
         <div
-          className={`grid w-full grid-cols-8 grid-rows-3 gap-4 lg:grid-cols-9 lg:grid-rows-6 lg:gap-8 ${
+          className={`grid h-full w-full grid-cols-18 grid-rows-3 gap-4 lg:grid-cols-9 lg:grid-rows-6 lg:gap-8 ${
             storeCardsMatchFound ? "invisible" : ""
           } `}
         >
@@ -99,7 +99,7 @@ const Game = () => {
         <PlayerCardMobile {...storePlayers[0]} />
 
         {/* Score card: */}
-        <div className="px-2 py-8 w-min bg-none">
+        <div className="px-4 w-min bg-none">
           <h2 className="text-base font-semibold text-center">Score</h2>
         </div>
 

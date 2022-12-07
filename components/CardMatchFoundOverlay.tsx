@@ -14,7 +14,9 @@ const CardMatchFoundOverlay = () => {
 
       {/* Celebration decoration: */}
       <div className="absolute top-0 left-0 w-full h-full">
-        <Image src={CardMatchDeco} fill alt="Card Deco" />
+        <div className="relative w-full h-full">
+          <Image src={CardMatchDeco} fill alt="Card Deco" />
+        </div>
       </div>
     </div>
   );

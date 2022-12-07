@@ -60,8 +60,9 @@ const Header = () => {
   };
 
   return (
-    <header className="relative z-10 flex justify-end w-full p-2 lg:py-8">
-      <div className="absolute right-[45%]">
+    <header className="flex items-center justify-end w-full lg:py-6">
+      {/* <header className="relative z-10 flex justify-end w-full py-2 lg:py-6"> */}
+      <div className="absolute left-[44%]">
         <h1 className="text-3xl font-bold lg:text-4xl">Memory</h1>
       </div>
 
@@ -71,7 +72,7 @@ const Header = () => {
         {storeHasGameStarted && (
           <button
             onClick={handleRestartGame}
-            className="rounded-xl bg-[#F4A236] p-4 text-xs font-bold hover:opacity-90 lg:text-xl"
+            className="rounded-xl bg-[#F4A236] p-4 text-sm font-bold hover:opacity-90 lg:text-xl"
           >
             Restart Game
           </button>
@@ -79,7 +80,7 @@ const Header = () => {
 
         <button
           onClick={handleExitGame}
-          className="rounded-xl bg-[#D4190C] p-2 text-xs font-bold hover:opacity-90 lg:p-4 lg:text-xl"
+          className="rounded-xl bg-[#D4190C] p-2 text-sm font-bold hover:opacity-90 lg:p-4 lg:text-xl"
         >
           Exit Game
         </button>

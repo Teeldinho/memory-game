@@ -7,6 +7,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      gridTemplateColumns: {
+        // Simple 18 column grid
+        18: "repeat(18, minmax(0, 1fr))",
+      },
       backgroundImage: {
         "gradient-radial":
           "radial-gradient(76.97% 83.67% at 100% 100%, #0D4477 0%, #3E92CE 100%)",
