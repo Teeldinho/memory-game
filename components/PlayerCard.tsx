@@ -5,9 +5,9 @@ import { TPlayer } from "store/store";
 const PlayerCard = (player: TPlayer) => {
   const { id, name, score, avatar, turnToPlay } = player;
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex-col hidden gap-4 lg:flex">
       {/* Player Card */}
-      <div className="flex h-[350px] w-48 flex-col gap-8 rounded-lg bg-gradient-player-card p-7">
+      <div className="flex h-[350px] w-48 flex-col gap-8 rounded-xl bg-gradient-player-card p-7">
         <div className="relative grid w-full bg-transparent h-52 place-items-center">
           <Image src={avatar} alt="Player Avatar" />
         </div>
@@ -23,7 +23,7 @@ const PlayerCard = (player: TPlayer) => {
 
       {id === 1 ? (
         <div
-          className={`rounded-lg bg-[#0AB169] py-4 text-white ${
+          className={`rounded-xl bg-[#0AB169] py-4 text-white ${
             turnToPlay ? "block" : "invisible"
           }`}
         >
@@ -31,7 +31,7 @@ const PlayerCard = (player: TPlayer) => {
         </div>
       ) : (
         <div
-          className={`rounded-lg bg-white py-4 text-[#489DDA] ${
+          className={`rounded-xl bg-white py-4 text-[#489DDA] ${
             turnToPlay ? "block" : "invisible"
           }`}
         >
