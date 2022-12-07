@@ -8,8 +8,8 @@ const CardMatchFoundOverlay = () => {
       className={`relative z-50 grid h-full w-full place-items-center bg-gradient-card-match`}
     >
       <div className="flex h-full w-full flex-col items-center justify-center gap-4 text-center text-[#489DDA]">
-        <h1 className="font-semibold text-7xl">It's A</h1>
-        <h1 className="font-bold text-7xl">Match!</h1>
+        <h1 className="text-3xl font-semibold lg:text-5xl">It's A</h1>
+        <h1 className="text-5xl font-bold lg:text-7xl">Match!</h1>
       </div>
 
       {/* Celebration decoration: */}

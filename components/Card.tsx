@@ -141,7 +141,7 @@ const Card = (card: ICard) => {
 
   return (
     <div
-      className={`relative h-20 cursor-pointer overflow-hidden rounded-sm ease-in-out hover:scale-110 hover:opacity-80 ${
+      className={`relative h-20 w-full cursor-pointer overflow-hidden rounded-sm ease-in-out hover:scale-110 hover:opacity-80 ${
         card.matched ? "invisible" : ""
       } ${isFlipped ? "pointer-events-none" : "pointer-events-auto"}`}
       onClick={handleCardFlip}
