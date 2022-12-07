@@ -17,7 +17,7 @@ const PlayerGameSummary = ({ position, player }: TAnnouncePlayer) => {
         {/* Display the trophy alongside, only if the player won */}
         {position === 1 ? (
           <div className="absolute -left-16 lg:-left-32">
-            <div className="relative grid w-12 h-12 place-items-center lg:h-36 lg:w-36">
+            <div className="relative w-12 h-12 lg:h-20 lg:w-20">
               <Image fill src={Trophy} alt="Player Trophy" />
             </div>
           </div>

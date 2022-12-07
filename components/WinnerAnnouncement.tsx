@@ -94,7 +94,7 @@ const WinnerAnnouncement = () => {
         </div>
 
         {/* Inner div */}
-        <div className="flex w-full max-w-[60vw] flex-col items-center justify-center gap-4 rounded-xl bg-gradient-mobile p-4 lg:max-w-4xl lg:gap-16 lg:bg-none">
+        <div className="flex w-full max-w-[60vw] flex-col items-center justify-center gap-4 rounded-xl bg-gradient-mobile p-4 lg:max-w-4xl lg:gap-12 lg:bg-none">
           {/* Winning player name and message: */}
           <div className="flex flex-col gap-2 text-center lg:gap-4">
             <h2 className="text-2xl font-bold lg:text-5xl">Well Done!</h2>
@@ -105,7 +105,7 @@ const WinnerAnnouncement = () => {
 
           {/* Winning Player Image */}
           <div>
-            <div className={`relative mx-auto h-16 w-16 lg:h-52 lg:w-52`}>
+            <div className={`relative mx-auto h-16 w-16 lg:h-36 lg:w-36`}>
               <Image
                 src={storeWinnersList[0]?.avatar}
                 fill
