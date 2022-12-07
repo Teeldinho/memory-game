@@ -4,12 +4,13 @@ Concentration, also known as Memory, Matching Pairs, Match Match, Match Up, Pelm
 
 ## Screenshots
 
-![App Screenshot](https://www.dropbox.com/s/vqjy2n67coiherp/Desktop%20-%202.png?dl=0)
-
 ## Tech Stack
 
-**Client:** NextJS, TailwindCSS, Zustand State Management
-**Server:** NextJS, Strapi Headless CMS
+This solution was implemented using the latest NextJS 13 with app directory in beta.
+
+**Client:** NextJS, TailwindCSS, Zustand (State Management)
+
+**Server:** Strapi Headless CMS, NextJS
 
 ## Authors
 
