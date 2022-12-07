@@ -79,7 +79,7 @@ const initialMemoryState: Store = {
   gameStarted: false,
   selectedCards: [] as ICard[],
   cardsMatchFound: false,
-  winnerFound: true,
+  winnerFound: false,
   winnersList: [] as TPlayer[],
 };
 

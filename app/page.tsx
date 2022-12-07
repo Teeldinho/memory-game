@@ -52,8 +52,8 @@ const Home = () => {
   };
 
   return (
-    <div className="z-20 p-4 mt-2 lg:mt-28">
-      <div className="mx-auto flex h-[70vh] w-[60vw] flex-col items-center justify-center gap-4 rounded-xl bg-gradient-mobile  p-8 lg:h-full lg:max-w-4xl lg:gap-16 lg:bg-none">
+    <div className="p-4 lg:mt-28">
+      <div className="mx-auto flex h-min w-[60vw]  flex-col items-center justify-center gap-4 rounded-xl bg-gradient-mobile p-4 lg:h-full lg:max-w-4xl lg:gap-16 lg:bg-none">
         {/* HEADING QUESTION: */}
         <h1 className="text-2xl font-bold lg:text-6xl">
           Are you ready to play?
@@ -62,7 +62,7 @@ const Home = () => {
         {/* AVATARS AND NAME INPUT BOX */}
 
         <form
-          className="flex flex-col items-center w-full h-full gap-8 mx-auto lg:gap-16"
+          className="flex flex-col items-center w-full h-full gap-6 mx-auto lg:gap-16"
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="grid w-full grid-cols-2 gap-12 lg:gap-16">

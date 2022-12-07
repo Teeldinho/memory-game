@@ -72,7 +72,7 @@ const Header = () => {
         {storeHasGameStarted && (
           <button
             onClick={handleRestartGame}
-            className="rounded-xl bg-[#F4A236] p-4 text-sm font-bold hover:opacity-90 lg:text-xl"
+            className="rounded-xl bg-[#F4A236] px-4 py-2 text-sm font-bold hover:opacity-90 lg:text-xl"
           >
             Restart Game
           </button>
@@ -80,7 +80,7 @@ const Header = () => {
 
         <button
           onClick={handleExitGame}
-          className="rounded-xl bg-[#D4190C] p-2 text-sm font-bold hover:opacity-90 lg:p-4 lg:text-xl"
+          className="rounded-xl bg-[#D4190C] px-4 py-2 text-sm font-bold hover:opacity-90 lg:p-4 lg:text-xl"
         >
           Exit Game
         </button>
