@@ -136,7 +136,11 @@ const Card = (card: ICard) => {
       }`}
       onClick={handleCardFlip}
     >
-      <div className="relative h-full w-full transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+      <div
+        className={`relative h-full w-full transition-all duration-500 [transform-style:preserve-3d] ${
+          storeCardIsFlipped(card) ? "[transform:rotateY(180deg)]" : ""
+        }`}
+      >
         <div className="absolute inset-0 h-full w-full transition-all duration-500 [transform:rotateY(180deg)]">
           <Image src={CardBack} fill alt="Card Back" />
         </div>
