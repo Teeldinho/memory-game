@@ -128,19 +128,40 @@ const Card = (card: ICard) => {
   };
 
   return (
+    // Perspective
+
     <div
-      className={`relative h-full max-h-20 min-h-[45px] w-full cursor-pointer overflow-hidden rounded-sm ease-in-out hover:scale-110 hover:opacity-80 lg:h-20 ${
+      className={`[perspective: 600px] group max-h-20 min-h-[45px] cursor-pointer overflow-hidden rounded-sm ease-in-out [perspective:600px] hover:scale-110 hover:opacity-80 lg:h-20 ${
         card.matched ? "invisible" : ""
       }`}
       onClick={handleCardFlip}
     >
-      {storeCardIsFlipped(card) ? (
-        <Image src={card.image} fill alt="Card Front" />
-      ) : (
-        <Image src={CardBack} fill alt="Card Back" />
-      )}
+      <div className="relative h-full w-full transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+        <div className="absolute inset-0 h-full w-full transition-all duration-500 [transform:rotateY(180deg)]">
+          <Image src={CardBack} fill alt="Card Back" />
+        </div>
+
+        <div className="absolute inset-0 h-full w-full transition-all duration-500 [transform:rotateY(180deg)] [backface-visibility:hidden]">
+          <Image src={card.image} fill alt="Card Front" />
+        </div>
+      </div>
     </div>
   );
 };
 
 export default Card;
+
+{
+  /* <div
+className={`relative h-full  w-full cursor-pointer overflow-hidden rounded-sm ease-in-out hover:scale-110 hover:opacity-80  ${
+  card.matched ? "invisible" : ""
+}`}
+onClick={handleCardFlip}
+>
+{storeCardIsFlipped(card) ? (
+  <Image src={card.image} fill alt="Card Front" />
+) : (
+  <Image src={CardBack} fill alt="Card Back" />
+)}
+</div> */
+}
