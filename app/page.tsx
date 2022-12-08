@@ -20,14 +20,16 @@ const Home = () => {
   // router for navigating pages:
   const router = useRouter();
 
-  const { storeStartGame, storeResetStore, storeFetchCards } = useMemoryStore(
-    (state) => ({
-      storeStartGame: state.startGame,
-      storeResetStore: state.resetStore,
-      storeFetchCards: state.fetchCards,
-    }),
-    shallow,
-  );
+  const { storeStartGame, storeResetStore, storeFetchCards, storeSetNames } =
+    useMemoryStore(
+      (state) => ({
+        storeStartGame: state.startGame,
+        storeResetStore: state.resetStore,
+        storeFetchCards: state.fetchCards,
+        storeSetNames: state.setNames,
+      }),
+      shallow,
+    );
 
   // Use React Hook Form to capture and validate input:
   const {
@@ -38,11 +40,19 @@ const Home = () => {
   } = useForm<TInputs>();
 
   const onSubmit: SubmitHandler<TInputs> = (data) => {
-    // reset store and update the player names:
-    storeResetStore([data.namePlayer1.trim(), data.namePlayer2.trim()]);
-
     // fetch cards:
     storeFetchCards();
+
+    console.log("Submitting Names");
+
+    // reset store and update the player names:
+    storeSetNames(data.namePlayer1.trim(), data.namePlayer2.trim());
+
+    console.log("Names submitted");
+
+    storeResetStore();
+
+    console.log("Store reset");
 
     // start the game:
     storeStartGame();

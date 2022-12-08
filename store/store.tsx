@@ -30,9 +30,10 @@ type Store = {
 type Actions = {
   // Player actions:
   increasePlayerScore: (playerId: number) => void;
-  setNames: (playerNames: string[]) => void;
+  setNames: (player1: string, player2: string) => void;
   toggleTurn: () => void;
-  resetStore: (names?: string[]) => void;
+  // resetStore: (names?: string[]) => void;
+  resetStore: () => void;
   resetScores: () => void;
   stopGame: () => void;
   startGame: () => void;
@@ -46,8 +47,8 @@ type Actions = {
   setCardsMatched: (card1: ICard, card2: ICard) => void;
   removeCardsMatchedDialog: () => void;
   generateWinnersList: (players: TPlayer[]) => void;
-  resetCardsProperties: (cards: ICard[]) => void;
   addSelectedCard: (card: ICard) => void;
+  resetCardsProperties: () => void;
 };
 
 type MemoryState = Store & Actions;
@@ -85,7 +86,7 @@ const initialMemoryState: Store = {
 
 export const useMemoryStore = create<MemoryState>(
   (persist as MyPersist)(
-    (set) => ({
+    (set, get) => ({
       // spread the initial state:
       ...initialMemoryState,
 
@@ -102,12 +103,12 @@ export const useMemoryStore = create<MemoryState>(
       },
 
       // Set the name of the players:
-      setNames: (playerNames: string[]) => {
+      setNames: (player1: string, player2: string) => {
         set((state) => ({
           ...state,
           players: [
-            { ...state.players[0], name: playerNames[0] },
-            { ...state.players[1], name: playerNames[1] },
+            { ...state.players[0], name: player1 },
+            { ...state.players[1], name: player2 },
           ],
         }));
       },
@@ -140,6 +141,8 @@ export const useMemoryStore = create<MemoryState>(
       },
 
       clearSelectedCards: () => {
+        // clear the selected cards:
+
         set((state) => ({
           ...state,
           selectedCards: [] as ICard[],
@@ -215,16 +218,19 @@ export const useMemoryStore = create<MemoryState>(
         }));
       },
 
-      resetCardsProperties: (cards: ICard[]) => {
-        const defaultCards: ICard[] = cards.map((card) => ({
+      resetCardsProperties: () => {
+        // reset the matched properties:
+        const defaultCards: ICard[] = get().cards?.map((card) => ({
           ...card,
           matched: false,
         }));
 
+        // clear the selected cards:
+        get().clearSelectedCards();
+
         set((state) => ({
           ...state,
           cards: [...defaultCards],
-          selectedCards: [] as ICard[],
         }));
       },
 
@@ -249,23 +255,23 @@ export const useMemoryStore = create<MemoryState>(
       },
 
       // reset the values of the store:
-      resetStore: (names?: string[]) => {
-        // const cardies = useMemoryStore().cards;
+      resetStore: () => {
+        // capture the existing names:
+        let player1Name = get().players[0].name;
+        let player2Name = get().players[1].name;
 
-        if (names) {
-          // we reset the whole store excluding names: (restart game):
-          set((state) => ({
-            ...initialMemoryState,
-            cards: [...state.cards],
-            players: [
-              { ...initialMemoryState.players[0], name: names[0] },
-              { ...initialMemoryState.players[1], name: names[1] },
-            ],
-          }));
-        } else {
-          // reset the entire state: (exit game):
-          set(initialMemoryState);
-        }
+        // reset card properties and score without fetching them from CMS:
+        get().resetCardsProperties();
+        get().resetScores();
+
+        // reset the entire state: (exit game):
+        set((state) => ({
+          initialMemoryState,
+          players: [
+            { ...state.players[0], name: player1Name },
+            { ...state.players[1], name: player2Name },
+          ],
+        }));
       },
     }),
 

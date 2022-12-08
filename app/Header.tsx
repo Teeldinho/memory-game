@@ -42,17 +42,11 @@ const Header = () => {
 
   const handleRestartGame = () => {
     // reset the card properties:
-    // storeResetCardsProperties(storeCards);
-
     // reset the scores:
-    storeResetStore(
-      storePlayers.map(
-        (player, index) => player.name || "Player " + index.toString(),
-      ),
-    );
+    storeResetStore();
 
     // fetch the cards:
-    storeFetchCards();
+    // storeFetchCards();
 
     storeStartGame();
 
