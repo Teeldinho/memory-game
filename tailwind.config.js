@@ -15,6 +15,12 @@ module.exports = {
         "gradient-radial":
           "radial-gradient(76.97% 83.67% at 100% 100%, #0D4477 0%, #3E92CE 100%)",
 
+        "gradient-mobile-radial-l":
+          "radial-gradient(148.57% 157.07% at 171.6% 173.4%, #FFFFFF 0%, #3E92CE 100%)",
+
+        "gradient-mobile-radial-r":
+          "radial-gradient(148.57% 157.07% at 171.6% 173.4%, #FFFFFF 0%, #3E92CE 100%)",
+
         "gradient-player-card":
           "linear-gradient(160.65deg, rgba(255, 255, 255, 0.6) 0.74%, rgba(255, 255, 255, 0.1) 102.03%)",
 

@@ -43,16 +43,9 @@ const Home = () => {
     // fetch cards:
     storeFetchCards();
 
-    console.log("Submitting Names");
-
     // reset store and update the player names:
     storeSetNames(data.namePlayer1.trim(), data.namePlayer2.trim());
-
-    console.log("Names submitted");
-
     storeResetStore();
-
-    console.log("Store reset");
 
     // start the game:
     storeStartGame();
@@ -75,7 +68,7 @@ const Home = () => {
           className="flex flex-col items-center w-full h-full gap-6 mx-auto lg:gap-16"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <div className="grid w-full grid-cols-2 gap-12 lg:gap-16">
+          <div className="grid w-full grid-cols-2 gap-8 lg:gap-16">
             {/* CARD 2 */}
             <div className="flex flex-col items-center gap-4 lg:gap-8">
               <div className="relative w-24 h-24 bg-transparent aspect-square lg:h-44 lg:w-44">
@@ -112,7 +105,7 @@ const Home = () => {
 
           <button
             type="submit"
-            className="mx-auto rounded-xl bg-[#A7DAFF] py-2 px-8 text-base font-bold uppercase text-[#164464] shadow-lg hover:opacity-90 lg:bg-[#0AB169] lg:px-16 lg:py-4 lg:text-xl lg:capitalize lg:text-white"
+            className="mx-auto rounded-xl bg-[#A7DAFF] py-2 px-8 text-base font-bold uppercase text-[#164464] shadow-sm hover:opacity-90 lg:bg-[#0AB169] lg:px-16 lg:py-4 lg:text-xl lg:capitalize lg:text-white"
           >
             Let's Play
           </button>

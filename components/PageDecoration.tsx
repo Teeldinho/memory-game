@@ -3,12 +3,21 @@ import React from "react";
 const PageDecoration = () => {
   return (
     <>
+      {/* DESKTOP DECORATION */}
+
       {/* top right decoration */}
       <div className="absolute -top-72 -right-48 -z-10 hidden h-[915px] w-[915px] rounded-full bg-white bg-gradient-decorator-circle blur-2xl lg:block"></div>
       {/* top left decoration */}
       <div className="absolute -top-40 -left-24 -z-10 hidden h-[637px] w-[637px] rounded-full bg-white bg-gradient-decorator-circle blur-2xl lg:block"></div>
       {/* bottom right decoration */}
       <div className="absolute top-[688px] -right-48 -z-10 hidden h-[664px] w-[664px] rounded-full bg-white bg-gradient-decorator-circle blur-2xl lg:block"></div>
+
+      {/* MOBILE DECORATION */}
+      {/* left decoration */}
+      <div className="absolute -top-32 -left-16 -z-10 block h-[400px] w-[400px] rounded-full bg-gradient-mobile-radial-r blur-xl lg:hidden"></div>
+
+      {/* right decoration */}
+      <div className="absolute -top-32 -right-8 -z-10 block h-[550px] w-[550px] rounded-full bg-gradient-mobile-radial-r blur-xl lg:hidden"></div>
     </>
   );
 };

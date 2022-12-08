@@ -42,8 +42,8 @@ const Game = () => {
     storeResetStore();
 
     // shuffle the cards twice:
-    // storeShuffleCards();
-    // storeShuffleCards();
+    storeShuffleCards();
+    storeShuffleCards();
 
     // start the game:
     storeStartGame();
