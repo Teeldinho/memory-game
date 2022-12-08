@@ -8,24 +8,16 @@ const Header = () => {
   const {
     storeStopGame,
     storeStartGame,
-    storePlayers,
     storeHasGameStarted,
     storeResetStore,
     storeShuffleCards,
-    storeResetCardsProperties,
-    storeCards,
-    storeFetchCards,
   } = useMemoryStore(
     (state) => ({
-      storePlayers: state.players,
-      storeCards: state.cards,
       storeStopGame: state.stopGame,
       storeStartGame: state.startGame,
       storeResetStore: state.resetStore,
       storeShuffleCards: state.shuffleCards,
-      storeResetCardsProperties: state.resetCardsProperties,
       storeHasGameStarted: state.gameStarted,
-      storeFetchCards: state.fetchCards,
     }),
     shallow,
   );
@@ -41,21 +33,14 @@ const Header = () => {
   };
 
   const handleRestartGame = () => {
-    // reset the card properties:
-    // reset the scores:
+    // reset the scores and start game:
     storeResetStore();
-
-    // fetch the cards:
-    // storeFetchCards();
-
     storeStartGame();
-
     storeShuffleCards();
   };
 
   return (
     <header className="flex items-center justify-end w-full lg:py-6">
-      {/* <header className="relative z-10 flex justify-end w-full py-2 lg:py-6"> */}
       <div className="absolute left-[44%]">
         <h1 className="text-3xl font-bold lg:text-4xl">Memory</h1>
       </div>
@@ -79,7 +64,6 @@ const Header = () => {
           Exit Game
         </button>
       </div>
-      {/* </div> */}
     </header>
   );
 };

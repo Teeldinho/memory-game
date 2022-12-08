@@ -49,6 +49,8 @@ type Actions = {
   generateWinnersList: (players: TPlayer[]) => void;
   addSelectedCard: (card: ICard) => void;
   resetCardsProperties: () => void;
+  flipSelectedCard: (card1: ICard) => void;
+  cardIsFlipped: (card1: ICard) => boolean;
 };
 
 type MemoryState = Store & Actions;
@@ -141,11 +143,33 @@ export const useMemoryStore = create<MemoryState>(
       },
 
       clearSelectedCards: () => {
-        // clear the selected cards:
-
+        // reset the flipped property and clear the selected cards:
         set((state) => ({
           ...state,
+          cards: state.cards.map((card) =>
+            card.id === get().selectedCards[0]?.id ||
+            card.id === get().selectedCards[1]?.id
+              ? { ...card, flipped: false }
+              : card,
+          ),
           selectedCards: [] as ICard[],
+        }));
+      },
+
+      cardIsFlipped: (card1: ICard): boolean => {
+        // filter and find the specific card:
+        const findCard = get().cards.filter((card) => card.id === card1.id);
+
+        return findCard[0]?.flipped;
+      },
+
+      flipSelectedCard: (card1: ICard) => {
+        // flipped the selected cards:
+        set((state) => ({
+          ...state,
+          cards: state.cards.map((card) =>
+            card.id === card1.id ? { ...card, flipped: true } : card,
+          ),
         }));
       },
 
@@ -179,7 +203,7 @@ export const useMemoryStore = create<MemoryState>(
           ...state,
           cards: state.cards.map((card) =>
             card.id === card1.id || card.id === card2.id
-              ? { ...card, matched: true }
+              ? { ...card, matched: true, flipped: true }
               : card,
           ),
           cardsMatchFound: true,

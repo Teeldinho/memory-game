@@ -20,7 +20,6 @@ const Game = () => {
     storeResetStore,
     storeStartGame,
     storeShuffleCards,
-    storeResetCardsProperties,
   } = useMemoryStore(
     (state) => ({
       storePlayers: state.players,
@@ -29,7 +28,6 @@ const Game = () => {
       storeResetStore: state.resetStore,
       storeShuffleCards: state.shuffleCards,
       storeCardsMatchFound: state.cardsMatchFound,
-      storeResetCardsProperties: state.resetCardsProperties,
       storeStartGame: state.startGame,
     }),
     shallow,

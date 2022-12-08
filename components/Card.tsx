@@ -2,7 +2,6 @@
 
 import CardBack from "@/assets/Card_Back.png";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import { useMemoryStore } from "store/store";
 import shallow from "zustand/shallow";
 
@@ -12,6 +11,7 @@ export interface ICard {
   symbol: string;
   color: string;
   image: string;
+  flipped: boolean;
   matched: boolean;
 }
 
@@ -25,6 +25,8 @@ const Card = (card: ICard) => {
     storeSetCardsMatched,
     storeIncreasePlayerScore,
     storeClearSelectedCards,
+    storeFlipSelectedCard,
+    storeCardIsFlipped,
   } = useMemoryStore(
     (state) => ({
       storePlayers: state.players,
@@ -35,11 +37,11 @@ const Card = (card: ICard) => {
       storeSetCardsMatched: state.setCardsMatched,
       storeIncreasePlayerScore: state.increasePlayerScore,
       storeClearSelectedCards: state.clearSelectedCards,
+      storeCardIsFlipped: state.cardIsFlipped,
+      storeFlipSelectedCard: state.flipSelectedCard,
     }),
     shallow,
   );
-
-  const [isFlipped, setIsFlipped] = useState(false);
 
   // helper function for finding matches:
   const cardsDoMatch = (): boolean => {
@@ -72,29 +74,21 @@ const Card = (card: ICard) => {
 
   // handle the card flips:
   const handleCardFlip = () => {
-    setIsFlipped(true);
-
-    console.log("CLICKING!");
-    console.log(storeSelectedCards);
+    // flip the selected card:
+    storeFlipSelectedCard(card);
 
     // push the card into the selected cards array:
     if (storeSelectedCards.length < 2) {
       // only push the card into the array if there will not be a duplicate (i.e. double clicking on a card will not match):
       if (!storeSelectedCards.some((c) => c.id === card.id)) {
         storeSelectedCards.push(card);
-
-        console.log("Added a selected card");
-        console.log(storeSelectedCards);
-
         // only check if cards match if the are 2 cards flipped:
         if (storeSelectedCards.length === 2) {
           // Determine the result:
           if (cardsDoMatch()) {
             console.log("These cards are matching.");
-
             // set the cards to matching, so they can be hidden from board:
             storeSetCardsMatched(storeSelectedCards[0], storeSelectedCards[1]);
-
             // increase the player's score if they found a match:
             storePlayers.map((player) => {
               if (player.turnToPlay) {
@@ -102,24 +96,18 @@ const Card = (card: ICard) => {
               }
             });
 
-            // check if
-
+            // check if it's the last 2 cards that are not matched:
             const checkLastCards = storeCards.filter(
               (c) => c.matched === false,
             );
-
             // trigger a results overlay when EVERY card has been matched:
             if (checkLastCards.length === 2) {
-              console.log("Left with 2 cards:");
-              console.log(checkLastCards);
-
               // trigger annoucement if both cards are selected:
               if (storeSelectedCards.length === 2) {
                 storeClearSelectedCards();
                 storeAnnounceWinner(true);
               }
             }
-
             // if (storeCards.every((card) => card.matched === true)) {
             //   storeAnnounceWinner(true);
             // }
@@ -130,28 +118,26 @@ const Card = (card: ICard) => {
             storeToggleTurn();
           }
 
-          // clear the selected cards:
-          storeClearSelectedCards();
+          setTimeout(() => {
+            // clear the selected cards:
+            storeClearSelectedCards();
+          }, 800);
         }
       }
     }
-
-    setIsFlipped(false);
   };
 
   return (
     <div
       className={`relative h-full max-h-20 min-h-[45px] w-full cursor-pointer overflow-hidden rounded-sm ease-in-out hover:scale-110 hover:opacity-80 lg:h-20 ${
         card.matched ? "invisible" : ""
-      } ${isFlipped ? "pointer-events-none" : "pointer-events-auto"}`}
+      }`}
       onClick={handleCardFlip}
     >
-      {isFlipped ? (
+      {storeCardIsFlipped(card) ? (
         <Image src={card.image} fill alt="Card Front" />
       ) : (
-        <Image src={card.image} fill alt="Card Front" />
-
-        // <Image src={CardBack} fill alt="Card Back" />
+        <Image src={CardBack} fill alt="Card Back" />
       )}
     </div>
   );
