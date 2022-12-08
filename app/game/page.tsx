@@ -20,6 +20,7 @@ const Game = () => {
     storeResetStore,
     storeStartGame,
     storeShuffleCards,
+    storeSelectedCards,
   } = useMemoryStore(
     (state) => ({
       storePlayers: state.players,
@@ -27,6 +28,7 @@ const Game = () => {
       storeRemoveCardsMatchedDialog: state.removeCardsMatchedDialog,
       storeResetStore: state.resetStore,
       storeShuffleCards: state.shuffleCards,
+      storeSelectedCards: state.selectedCards,
       storeCardsMatchFound: state.cardsMatchFound,
       storeStartGame: state.startGame,
     }),
@@ -74,7 +76,11 @@ const Game = () => {
         <div
           className={`grid h-full w-full grid-cols-18 grid-rows-3 gap-4 lg:grid-cols-9 lg:grid-rows-6 lg:gap-8 ${
             storeCardsMatchFound ? "invisible" : ""
-          } `}
+          } ${
+            storeSelectedCards.length > 1
+              ? "pointer-events-none cursor-wait"
+              : "pointer-events-auto cursor-default"
+          }`}
         >
           {storeCards.map((card: ICard, count: number) => (
             <Card key={count} {...card} />
