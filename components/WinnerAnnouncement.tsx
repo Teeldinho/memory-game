@@ -49,15 +49,8 @@ const WinnerAnnouncement = () => {
   const router = useRouter();
 
   const handlePlayAgain = () => {
-    // reset the card properties:
-    storeResetCardsProperties(storeCards);
-
     // reset the scores:
-    storeResetStore(
-      storePlayers.map(
-        (player, index) => player.name || "Player " + index.toString(),
-      ),
-    );
+    storeResetStore();
 
     // shuffle the card deck twice:
     storeShuffleCards();

@@ -38,14 +38,8 @@ const Game = () => {
   // reset store on render:
   // run once to fetch card data and shuffle them:
   useEffect(() => {
-    // reset the card properties:
-    storeResetCardsProperties(storeCards);
-
-    storeResetStore(
-      storePlayers.map(
-        (player, index) => player.name || "Player " + index.toString(),
-      ),
-    );
+    // reset the store:
+    storeResetStore();
 
     // shuffle the cards twice:
     // storeShuffleCards();
