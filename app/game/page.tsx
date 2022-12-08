@@ -5,8 +5,6 @@ import Card, { ICard } from "components/Card";
 import { useEffect } from "react";
 import { useMemoryStore } from "store/store";
 import shallow from "zustand/shallow";
-import CardMatching from "@/assets/Match.png";
-import Image from "next/image";
 import CardMatchFoundOverlay from "components/CardMatchFoundOverlay";
 import PlayerCardMobile from "components/PlayerCardMobile";
 
@@ -68,13 +66,13 @@ const Game = () => {
       <div className="relative w-full h-full p-3 mt-3 overflow-hidden rounded-xl bg-gradient-glassy lg:mt-0 lg:p-8">
         {/* CardMatching */}
         {storeCardsMatchFound && (
-          <div className="absolute top-0 left-0 grid w-full h-full overflow-hidden rounded-xl">
+          <div className="absolute top-0 left-0 z-30 grid w-full h-full overflow-hidden rounded-xl ">
             <CardMatchFoundOverlay />
           </div>
         )}
 
         <div
-          className={`grid h-full w-full grid-cols-18 grid-rows-3 gap-4 lg:grid-cols-9 lg:grid-rows-6 lg:gap-8 ${
+          className={`z-10 grid h-full w-full grid-cols-18 grid-rows-3 gap-4 lg:grid-cols-9 lg:grid-rows-6 lg:gap-8 ${
             storeCardsMatchFound ? "invisible" : ""
           } ${
             storeSelectedCards.length > 1

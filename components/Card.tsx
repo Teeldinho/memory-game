@@ -112,6 +112,7 @@ const Card = (card: ICard) => {
             //   storeAnnounceWinner(true);
             // }
           } else {
+            // Cards are NOT a match:
             console.log("These cards are NOT matching.");
 
             // switch player turns:
@@ -121,17 +122,15 @@ const Card = (card: ICard) => {
           setTimeout(() => {
             // clear the selected cards:
             storeClearSelectedCards();
-          }, 800);
+          }, 1000);
         }
       }
     }
   };
 
   return (
-    // Perspective
-
     <div
-      className={`[perspective: 600px] group max-h-20 min-h-[45px] cursor-pointer overflow-hidden rounded-sm ease-in-out [perspective:600px] hover:scale-110 hover:opacity-80 lg:h-20 ${
+      className={`[perspective: 100px] group max-h-20 min-h-[45px] cursor-pointer overflow-hidden rounded-sm ease-in-out hover:scale-110 hover:opacity-80 lg:h-20 ${
         card.matched ? "invisible" : ""
       }`}
       onClick={handleCardFlip}
@@ -154,18 +153,3 @@ const Card = (card: ICard) => {
 };
 
 export default Card;
-
-{
-  /* <div
-className={`relative h-full  w-full cursor-pointer overflow-hidden rounded-sm ease-in-out hover:scale-110 hover:opacity-80  ${
-  card.matched ? "invisible" : ""
-}`}
-onClick={handleCardFlip}
->
-{storeCardIsFlipped(card) ? (
-  <Image src={card.image} fill alt="Card Front" />
-) : (
-  <Image src={CardBack} fill alt="Card Back" />
-)}
-</div> */
-}
