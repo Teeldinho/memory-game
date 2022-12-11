@@ -32,7 +32,6 @@ type Actions = {
   increasePlayerScore: (playerId: number) => void;
   setNames: (player1: string, player2: string) => void;
   toggleTurn: () => void;
-  // resetStore: (names?: string[]) => void;
   resetStore: () => void;
   resetScores: () => void;
   stopGame: () => void;
@@ -51,6 +50,8 @@ type Actions = {
   resetCardsProperties: () => void;
   flipSelectedCard: (card1: ICard) => void;
   cardIsFlipped: (card1: ICard) => boolean;
+  flashDisplayCards: () => void;
+  removeFlashDisplayCards: () => void;
 };
 
 type MemoryState = Store & Actions;
@@ -161,6 +162,20 @@ export const useMemoryStore = create<MemoryState>(
         const findCard = get().cards.filter((card) => card.id === card1.id);
 
         return findCard[0]?.flipped;
+      },
+
+      flashDisplayCards: () => {
+        set((state) => ({
+          ...state,
+          cards: state.cards.map((card) => ({ ...card, flipped: true })),
+        }));
+      },
+
+      removeFlashDisplayCards: () => {
+        set((state) => ({
+          ...state,
+          cards: state.cards.map((card) => ({ ...card, flipped: false })),
+        }));
       },
 
       flipSelectedCard: (card1: ICard) => {

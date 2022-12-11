@@ -19,6 +19,8 @@ const Game = () => {
     storeStartGame,
     storeShuffleCards,
     storeSelectedCards,
+    storeFlashDisplayCards,
+    storeRemoveFlashDisplayCards,
   } = useMemoryStore(
     (state) => ({
       storePlayers: state.players,
@@ -29,6 +31,8 @@ const Game = () => {
       storeSelectedCards: state.selectedCards,
       storeCardsMatchFound: state.cardsMatchFound,
       storeStartGame: state.startGame,
+      storeFlashDisplayCards: state.flashDisplayCards,
+      storeRemoveFlashDisplayCards: state.removeFlashDisplayCards,
     }),
     shallow,
   );
@@ -42,6 +46,12 @@ const Game = () => {
     // shuffle the cards twice:
     storeShuffleCards();
     storeShuffleCards();
+
+    // flash the cards for players to memorise upon starting:
+    storeFlashDisplayCards();
+    setTimeout(() => {
+      storeRemoveFlashDisplayCards();
+    }, 5000);
 
     // start the game:
     storeStartGame();
