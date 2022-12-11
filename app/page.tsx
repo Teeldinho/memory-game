@@ -55,7 +55,7 @@ const Home = () => {
   };
 
   return (
-    <div className="p-4 lg:mt-28">
+    <div className="p-4 select-none lg:mt-28">
       <div className="mx-auto flex h-min w-[60vw]  flex-col items-center justify-center gap-4 rounded-xl bg-gradient-mobile p-4 lg:h-full lg:max-w-4xl lg:gap-16 lg:bg-none">
         {/* HEADING QUESTION: */}
         <h1 className="text-2xl font-bold lg:text-6xl">

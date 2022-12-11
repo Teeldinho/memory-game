@@ -82,7 +82,7 @@ const Game = () => {
         )}
 
         <div
-          className={`z-10 grid h-full w-full grid-cols-18 grid-rows-3 gap-4 lg:grid-cols-9 lg:grid-rows-6 lg:gap-8 ${
+          className={`z-10 grid h-full w-full select-none grid-cols-18 grid-rows-3 gap-4 lg:grid-cols-9 lg:grid-rows-6 lg:gap-8 ${
             storeCardsMatchFound ? "invisible" : ""
           } ${
             storeSelectedCards.length > 1
