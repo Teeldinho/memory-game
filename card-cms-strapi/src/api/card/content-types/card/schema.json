@@ -4,7 +4,8 @@
   "info": {
     "singularName": "card",
     "pluralName": "cards",
-    "displayName": "Card"
+    "displayName": "Card",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -31,14 +32,18 @@
       "required": true
     },
     "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false,
+      ]
+    },
+    "name": {
+      "type": "string",
       "required": true
     }
   }
