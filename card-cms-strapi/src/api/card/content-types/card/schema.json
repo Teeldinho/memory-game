@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cards",
+  "info": {
+    "singularName": "card",
+    "pluralName": "cards",
+    "displayName": "Card"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "symbol": {
+      "type": "enumeration",
+      "enum": [
+        "CLUBS",
+        "DIAMONDS",
+        "HEARTS",
+        "SPADES",
+        "JOKER"
+      ],
+      "required": true
+    },
+    "color": {
+      "type": "enumeration",
+      "enum": [
+        "BLACK",
+        "RED"
+      ],
+      "required": true
+    },
+    "image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    }
+  }
+}
