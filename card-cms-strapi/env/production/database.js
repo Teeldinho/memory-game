@@ -1,6 +1,6 @@
-// path: ./config/env/production/database.ts
+// path: ./config/env/production/database.js
 
-export default ({ env }) => ({
+module.exports = ({ env }) => ({
   connection: {
     client: "postgres",
     connection: {
