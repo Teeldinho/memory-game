@@ -30,8 +30,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "card-cms-strapi/env/production/server.js",
-    "card-cms-strapi/config/env/production/database.js"
+    "card-cms-strapi/env/production/server.js"
   ],
   "exclude": ["node_modules"]
 }
