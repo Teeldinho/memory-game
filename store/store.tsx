@@ -8,6 +8,8 @@ import { ICard } from "components/Card";
 import { ShuffleCards } from "utils/ShuffleCards";
 import { StripCardDetails } from "utils/StripCardDetails";
 
+import { fetchEntries } from "utils/contentfulCMS";
+
 export type TPlayer = {
   id: number;
   name: string | null;
@@ -258,6 +260,9 @@ export const useMemoryStore = create<MemoryState>(
       },
 
       resetCardsProperties: () => {
+        console.log("Displaying the stuff");
+        console.log(fetchEntries());
+
         // reset the matched properties:
         const defaultCards: ICard[] = get().cards?.map((card) => ({
           ...card,

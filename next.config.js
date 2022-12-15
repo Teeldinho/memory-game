@@ -6,5 +6,6 @@ module.exports = {
   },
   images: {
     domains: ["localhost"],
+    domains: ["images.ctfassets.net"],
   },
 };

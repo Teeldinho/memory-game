@@ -6,8 +6,12 @@
     "start": "next start"
   },
   "dependencies": {
+    "@apollo/client": "^3.7.3",
     "@next/font": "^13.0.4",
+    "apollo-link": "^1.2.14",
+    "apollo-link-http": "^1.5.17",
     "contentful": "^9.2.14",
+    "graphql": "^15.8.0",
     "next": "latest",
     "react": "18.2.0",
     "react-dom": "18.2.0",
