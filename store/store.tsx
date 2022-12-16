@@ -229,17 +229,12 @@ export const useMemoryStore = create<MemoryState>(
 
       // asynchronously fetch cards from CMS:
       fetchCards: async () => {
-        // const cardsArrayWithAllInformation = await fetch(
-        //   `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/cards?populate=*`,
-        // );
-        // // Promise:
-        // const allCards = await cardsArrayWithAllInformation.json();
-        // // Capture data that is needed from the card:
-        // const processedCards = StripCardDetails(allCards.data);
-        // set((state) => ({
-        //   ...state,
-        //   cards: [...processedCards],
-        // }));
+        const processedCards = await fetchCardsFromCMS();
+
+        set((state) => ({
+          ...state,
+          cards: [...processedCards],
+        }));
       },
 
       removeCardsMatchedDialog: () => {
@@ -257,14 +252,6 @@ export const useMemoryStore = create<MemoryState>(
       },
 
       resetCardsProperties: async () => {
-        console.log("Displaying the stuff");
-
-        const cardii = await fetchCardsFromCMS();
-
-        // fetchCardsFromCMS().then((c) => console.log(JSON.parse(c)));
-
-        // console.log(StripCardDetails());
-
         // reset the matched properties:
         const defaultCards: ICard[] = get().cards?.map((card) => ({
           ...card,

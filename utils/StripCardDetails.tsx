@@ -8,7 +8,7 @@ const StripCardDetails = (cards: any[]) => {
         name: card.name,
         symbol: card.symbol,
         color: card.color,
-        image: "https:" + card.image.url,
+        image: card.image.url,
         matched: false,
         flipped: false,
       } as ICard),
