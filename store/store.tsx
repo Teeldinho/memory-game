@@ -6,7 +6,6 @@ import { StaticImageData } from "next/image";
 import { persist, PersistOptions } from "zustand/middleware";
 import { ICard } from "components/Card";
 import { ShuffleCards } from "utils/ShuffleCards";
-import { StripCardDetails } from "utils/StripCardDetails";
 
 import { fetchCardsFromCMS } from "utils/contentfulCMS";
 
