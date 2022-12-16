@@ -5,7 +5,6 @@ module.exports = {
     appDir: true,
   },
   images: {
-    domains: ["localhost"],
-    domains: ["images.ctfassets.net"],
+    domains: ["localhost", "images.ctfassets.net"],
   },
 };

@@ -8,7 +8,7 @@ import { ICard } from "components/Card";
 import { ShuffleCards } from "utils/ShuffleCards";
 import { StripCardDetails } from "utils/StripCardDetails";
 
-import { fetchEntries } from "utils/contentfulCMS";
+import { fetchCardsFromCMS } from "utils/contentfulCMS";
 
 export type TPlayer = {
   id: number;
@@ -229,20 +229,17 @@ export const useMemoryStore = create<MemoryState>(
 
       // asynchronously fetch cards from CMS:
       fetchCards: async () => {
-        const cardsArrayWithAllInformation = await fetch(
-          `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/cards?populate=*`,
-        );
-
-        // Promise:
-        const allCards = await cardsArrayWithAllInformation.json();
-
-        // Capture data that is needed from the card:
-        const processedCards = StripCardDetails(allCards.data);
-
-        set((state) => ({
-          ...state,
-          cards: [...processedCards],
-        }));
+        // const cardsArrayWithAllInformation = await fetch(
+        //   `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/cards?populate=*`,
+        // );
+        // // Promise:
+        // const allCards = await cardsArrayWithAllInformation.json();
+        // // Capture data that is needed from the card:
+        // const processedCards = StripCardDetails(allCards.data);
+        // set((state) => ({
+        //   ...state,
+        //   cards: [...processedCards],
+        // }));
       },
 
       removeCardsMatchedDialog: () => {
@@ -259,9 +256,14 @@ export const useMemoryStore = create<MemoryState>(
         }));
       },
 
-      resetCardsProperties: () => {
+      resetCardsProperties: async () => {
         console.log("Displaying the stuff");
-        console.log(fetchEntries());
+
+        const cardii = await fetchCardsFromCMS();
+
+        // fetchCardsFromCMS().then((c) => console.log(JSON.parse(c)));
+
+        // console.log(StripCardDetails());
 
         // reset the matched properties:
         const defaultCards: ICard[] = get().cards?.map((card) => ({

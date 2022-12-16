@@ -1,16 +1,31 @@
-const contentful = require("contentful");
+import gql from "graphql-tag";
+import apolloClient from "./apollo-client";
+import { StripCardDetails } from "./StripCardDetails";
 
-const client = contentful.createClient({
-  space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID,
-  accessToken: process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN,
-});
+export async function fetchCardsFromCMS() {
+  const { data } = await apolloClient.query({
+    query: gql`
+      query memoryCardCmsCollectionQuery {
+        memoryCardCmsCollection {
+          items {
+            sys {
+              id
+            }
+            name
+            symbol
+            color
+            image {
+              url
+            }
+          }
+        }
+      }
+    `,
+  });
 
-export async function fetchEntries() {
-  const cards = await client.getEntries().then((c) => console.log(c.items));
+  const processedCards = StripCardDetails(data.memoryCardCmsCollection.items);
 
-  console.log("CARDS");
-  console.log(cards);
-  return cards;
+  return processedCards;
 }
 
-export default { fetchEntries };
+export default { fetchCardsFromCMS };
