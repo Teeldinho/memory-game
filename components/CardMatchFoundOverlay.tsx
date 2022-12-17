@@ -5,7 +5,7 @@ import Image from "next/image";
 const CardMatchFoundOverlay = () => {
   return (
     <div
-      className={`relative grid h-full w-full place-items-center bg-gradient-card-match`}
+      className={`relative z-50 grid h-full w-full place-items-center bg-gradient-card-match`}
     >
       <div className="flex h-full w-full flex-col items-center justify-center gap-2 text-center text-[#489DDA] lg:gap-4">
         <h1 className="text-2xl font-semibold lg:text-5xl">It's A</h1>
