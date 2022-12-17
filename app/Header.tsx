@@ -50,8 +50,14 @@ const Header = () => {
   };
 
   return (
-    <header className="flex items-center justify-end w-full lg:py-6">
-      <div className="absolute left-[44%]">
+    <header className="flex items-center justify-between w-full md:justify-end lg:py-6">
+      {/* Shown on desktop */}
+      <div className="absolute left-[44%] hidden md:block">
+        <h1 className="text-3xl font-bold lg:text-4xl">Memory</h1>
+      </div>
+
+      {/* Hidden on desktop */}
+      <div className="md:hidden">
         <h1 className="text-3xl font-bold lg:text-4xl">Memory</h1>
       </div>
 
