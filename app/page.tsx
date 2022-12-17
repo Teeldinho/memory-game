@@ -9,6 +9,7 @@ import shallow from "zustand/shallow";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useMemoryStore } from "store/store";
+import { useEffect } from "react";
 
 type TInputs = {
   namePlayer1: string;
@@ -39,9 +40,6 @@ const Home = () => {
   } = useForm<TInputs>();
 
   const onSubmit: SubmitHandler<TInputs> = (data) => {
-    // fetch cards:
-    storeFetchCards();
-
     // reset store and update the player names:
     storeSetNames(data.namePlayer1.trim(), data.namePlayer2.trim());
     storeResetStore();
@@ -52,6 +50,12 @@ const Home = () => {
     // redirect to the game screen:
     router.push("/game");
   };
+
+  // fetch cards upon loading:
+  useEffect(() => {
+    // fetch cards:
+    storeFetchCards();
+  }, []);
 
   return (
     <div className="w-full h-full p-4 select-none lg:mt-28">
