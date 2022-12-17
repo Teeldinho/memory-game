@@ -37,15 +37,21 @@ const Header = () => {
   };
 
   const handleRestartGame = () => {
-    // reset the scores and start game:
+    // stop the game:
+    storeStopGame();
+
+    // reset the store:
     storeResetStore();
-    storeStartGame();
+
+    // shuffle the cards:
     storeShuffleCards();
 
     // flash the cards for players to memorise upon starting:
     storeFlashDisplayCards();
     setTimeout(() => {
       storeRemoveFlashDisplayCards();
+      // start the game:
+      storeStartGame();
     }, 5000);
   };
 
