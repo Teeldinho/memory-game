@@ -4,8 +4,9 @@ Concentration, also known as Memory, Matching Pairs, Match Match, Match Up, Pelm
 
 <div align="center">
 <img src="https://uca5c1e7b8072b21d4ece1a1613a.previews.dropboxusercontent.com/p/thumb/ABzuoCusvI7yrF1M2brZdYezoL9hIwVDwu_7zPAoZ_Ce0Ekkq7TEBRNAKiNlw4X_Y8Q0KOMzI-c4A0bxhgksp7MkdZ-JAv51eq6Xc5qNoxXzsMVNYXLbEOmq-rZeVyReJa7j8-QUX97X0WGSC4VjjmP8TdJ9ARAA54s5lxYX7kx7JLN_nuztBCrnpSXCcuYRaMn4ObtLwSRwc-153DaJS0tC4BqBQkzjIkr8hmbdnhQohcv6Ur5BB2ZIpHhcym2h3QyNaUk2VEvhQZPeHJgf4IhNLzk8nvCZXbZFBSiNj_9qhYkV7eAzjMF3si_jxqY8fXmqUkROBu-2XEy--eKnh3zQMfr3QeVCwylOrr9FZO6vxQGZmCDpXUtyvkbgxKox3vtDhx3c6swC363pzjcLFgXd8hv8E4U4se5bdiawCtKOKg/p.png" align="center" style="width: 100%" />
-</div>  
+</div>
 
+[View Demo](https://memory.teeldinho.co.za)
 
 # **Tech Stack**
 
@@ -42,32 +43,26 @@ Concentration, also known as Memory, Matching Pairs, Match Match, Match Up, Pelm
 <a href="https://reactjs.org/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/react-original-wordmark.svg" alt="React" height="50" /></a>  
 </div>
 
+### API
+
+<div align="center">  
+<a href="https://graphql.org/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/graphql.png" alt="GraphQL" height="50" /></a>
+</div>
+
 </td><td valign="top" width="33%">
 
 ### Backend
 
 <div align="center">  
-<a href="https://www.typescriptlang.org/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/typescript-original.svg" alt="TypeScript" height="50" /></a>  
-<a href="https://github.com/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/git-scm-icon.svg" alt="Git" height="50" /></a>  
-<a href="https://graphql.org/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/graphql.png" alt="GraphQL" height="50" /></a>  
+<a href="https://www.typescriptlang.org/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/typescript-original.svg" alt="TypeScript" height="50" /></a>    
 <a href="https://nextjs.org/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/nextjs.png" alt="NextJS" height="50" /></a>  
+</div>
+<a href="https://www.contentful.com/" target="_blank"><img style="margin: 10px" src="https://seeklogo.com/images/C/contentful-logo-C395C545BF-seeklogo.com.png" alt="Contentful CMS" height="50" /></a>  
 </div>
 
 </td><td valign="top" width="33%">
 
 </td></tr></table>
-
-<br/>
-
-## Connect with me
-
-<br/>
-
-## Github Stats
-
-<br/>
-
-## Recent Blog Posts
 
 <br/>
 
