@@ -12,7 +12,7 @@ const PlayerCardMobile = ({ id, name, score, avatar, turnToPlay }: TPlayer) => {
       }`}
     >
       {/* Player Avatar: */}
-      <div className="relative w-12 h-12 bg-transparent">
+      <div className="relative w-8 h-8 bg-transparent">
         <Image src={avatar} fill alt="Player Avatar" />
       </div>
 

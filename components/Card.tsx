@@ -130,7 +130,7 @@ const Card = (card: ICard) => {
 
   return (
     <div
-      className={`[perspective: 100px] group max-h-20 min-h-[2rem] cursor-pointer select-none overflow-hidden rounded-sm ease-in-out hover:scale-110 hover:opacity-80 lg:h-20 ${
+      className={`[perspective: 100px] group max-h-20 min-h-[2.5rem] cursor-pointer select-none overflow-hidden rounded-sm ease-in-out hover:scale-110 hover:opacity-80 lg:h-20 ${
         card.matched ? "invisible" : ""
       }`}
       onClick={handleCardFlip}
