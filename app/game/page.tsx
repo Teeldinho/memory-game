@@ -17,6 +17,8 @@ const Game = () => {
     storeCardsMatchFound,
     storeResetStore,
     storeStartGame,
+    storeStopGame,
+    storeGameStarted,
     storeShuffleCards,
     storeSelectedCards,
     storeFlashDisplayCards,
@@ -25,12 +27,14 @@ const Game = () => {
     (state) => ({
       storePlayers: state.players,
       storeCards: state.cards,
+      storeGameStarted: state.gameStarted,
       storeRemoveCardsMatchedDialog: state.removeCardsMatchedDialog,
       storeResetStore: state.resetStore,
       storeShuffleCards: state.shuffleCards,
       storeSelectedCards: state.selectedCards,
       storeCardsMatchFound: state.cardsMatchFound,
       storeStartGame: state.startGame,
+      storeStopGame: state.stopGame,
       storeFlashDisplayCards: state.flashDisplayCards,
       storeRemoveFlashDisplayCards: state.removeFlashDisplayCards,
     }),
@@ -40,6 +44,9 @@ const Game = () => {
   // reset store on render:
   // run once to fetch card data and shuffle them:
   useEffect(() => {
+    // stop the game:
+    storeStopGame();
+
     // reset the store:
     storeResetStore();
 
@@ -51,10 +58,9 @@ const Game = () => {
     storeFlashDisplayCards();
     setTimeout(() => {
       storeRemoveFlashDisplayCards();
+      // start the game:
+      storeStartGame();
     }, 5000);
-
-    // start the game:
-    storeStartGame();
   }, []);
 
   // useEffect to remove the matched dialog:
@@ -63,7 +69,7 @@ const Game = () => {
     if (storeCardsMatchFound)
       setTimeout(() => {
         storeRemoveCardsMatchedDialog();
-      }, 500);
+      }, 1000);
   }, [storeCardsMatchFound]);
 
   return (
@@ -85,7 +91,7 @@ const Game = () => {
           className={`z-10 grid h-full w-full select-none grid-cols-18 grid-rows-3 gap-2 lg:grid-cols-9 lg:grid-rows-6 lg:gap-8 ${
             storeCardsMatchFound ? "invisible" : ""
           } ${
-            storeSelectedCards.length > 1
+            storeSelectedCards.length > 1 || !storeGameStarted
               ? "pointer-events-none cursor-wait"
               : "pointer-events-auto cursor-default"
           }`}
