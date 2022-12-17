@@ -14,10 +14,10 @@ const PageDecoration = () => {
 
       {/* MOBILE DECORATION */}
       {/* left decoration */}
-      <div className="absolute -top-32 -left-16 -z-10 block h-[400px] w-[400px] rounded-full bg-gradient-mobile-radial-r blur-xl lg:hidden"></div>
+      <div className="absolute -top-32 -left-16 -z-10 block h-[20rem] w-[20rem] rounded-full bg-gradient-mobile-radial-l blur-xl lg:hidden"></div>
 
       {/* right decoration */}
-      <div className="absolute -top-32 -right-8 -z-10 block h-[550px] w-[550px] rounded-full bg-gradient-mobile-radial-r blur-xl lg:hidden"></div>
+      <div className="absolute -top-16 right-0 -z-10 block h-[25rem] w-[25rem] rounded-full bg-gradient-mobile-radial-r blur-xl lg:hidden"></div>
     </>
   );
 };

@@ -42,7 +42,7 @@ export default function RootLayout({
 
       <body className="relative mx-auto flex min-h-screen w-screen select-none flex-col items-center overflow-auto bg-gradient-radial bg-no-repeat p-4 text-white lg:max-w-[1440px]">
         {/* decorate page with background circles: */}
-        {/* <PageDecoration /> */}
+        <PageDecoration />
         {/* If a winner is found, show overlay of results:
         Otherwise, show the game: */}
 
