@@ -11,13 +11,15 @@ Concentration, also known as Memory, Matching Pairs, Match Match, Match Up, Pelm
 <br />
 
 [View Live Demo](https://memory.teeldinho.co.za)
+
+<br />
 <br />
 
 # **Tech Stack**
 
 ### This solution was implemented using the latest NextJS 13 with app directory in beta.
 
-### Client
+### Frontend
 
 - NextJS
 
@@ -29,54 +31,12 @@ Concentration, also known as Memory, Matching Pairs, Match Match, Match Up, Pelm
 
 - GraphQL
 
-### Server
+### Backend
 
 - Contentful Headless CMS
 
 <br/>
 
-## My Skill Set
-
-<table><tr><td valign="top" width="33%">
-
-### Frontend
-
-<div align="center">  
-<a href="https://www.typescriptlang.org/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/typescript-original.svg" alt="TypeScript" height="50" /></a>  
-<a href="https://nextjs.org/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/nextjs.png" alt="NextJS" height="50" /></a>  
-<a href="https://www.tailwindcss.com/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/tailwindcss.svg" alt="Tailwind CSS" height="50" /></a>  
-<a href="https://reactjs.org/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/react-original-wordmark.svg" alt="React" height="50" /></a>  
-</div>
-
-### API
-
-<div align="center">  
-<a href="https://graphql.org/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/graphql.png" alt="GraphQL" height="50" /></a>
-</div>
-
-</td><td valign="top" width="33%">
-
-### Backend
-
-<div align="center">  
-<a href="https://www.typescriptlang.org/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/typescript-original.svg" alt="TypeScript" height="50" /></a>    
-<a href="https://nextjs.org/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/nextjs.png" alt="NextJS" height="50" /></a>  
-</div>
-<a href="https://www.contentful.com/" target="_blank"><img style="margin: 10px" src="https://seeklogo.com/images/C/contentful-logo-C395C545BF-seeklogo.com.png" alt="Contentful CMS" height="50" /></a>  
-</div>
-
-</td><td valign="top" width="33%">
-
-</td></tr></table>
-
 <br/>
 
 <br/>
-
-<br/>
-
-<br />
-
----
-
-<div align="center">Generated using <a href="https://profilinator.rishav.dev/" target="_blank">Github Profilinator</a></div>
