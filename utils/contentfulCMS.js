@@ -1,5 +1,6 @@
 import gql from "graphql-tag";
 import apolloClient from "./apollo-client";
+import { ShuffleCards } from "./ShuffleCards";
 import { StripCardDetails } from "./StripCardDetails";
 
 export async function fetchCardsFromCMS() {
@@ -23,7 +24,13 @@ export async function fetchCardsFromCMS() {
     `,
   });
 
+  // strip card details to match card interface:
   const processedCards = StripCardDetails(data.memoryCardCmsCollection.items);
+
+  // shuffle the cards:
+  ShuffleCards(processedCards);
+  ShuffleCards(processedCards);
+  ShuffleCards(processedCards);
 
   return processedCards;
 }
