@@ -40,7 +40,7 @@ export default function RootLayout({
     <html className={customFont.className}>
       <head />
 
-      <body className="relative mx-auto h-screen w-screen select-none overflow-hidden bg-gradient-radial bg-no-repeat p-4 text-white lg:max-w-[1440px]">
+      <body className="fill-available relative mx-auto flex h-full min-h-screen select-none items-center justify-center overflow-hidden bg-gradient-radial bg-no-repeat p-4 text-white lg:max-w-[1440px]">
         {/* decorate page with background circles: */}
         <PageDecoration />
         {/* If a winner is found, show overlay of results:

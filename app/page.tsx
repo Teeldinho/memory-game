@@ -9,7 +9,6 @@ import shallow from "zustand/shallow";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useMemoryStore } from "store/store";
-import { useEffect } from "react";
 
 type TInputs = {
   namePlayer1: string;
@@ -56,9 +55,9 @@ const Home = () => {
 
   return (
     <div className="p-4 select-none lg:mt-28">
-      <div className="mx-auto flex h-min w-[60vw]  flex-col items-center justify-center gap-4 rounded-xl bg-gradient-mobile p-4 lg:h-full lg:max-w-4xl lg:gap-16 lg:bg-none">
+      <div className="mx-auto flex w-[60vw]  flex-col items-center justify-center gap-4 rounded-xl bg-gradient-mobile p-4 lg:h-full lg:max-w-4xl lg:gap-16 lg:bg-none">
         {/* HEADING QUESTION: */}
-        <h1 className="text-2xl font-bold lg:text-6xl">
+        <h1 className="font-bold text2xl lg:text-6xl">
           Are you ready to play?
         </h1>
 
@@ -71,7 +70,7 @@ const Home = () => {
           <div className="grid w-full grid-cols-2 gap-8 lg:gap-16">
             {/* CARD 2 */}
             <div className="flex flex-col items-center gap-4 lg:gap-8">
-              <div className="relative w-24 h-24 bg-transparent aspect-square lg:h-44 lg:w-44">
+              <div className="relative w-16 h-16 bg-transparent aspect-square lg:h-44 lg:w-44">
                 <Image src={AvatarPlayer1} fill alt="Player 1 Avatar" />
               </div>
 
@@ -79,7 +78,7 @@ const Home = () => {
                 <input
                   {...register("namePlayer1", { required: true })}
                   type="text"
-                  className="block w-full px-4 py-2 m-0 text-base font-normal text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid form-control rounded-xl bg-clip-padding focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none lg:py-4"
+                  className="block w-full px-4 py-1 m-0 text-sm font-normal text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid form-control rounded-xl bg-clip-padding focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none md:text-base lg:py-4"
                   placeholder="Name of Player 1"
                 />
               </div>
@@ -87,7 +86,7 @@ const Home = () => {
 
             {/* CARD 2 */}
             <div className="flex flex-col items-center gap-4 lg:gap-8">
-              <div className="relative w-24 h-24 bg-transparent aspect-square lg:h-44 lg:w-44">
+              <div className="relative w-16 h-16 bg-transparent aspect-square lg:h-44 lg:w-44">
                 <Image src={AvatarPlayer2} fill alt="Player 2 Avatar" />
               </div>
 
@@ -95,7 +94,7 @@ const Home = () => {
                 <input
                   {...register("namePlayer2", { required: true })}
                   type="text"
-                  className="block w-full px-4 py-2 m-0 text-base font-normal text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid form-control rounded-xl bg-clip-padding focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none lg:py-4"
+                  className="block w-full px-4 py-1 m-0 text-sm font-normal text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid form-control rounded-xl bg-clip-padding focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none md:text-base lg:py-4"
                   placeholder="Name of Player 2"
                 />
               </div>
@@ -105,7 +104,7 @@ const Home = () => {
 
           <button
             type="submit"
-            className="mx-auto rounded-xl bg-[#A7DAFF] py-2 px-8 text-base font-bold uppercase text-[#164464] shadow-sm hover:opacity-90 lg:bg-[#0AB169] lg:px-16 lg:py-4 lg:text-xl lg:capitalize lg:text-white"
+            className="mx-auto rounded-xl bg-[#A7DAFF] py-1 px-8 text-base font-bold uppercase text-[#164464] shadow-sm hover:opacity-90 lg:bg-[#0AB169] lg:px-16 lg:py-4 lg:text-xl lg:capitalize lg:text-white"
           >
             Let's Play
           </button>
