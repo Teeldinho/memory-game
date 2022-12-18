@@ -156,7 +156,9 @@ export const useMemoryStore = create<MemoryState>(
         // reset the store:
         get().resetStore();
 
-        // shuffle the cards:
+        // shuffle the cards a couple of times:
+        get().shuffleCards();
+        get().shuffleCards();
         get().shuffleCards();
 
         // flash the cards for players to memorise upon starting:
