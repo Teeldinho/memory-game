@@ -37,6 +37,7 @@ type Actions = {
   resetScores: () => void;
   stopGame: () => void;
   startGame: () => void;
+  restartGame: () => void;
 
   // Card actions:
   setCards: (cards: ICard[]) => void;
@@ -144,6 +145,30 @@ export const useMemoryStore = create<MemoryState>(
         }));
       },
 
+      // restart stop game:
+      restartGame: () => {
+        // stop the game:
+        get().stopGame();
+
+        // remove announce winner:
+        get().announceWinner(false);
+
+        // reset the store:
+        get().resetStore();
+
+        // shuffle the cards:
+        get().shuffleCards();
+
+        // flash the cards for players to memorise upon starting:
+        get().flashDisplayCards();
+
+        setTimeout(() => {
+          get().removeFlashDisplayCards();
+          // start the game:
+          get().startGame();
+        }, 5000);
+      },
+
       clearSelectedCards: () => {
         // reset the flipped property and clear the selected cards:
         set((state) => ({
@@ -204,7 +229,7 @@ export const useMemoryStore = create<MemoryState>(
       shuffleCards: () => {
         set((state) => ({
           ...state,
-          cards: ShuffleCards(state.cards),
+          cards: [...ShuffleCards(state.cards)],
         }));
       },
 
@@ -230,10 +255,21 @@ export const useMemoryStore = create<MemoryState>(
       fetchCards: async () => {
         const processedCards = await fetchCardsFromCMS();
 
+        while (get().cards.length > 0) {
+          // remove all items in cards array:
+          get().cards.pop();
+        }
+
+        console.log("Bana ba");
+        console.log(get().cards);
+
         set((state) => ({
           ...state,
           cards: [...processedCards],
         }));
+
+        console.log("Cardies");
+        console.log(get().cards);
       },
 
       removeCardsMatchedDialog: () => {

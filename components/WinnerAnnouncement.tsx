@@ -15,6 +15,7 @@ const WinnerAnnouncement = () => {
   const {
     storePlayers,
     storeGenerateWinners,
+    storeRestartGame,
     storeWinnersList,
     storeWinnerFound,
     storeAnnounceWinner,
@@ -29,6 +30,7 @@ const WinnerAnnouncement = () => {
       storePlayers: state.players,
       storeCards: state.cards,
       storeGenerateWinners: state.generateWinnersList,
+      storeRestartGame: state.restartGame,
       storeWinnersList: state.winnersList,
       storeWinnerFound: state.winnerFound,
       storeAnnounceWinner: state.announceWinner,
@@ -49,20 +51,12 @@ const WinnerAnnouncement = () => {
   const router = useRouter();
 
   const handlePlayAgain = () => {
-    // reset the scores:
-    storeResetStore();
+    // restart the game:
+    storeRestartGame();
 
-    // shuffle the card deck twice:
-    storeShuffleCards();
-    storeShuffleCards();
-
-    storeAnnounceWinner(false);
-
-    // start the game:
-    storeStartGame();
-
+    // redirect to game:
     router.push("/game");
-    router.refresh();
+    // router.refresh();
   };
 
   const handleExitGame = () => {
@@ -74,7 +68,6 @@ const WinnerAnnouncement = () => {
 
   return (
     <>
-      {/* {storeWinnerFound ? ( */}
       <div className="absolute top-0 left-0 z-50 grid w-full h-full p-2 place-items-center">
         {/* Exit button on mobile screens: */}
         <div className="absolute top-4 right-8 lg:hidden">
@@ -126,7 +119,7 @@ const WinnerAnnouncement = () => {
           {/* Play Again call to action:             */}
           <div>
             <button
-              className="rounded-xl bg-[#A7DAFF] px-4 py-2 text-base font-bold uppercase text-[#164464] hover:opacity-80 lg:py-5"
+              className="rounded-xl bg-[#A7DAFF] px-8 py-2 text-base font-bold uppercase text-[#164464] hover:opacity-80 lg:py-5"
               onClick={handlePlayAgain}
             >
               Play Again
@@ -134,11 +127,6 @@ const WinnerAnnouncement = () => {
           </div>
         </div>
       </div>
-      {/* ) : (
-        <div className="grid w-full h-full place-items-center">
-          <h1 className="font-bold text-7xl">No winners found.</h1>
-        </div>
-      )} */}
     </>
   );
 };

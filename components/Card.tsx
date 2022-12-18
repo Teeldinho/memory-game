@@ -45,6 +45,9 @@ const Card = (card: ICard) => {
 
   // helper function for finding matches:
   const cardsDoMatch = (): boolean => {
+    console.log("CARDS ARE");
+    console.log(storeSelectedCards);
+
     // check if the selected cards have matching numbers (symbols):
     if (
       storeSelectedCards[0].name.toLowerCase() ===

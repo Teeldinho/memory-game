@@ -12,11 +12,13 @@ const Header = () => {
     storeResetStore,
     storeShuffleCards,
     storeFlashDisplayCards,
+    storeRestartGame,
     storeRemoveFlashDisplayCards,
   } = useMemoryStore(
     (state) => ({
       storeStopGame: state.stopGame,
       storeStartGame: state.startGame,
+      storeRestartGame: state.restartGame,
       storeResetStore: state.resetStore,
       storeShuffleCards: state.shuffleCards,
       storeHasGameStarted: state.gameStarted,
@@ -37,22 +39,8 @@ const Header = () => {
   };
 
   const handleRestartGame = () => {
-    // stop the game:
-    storeStopGame();
-
-    // reset the store:
-    storeResetStore();
-
-    // shuffle the cards:
-    storeShuffleCards();
-
-    // flash the cards for players to memorise upon starting:
-    storeFlashDisplayCards();
-    setTimeout(() => {
-      storeRemoveFlashDisplayCards();
-      // start the game:
-      storeStartGame();
-    }, 5000);
+    // restart the game:
+    storeRestartGame();
   };
 
   return (

@@ -28,9 +28,9 @@ export async function fetchCardsFromCMS() {
   const processedCards = StripCardDetails(data.memoryCardCmsCollection.items);
 
   // shuffle the cards:
-  ShuffleCards(processedCards);
-  ShuffleCards(processedCards);
-  ShuffleCards(processedCards);
+  // ShuffleCards(processedCards);
+  // ShuffleCards(processedCards);
+  // ShuffleCards(processedCards);
 
   return processedCards;
 }

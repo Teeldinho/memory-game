@@ -82,7 +82,7 @@ const Home = () => {
                 <input
                   {...register("namePlayer1", { required: true })}
                   type="text"
-                  className="block w-full px-4 py-2 m-0 text-sm font-normal text-blue-900 transition ease-in-out bg-white border-2 border-blue-200 border-solid rounded-lg form-control bg-clip-padding placeholder:text-sm placeholder:text-gray-500 focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none md:text-base lg:border-blue-400 lg:py-4 lg:placeholder:text-base"
+                  className="block w-full px-4 py-2 m-0 text-sm font-normal text-blue-900 transition ease-in-out bg-white border-2 border-blue-200 border-solid rounded-lg form-control bg-clip-padding placeholder:text-sm placeholder:text-gray-500 focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none md:text-base lg:border-blue-400 lg:py-4 lg:placeholder:text-base"
                   placeholder="Name of Player 1"
                 />
               </div>
@@ -98,7 +98,7 @@ const Home = () => {
                 <input
                   {...register("namePlayer2", { required: true })}
                   type="text"
-                  className="block w-full px-4 py-2 m-0 text-sm font-normal text-blue-900 transition ease-in-out bg-white border-2 border-blue-200 border-solid rounded-lg form-control bg-clip-padding placeholder:text-sm placeholder:text-gray-500 focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none md:text-base lg:border-blue-400 lg:py-4 lg:placeholder:text-base"
+                  className="block w-full px-4 py-2 m-0 text-sm font-normal text-blue-900 transition ease-in-out bg-white border-2 border-blue-200 border-solid rounded-lg form-control bg-clip-padding placeholder:text-sm placeholder:text-gray-500 focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none md:text-base lg:border-blue-400 lg:py-4 lg:placeholder:text-base"
                   placeholder="Name of Player 2"
                 />
               </div>
