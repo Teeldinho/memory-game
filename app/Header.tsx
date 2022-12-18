@@ -7,23 +7,15 @@ import shallow from "zustand/shallow";
 const Header = () => {
   const {
     storeStopGame,
-    storeStartGame,
     storeHasGameStarted,
     storeResetStore,
-    storeShuffleCards,
-    storeFlashDisplayCards,
     storeRestartGame,
-    storeRemoveFlashDisplayCards,
   } = useMemoryStore(
     (state) => ({
       storeStopGame: state.stopGame,
-      storeStartGame: state.startGame,
       storeRestartGame: state.restartGame,
       storeResetStore: state.resetStore,
-      storeShuffleCards: state.shuffleCards,
       storeHasGameStarted: state.gameStarted,
-      storeFlashDisplayCards: state.flashDisplayCards,
-      storeRemoveFlashDisplayCards: state.removeFlashDisplayCards,
     }),
     shallow,
   );

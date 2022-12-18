@@ -15,28 +15,18 @@ const Game = () => {
     storeCards,
     storeRemoveCardsMatchedDialog,
     storeCardsMatchFound,
-    storeResetStore,
-    storeStartGame,
-    storeStopGame,
+    storeRestartGame,
     storeGameStarted,
-    storeShuffleCards,
     storeSelectedCards,
-    storeFlashDisplayCards,
-    storeRemoveFlashDisplayCards,
   } = useMemoryStore(
     (state) => ({
       storePlayers: state.players,
       storeCards: state.cards,
       storeGameStarted: state.gameStarted,
       storeRemoveCardsMatchedDialog: state.removeCardsMatchedDialog,
-      storeResetStore: state.resetStore,
-      storeShuffleCards: state.shuffleCards,
       storeSelectedCards: state.selectedCards,
       storeCardsMatchFound: state.cardsMatchFound,
-      storeStartGame: state.startGame,
-      storeStopGame: state.stopGame,
-      storeFlashDisplayCards: state.flashDisplayCards,
-      storeRemoveFlashDisplayCards: state.removeFlashDisplayCards,
+      storeRestartGame: state.restartGame,
     }),
     shallow,
   );
@@ -44,23 +34,8 @@ const Game = () => {
   // reset store on render:
   // run once to fetch card data and shuffle them:
   useEffect(() => {
-    // stop the game:
-    storeStopGame();
-
-    // reset the store:
-    storeResetStore();
-
-    // shuffle the cards twice:
-    storeShuffleCards();
-    storeShuffleCards();
-
-    // flash the cards for players to memorise upon starting:
-    storeFlashDisplayCards();
-    setTimeout(() => {
-      storeRemoveFlashDisplayCards();
-      // start the game:
-      storeStartGame();
-    }, 5000);
+    // restart game:
+    storeRestartGame();
   }, []);
 
   // useEffect to remove the matched dialog:
@@ -73,16 +48,16 @@ const Game = () => {
   }, [storeCardsMatchFound]);
 
   return (
-    <div className="mt-2 flex h-full w-full flex-col items-center justify-center gap-4 lg:mt-8 lg:flex-row lg:gap-16">
+    <div className="flex flex-col items-center justify-center w-full h-full gap-4 mt-2 lg:mt-8 lg:flex-row lg:gap-16">
       {/* Player 1 Card showing name and score  */}
       {/* This card is hidden on mobile: */}
       <PlayerCard {...storePlayers[0]} />
 
       {/* Grid to render the cards: */}
-      <div className="relative mt-3 h-full w-full overflow-hidden rounded-xl bg-gradient-glassy p-3 lg:mt-0 lg:p-8">
+      <div className="relative w-full h-full p-3 mt-3 overflow-hidden rounded-xl bg-gradient-glassy lg:mt-0 lg:p-8">
         {/* CardMatching */}
         {storeCardsMatchFound && (
-          <div className="absolute top-0 left-0 z-30 grid h-full w-full overflow-hidden rounded-xl ">
+          <div className="absolute top-0 left-0 z-30 grid w-full h-full overflow-hidden rounded-xl ">
             <CardMatchFoundOverlay />
           </div>
         )}
@@ -104,13 +79,13 @@ const Game = () => {
 
       {/* Mobile player card and game score: */}
       {/* This card is hidden on large screens: */}
-      <div className="flex w-full items-center lg:hidden">
+      <div className="flex items-center w-full lg:hidden">
         {/* Player 1 Card showing name and turn to play  */}
         <PlayerCardMobile {...storePlayers[0]} />
 
         {/* Score card: */}
-        <div className="w-min bg-none px-4">
-          <h2 className="text-center text-base font-semibold">Score</h2>
+        <div className="px-4 w-min bg-none">
+          <h2 className="text-base font-semibold text-center">Score</h2>
         </div>
 
         {/* Player 2 Card showing name and turn to play  */}
