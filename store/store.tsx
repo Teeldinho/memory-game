@@ -6,6 +6,7 @@ import { StaticImageData } from "next/image";
 import { persist, PersistOptions } from "zustand/middleware";
 import { ICard } from "components/Card";
 import { ShuffleCards } from "utils/ShuffleCards";
+import { GAME_DELAYS, GAME_RULES } from "utils/gameConfig";
 
 import { fetchCardsFromCMS } from "utils/contentfulCMS";
 
@@ -60,8 +61,10 @@ type MemoryState = Store & Actions;
 
 type MyPersist = (
   config: StateCreator<MemoryState>,
-  options: PersistOptions<MemoryState>,
+  options: PersistOptions<MemoryState>
 ) => StateCreator<MemoryState>;
+
+let restartGameTimer: ReturnType<typeof setTimeout> | null = null;
 
 // Initialize state initial:
 const initialMemoryState: Store = {
@@ -102,7 +105,7 @@ export const useMemoryStore = create<MemoryState>(
           players: state.players.map((player) =>
             player.id === playerId
               ? { ...player, score: player.score + 1 }
-              : player,
+              : player
           ),
         }));
       },
@@ -139,6 +142,11 @@ export const useMemoryStore = create<MemoryState>(
 
       // toggle stop game:
       stopGame: () => {
+        if (restartGameTimer) {
+          clearTimeout(restartGameTimer);
+          restartGameTimer = null;
+        }
+
         set((state) => ({
           ...state,
           gameStarted: false,
@@ -147,6 +155,10 @@ export const useMemoryStore = create<MemoryState>(
 
       // restart stop game:
       restartGame: () => {
+        if (restartGameTimer) {
+          clearTimeout(restartGameTimer);
+        }
+
         // stop the game:
         get().stopGame();
 
@@ -157,39 +169,48 @@ export const useMemoryStore = create<MemoryState>(
         get().resetStore();
 
         // shuffle the cards a couple of times:
-        get().shuffleCards();
-        get().shuffleCards();
-        get().shuffleCards();
+        for (let index = 0; index < GAME_RULES.SHUFFLE_ITERATIONS; index += 1) {
+          get().shuffleCards();
+        }
 
         // flash the cards for players to memorise upon starting:
         get().flashDisplayCards();
 
-        setTimeout(() => {
+        restartGameTimer = setTimeout(() => {
           get().removeFlashDisplayCards();
           // start the game:
           get().startGame();
-        }, 5000);
+          restartGameTimer = null;
+        }, GAME_DELAYS.MEMORIZE_CARDS_MS);
       },
 
       clearSelectedCards: () => {
         // reset the flipped property and clear the selected cards:
-        set((state) => ({
-          ...state,
-          cards: state.cards.map((card) =>
-            card.id === get().selectedCards[0]?.id ||
-            card.id === get().selectedCards[1]?.id
-              ? { ...card, flipped: false }
-              : card,
-          ),
-          selectedCards: [] as ICard[],
-        }));
+        set((state) => {
+          const selectedCardIds = new Set(
+            state.selectedCards.map((selectedCard) => selectedCard.id)
+          );
+
+          return {
+            ...state,
+            // support clearing any number of selected cards.
+            cards: state.cards.map((card) => {
+              if (selectedCardIds.has(card.id) && card.matched === false) {
+                return { ...card, flipped: false };
+              }
+
+              return card;
+            }),
+            selectedCards: [] as ICard[],
+          };
+        });
       },
 
       cardIsFlipped: (card1: ICard): boolean => {
-        // filter and find the specific card:
-        const findCard = get().cards.filter((card) => card.id === card1.id);
+        // find the specific card:
+        const findCard = get().cards.find((card) => card.id === card1.id);
 
-        return findCard[0]?.flipped;
+        return findCard?.flipped ?? false;
       },
 
       flashDisplayCards: () => {
@@ -211,7 +232,7 @@ export const useMemoryStore = create<MemoryState>(
         set((state) => ({
           ...state,
           cards: state.cards.map((card) =>
-            card.id === card1.id ? { ...card, flipped: true } : card,
+            card.id === card1.id ? { ...card, flipped: true } : card
           ),
         }));
       },
@@ -247,7 +268,7 @@ export const useMemoryStore = create<MemoryState>(
           cards: state.cards.map((card) =>
             card.id === card1.id || card.id === card2.id
               ? { ...card, matched: true, flipped: true }
-              : card,
+              : card
           ),
           cardsMatchFound: true,
         }));
@@ -257,21 +278,10 @@ export const useMemoryStore = create<MemoryState>(
       fetchCards: async () => {
         const processedCards = await fetchCardsFromCMS();
 
-        while (get().cards.length > 0) {
-          // remove all items in cards array:
-          get().cards.pop();
-        }
-
-        console.log("Bana ba");
-        console.log(get().cards);
-
         set((state) => ({
           ...state,
           cards: [...processedCards],
         }));
-
-        console.log("Cardies");
-        console.log(get().cards);
       },
 
       removeCardsMatchedDialog: () => {
@@ -305,16 +315,45 @@ export const useMemoryStore = create<MemoryState>(
       },
 
       addSelectedCard: (card: ICard) => {
-        set((state) => ({
-          ...state,
-          selectedCards: [...state.selectedCards, card],
-        }));
+        set((state) => {
+          if (
+            state.selectedCards.length >= GAME_RULES.REQUIRED_SELECTED_CARDS
+          ) {
+            return state;
+          }
+
+          if (
+            state.selectedCards.some(
+              (selectedCard) => selectedCard.id === card.id
+            )
+          ) {
+            return state;
+          }
+
+          const boardCard = state.cards.find(
+            (existingCard) => existingCard.id === card.id
+          );
+
+          if (!boardCard || boardCard.flipped || boardCard.matched) {
+            return state;
+          }
+
+          return {
+            ...state,
+            cards: state.cards.map((existingCard) =>
+              existingCard.id === card.id
+                ? { ...existingCard, flipped: true }
+                : existingCard
+            ),
+            selectedCards: [...state.selectedCards, card],
+          };
+        });
       },
 
       generateWinnersList: (players: TPlayer[]) => {
         // sort the players according to their scores:
         const arrWinners: TPlayer[] = [...players].sort(
-          (a, b) => b.score - a.score,
+          (a, b) => b.score - a.score
         );
 
         set((state) => ({
@@ -327,24 +366,30 @@ export const useMemoryStore = create<MemoryState>(
       // reset the values of the store:
       resetStore: () => {
         // capture the existing names:
-        let player1Name = get().players[0].name;
-        let player2Name = get().players[1].name;
+        const player1Name = get().players[0].name;
+        const player2Name = get().players[1].name;
+        const resetCards = get().cards.map((card) => ({
+          ...card,
+          matched: false,
+          flipped: false,
+        }));
 
-        // reset card properties and score without fetching them from CMS:
-        get().resetCardsProperties();
-        get().resetScores();
+        if (restartGameTimer) {
+          clearTimeout(restartGameTimer);
+          restartGameTimer = null;
+        }
 
-        // reset the entire state: (exit game):
-        set((state) => ({
-          initialMemoryState,
+        set(() => ({
+          ...initialMemoryState,
           players: [
-            { ...state.players[0], name: player1Name },
-            { ...state.players[1], name: player2Name },
+            { ...initialMemoryState.players[0], name: player1Name },
+            { ...initialMemoryState.players[1], name: player2Name },
           ],
+          cards: resetCards,
         }));
       },
     }),
 
-    { name: "memory-store", getStorage: () => sessionStorage },
-  ),
+    { name: "memory-store", getStorage: () => sessionStorage }
+  )
 );

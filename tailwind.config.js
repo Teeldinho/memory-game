@@ -7,6 +7,22 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        brand: {
+          primary: "#489DDA",
+          heading: "#164464",
+          deep: "#0D4477",
+        },
+        action: {
+          success: "#0AB169",
+          warning: "#F4A236",
+          danger: "#D4190C",
+          info: "#A7DAFF",
+        },
+        accent: {
+          gold: "#FFD975",
+        },
+      },
       gridTemplateColumns: {
         // Simple 18 column grid
         18: "repeat(18, minmax(0, 1fr))",

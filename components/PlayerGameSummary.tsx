@@ -13,10 +13,10 @@ const PlayerGameSummary = ({ position, player }: TAnnouncePlayer) => {
 
   return (
     <div className="w-full">
-      <div className="relative mx-auto flex w-[70%] items-center justify-between text-[#0D4477]">
+      <div className="relative mx-auto flex w-full max-w-3xl items-center justify-between px-2 text-brand-deep sm:px-4">
         {/* Display the trophy alongside, only if the player won */}
         {position === 1 ? (
-          <div className="absolute -left-14 lg:-left-28">
+          <div className="absolute -left-3 sm:-left-10 lg:-left-20">
             <div className="relative h-10 w-10 lg:h-[70px] lg:w-[70px]">
               <Image fill src={Trophy} alt="Player Trophy" />
             </div>
@@ -27,12 +27,12 @@ const PlayerGameSummary = ({ position, player }: TAnnouncePlayer) => {
         <div
           className={`flex w-full items-center justify-around rounded-xl p-2 lg:py-5 ${
             position === 1
-              ? "bg-gradient-to-r from-[#FFD975] to-yellow-100"
+              ? "bg-gradient-to-r from-accent-gold to-yellow-100"
               : "bg-white"
           }`}
         >
           {/* player avatar: */}
-          <div className="relative w-10 h-10 overflow-hidden lg:h-20 lg:w-20">
+          <div className="relative h-10 w-10 overflow-hidden lg:h-20 lg:w-20">
             <Image src={player.avatar} alt="Player Avatar" fill />
           </div>
 
@@ -40,7 +40,9 @@ const PlayerGameSummary = ({ position, player }: TAnnouncePlayer) => {
           <h3 className="text-base font-bold lg:text-xl">{playerPosition}</h3>
 
           {/* player name: */}
-          <h3 className="text-base lg:text-xl">{player.name}</h3>
+          <h3 className="max-w-[7rem] truncate text-base lg:max-w-none lg:text-xl">
+            {player.name}
+          </h3>
 
           {/* player score: */}
           <h3 className="text-base lg:text-xl">Score: {player.score}</h3>

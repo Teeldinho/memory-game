@@ -4,9 +4,10 @@ import CardBack from "@/assets/Card_Back.png";
 import Image from "next/image";
 import { useMemoryStore } from "store/store";
 import shallow from "zustand/shallow";
+import { GAME_DELAYS, GAME_RULES } from "utils/gameConfig";
 
 export interface ICard {
-  id: number;
+  id: string;
   name: string;
   symbol: string;
   color: string;
@@ -17,123 +18,108 @@ export interface ICard {
 
 const Card = (card: ICard) => {
   const {
-    storePlayers,
-    storeCards,
-    storeSelectedCards,
     storeAnnounceWinner,
     storeToggleTurn,
     storeSetCardsMatched,
     storeIncreasePlayerScore,
     storeClearSelectedCards,
-    storeFlipSelectedCard,
+    storeAddSelectedCard,
     storeCardIsFlipped,
   } = useMemoryStore(
     (state) => ({
-      storePlayers: state.players,
-      storeCards: state.cards,
-      storeSelectedCards: state.selectedCards,
       storeAnnounceWinner: state.announceWinner,
       storeToggleTurn: state.toggleTurn,
       storeSetCardsMatched: state.setCardsMatched,
       storeIncreasePlayerScore: state.increasePlayerScore,
       storeClearSelectedCards: state.clearSelectedCards,
+      storeAddSelectedCard: state.addSelectedCard,
       storeCardIsFlipped: state.cardIsFlipped,
-      storeFlipSelectedCard: state.flipSelectedCard,
     }),
-    shallow,
+    shallow
   );
 
   // helper function for finding matches:
-  const cardsDoMatch = (): boolean => {
-    console.log("CARDS ARE");
-    console.log(storeSelectedCards);
+  const cardsDoMatch = (selectedCards: ICard[]): boolean => {
+    const [firstCard, secondCard] = selectedCards;
 
-    // check if the selected cards have matching numbers (symbols):
-    if (
-      storeSelectedCards[0].name.toLowerCase() ===
-      storeSelectedCards[1].name.toLowerCase()
-    ) {
-      console.log("The names are a match!");
-      // check if the cards are jokers:
-      if (storeSelectedCards[0].name.toLowerCase() === "joker") {
-        console.log("Jokers found!");
-
-        return true;
-      } else {
-        // else check if the colors of non-Joker cards match:
-        if (
-          storeSelectedCards[0].color.toLowerCase() ===
-          storeSelectedCards[1].color.toLowerCase()
-        ) {
-          console.log("The colors are a match!");
-
-          return true;
-        }
-      }
+    if (!firstCard || !secondCard) {
+      return false;
     }
 
-    return false;
+    // check if the selected cards have matching numbers (symbols):
+    if (firstCard.name.toLowerCase() !== secondCard.name.toLowerCase()) {
+      return false;
+    }
+
+    // check if the cards are jokers:
+    if (firstCard.name.toLowerCase() === GAME_RULES.JOKER_NAME) {
+      return true;
+    }
+
+    // else check if the colors of non-Joker cards match:
+    return firstCard.color.toLowerCase() === secondCard.color.toLowerCase();
   };
 
   // handle the card flips:
   const handleCardFlip = () => {
-    // flip the selected card:
-    storeFlipSelectedCard(card);
+    const previousSelectedCardsCount =
+      useMemoryStore.getState().selectedCards.length;
 
-    // push the card into the selected cards array:
-    if (storeSelectedCards.length < 2) {
-      // only push the card into the array if there will not be a duplicate (i.e. double clicking on a card will not match):
-      if (!storeSelectedCards.some((c) => c.id === card.id)) {
-        storeSelectedCards.push(card);
-        // only check if cards match if the are 2 cards flipped:
-        if (storeSelectedCards.length === 2) {
-          // Determine the result:
-          if (cardsDoMatch()) {
-            console.log("These cards are matching.");
-            // set the cards to matching, so they can be hidden from board:
-            storeSetCardsMatched(storeSelectedCards[0], storeSelectedCards[1]);
-            // increase the player's score if they found a match:
-            storePlayers.map((player) => {
-              if (player.turnToPlay) {
-                storeIncreasePlayerScore(player.id);
-              }
-            });
+    storeAddSelectedCard(card);
 
-            // check if it's the last 2 cards that are not matched:
-            const checkLastCards = storeCards.filter(
-              (c) => c.matched === false,
-            );
-            // trigger a results overlay when EVERY card has been matched:
-            if (checkLastCards.length === 2) {
-              // trigger annoucement if both cards are selected:
-              if (storeSelectedCards.length === 2) {
-                storeClearSelectedCards();
-                storeAnnounceWinner(true);
-              }
-            }
-            // if (storeCards.every((card) => card.matched === true)) {
-            //   storeAnnounceWinner(true);
-            // }
-          } else {
-            // Cards are NOT a match:
-            console.log("These cards are NOT matching.");
+    const latestStoreState = useMemoryStore.getState();
+    const nextSelectedCards = latestStoreState.selectedCards;
 
-            // switch player turns:
-            storeToggleTurn();
-          }
-
-          setTimeout(() => {
-            // clear the selected cards:
-            storeClearSelectedCards();
-          }, 1000);
-        }
-      }
+    if (nextSelectedCards.length === previousSelectedCardsCount) {
+      return;
     }
+
+    // only check if cards match if there are exactly 2 cards flipped:
+    if (nextSelectedCards.length !== GAME_RULES.REQUIRED_SELECTED_CARDS) {
+      return;
+    }
+
+    // Determine the result:
+    if (cardsDoMatch(nextSelectedCards)) {
+      // set the cards to matching, so they can be hidden from board:
+      storeSetCardsMatched(nextSelectedCards[0], nextSelectedCards[1]);
+
+      const activePlayer = latestStoreState.players.find(
+        (player) => player.turnToPlay
+      );
+
+      // increase the player's score if they found a match:
+      if (activePlayer) {
+        storeIncreasePlayerScore(activePlayer.id);
+      }
+
+      // check if it's the last 2 cards that are not matched:
+      const unmatchedCards = latestStoreState.cards.filter((existingCard) => {
+        return existingCard.matched === false;
+      });
+
+      // trigger a results overlay when EVERY card has been matched:
+      if (unmatchedCards.length === GAME_RULES.REQUIRED_SELECTED_CARDS) {
+        storeClearSelectedCards();
+        storeAnnounceWinner(true);
+
+        return;
+      }
+    } else {
+      // Cards are NOT a match:
+      // switch player turns:
+      storeToggleTurn();
+    }
+
+    setTimeout(() => {
+      // clear the selected cards:
+      storeClearSelectedCards();
+    }, GAME_DELAYS.MATCH_OVERLAY_MS);
   };
 
   return (
     <div
-      className={`[perspective: 100px] group max-h-20 min-h-[3.5rem] cursor-pointer select-none overflow-hidden rounded-sm ease-in-out hover:scale-110 hover:opacity-80 lg:h-20 ${
+      className={`group max-h-20 min-h-[3.5rem] cursor-pointer select-none overflow-hidden rounded-sm ease-in-out [perspective:1000px] hover:scale-110 hover:opacity-80 lg:h-20 ${
         card.matched ? "invisible" : ""
       }`}
       onClick={handleCardFlip}
@@ -143,7 +129,7 @@ const Card = (card: ICard) => {
           storeCardIsFlipped(card) ? "[transform:rotateY(180deg)]" : ""
         }`}
       >
-        <div className="absolute inset-0 h-full w-full transition-all duration-500 [transform:rotateY(180deg)]">
+        <div className="absolute inset-0 h-full w-full transition-all duration-500 [backface-visibility:hidden]">
           <Image src={CardBack} fill alt="Card Back" />
         </div>
 

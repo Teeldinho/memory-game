@@ -28,14 +28,13 @@ const Home = () => {
         storeFetchCards: state.fetchCards,
         storeSetNames: state.setNames,
       }),
-      shallow,
+      shallow
     );
 
   // Use React Hook Form to capture and validate input:
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<TInputs>();
 
@@ -58,23 +57,23 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="w-full h-full p-4 select-none lg:mt-28">
-      <div className="mx-auto flex w-[70vw] flex-col items-center justify-center gap-4 rounded-xl bg-gradient-mobile p-8 lg:h-full lg:max-w-4xl lg:gap-16 lg:bg-none">
+    <div className="flex h-full w-full flex-1 items-center justify-center py-4 lg:py-8">
+      <div className="mx-auto flex w-full max-w-5xl flex-col items-center justify-center gap-6 rounded-xl bg-gradient-mobile px-4 py-8 sm:px-8 md:px-10 lg:gap-16 lg:bg-none lg:px-16">
         {/* HEADING QUESTION: */}
-        <h1 className="text-3xl font-bold lg:text-6xl">
+        <h1 className="text-center text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
           Are you ready to play?
         </h1>
 
         {/* AVATARS AND NAME INPUT BOX */}
 
         <form
-          className="flex flex-col items-center w-full h-full gap-6 mx-auto lg:gap-16"
+          className="mx-auto flex h-full w-full max-w-4xl flex-col items-center gap-8 lg:gap-16"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <div className="grid w-full grid-cols-2 gap-8 lg:gap-16">
+          <div className="grid w-full grid-cols-1 gap-8 sm:grid-cols-2 lg:gap-16">
             {/* CARD 2 */}
             <div className="flex flex-col items-center gap-4 lg:gap-8">
-              <div className="relative w-16 h-16 bg-transparent aspect-square lg:h-44 lg:w-44">
+              <div className="relative aspect-square h-16 w-16 bg-transparent lg:h-44 lg:w-44">
                 <Image src={AvatarPlayer1} fill alt="Player 1 Avatar" />
               </div>
 
@@ -82,7 +81,7 @@ const Home = () => {
                 <input
                   {...register("namePlayer1", { required: true })}
                   type="text"
-                  className="block w-full px-4 py-2 m-0 text-sm font-normal text-blue-900 transition ease-in-out bg-white border-2 border-blue-200 border-solid rounded-lg form-control bg-clip-padding placeholder:text-sm placeholder:text-gray-500 focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none md:text-base lg:border-blue-400 lg:py-4 lg:placeholder:text-base"
+                  className="form-control m-0 block w-full rounded-lg border-2 border-solid border-blue-200 bg-white bg-clip-padding px-4 py-2 text-sm font-normal text-blue-900 transition ease-in-out placeholder:text-sm placeholder:text-gray-500 focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none md:text-base lg:border-blue-400 lg:py-4 lg:placeholder:text-base"
                   placeholder="Name of Player 1"
                 />
               </div>
@@ -90,7 +89,7 @@ const Home = () => {
 
             {/* CARD 2 */}
             <div className="flex flex-col items-center gap-4 lg:gap-8">
-              <div className="relative w-16 h-16 bg-transparent aspect-square lg:h-44 lg:w-44">
+              <div className="relative aspect-square h-16 w-16 bg-transparent lg:h-44 lg:w-44">
                 <Image src={AvatarPlayer2} fill alt="Player 2 Avatar" />
               </div>
 
@@ -98,7 +97,7 @@ const Home = () => {
                 <input
                   {...register("namePlayer2", { required: true })}
                   type="text"
-                  className="block w-full px-4 py-2 m-0 text-sm font-normal text-blue-900 transition ease-in-out bg-white border-2 border-blue-200 border-solid rounded-lg form-control bg-clip-padding placeholder:text-sm placeholder:text-gray-500 focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none md:text-base lg:border-blue-400 lg:py-4 lg:placeholder:text-base"
+                  className="form-control m-0 block w-full rounded-lg border-2 border-solid border-blue-200 bg-white bg-clip-padding px-4 py-2 text-sm font-normal text-blue-900 transition ease-in-out placeholder:text-sm placeholder:text-gray-500 focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none md:text-base lg:border-blue-400 lg:py-4 lg:placeholder:text-base"
                   placeholder="Name of Player 2"
                 />
               </div>
@@ -108,11 +107,11 @@ const Home = () => {
 
           <button
             type="submit"
-            className={`mx-auto rounded-lg bg-[#A7DAFF] py-2 px-8 text-base font-bold uppercase text-[#164464] shadow-sm hover:opacity-90 lg:bg-[#0AB169] lg:px-16 lg:py-4 lg:text-xl lg:capitalize lg:text-white ${
+            className={`mx-auto rounded-lg bg-action-info py-2 px-8 text-base font-bold uppercase text-brand-heading shadow-sm hover:opacity-90 lg:bg-action-success lg:px-16 lg:py-4 lg:text-xl lg:capitalize lg:text-white ${
               errors.namePlayer1 || errors.namePlayer2
                 ? "cursor-not-allowed opacity-50"
                 : ""
-            }}`}
+            }`}
           >
             Let's Play
           </button>

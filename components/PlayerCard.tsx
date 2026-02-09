@@ -5,14 +5,14 @@ import { TPlayer } from "store/store";
 const PlayerCard = (player: TPlayer) => {
   const { id, name, score, avatar, turnToPlay } = player;
   return (
-    <div className="flex-col hidden gap-4 lg:flex">
+    <div className="hidden flex-col gap-4 lg:flex">
       {/* Player Card */}
       <div className="flex h-[350px] w-48 flex-col gap-8 rounded-xl bg-gradient-player-card p-7">
-        <div className="relative grid w-full bg-transparent h-52 place-items-center">
+        <div className="relative grid h-52 w-full place-items-center bg-transparent">
           <Image src={avatar} alt="Player Avatar" />
         </div>
 
-        <div className="flex flex-col items-center w-full gap-4">
+        <div className="flex w-full flex-col items-center gap-4">
           <h2 className="text-xl font-extrabold">{name}</h2>
           <h2 className="text-xl font-semibold">Score: {score}</h2>
         </div>
@@ -23,19 +23,19 @@ const PlayerCard = (player: TPlayer) => {
 
       {id === 1 ? (
         <div
-          className={`rounded-xl bg-[#0AB169] py-4 text-white ${
+          className={`rounded-xl bg-action-success py-4 text-white ${
             turnToPlay ? "block" : "invisible"
           }`}
         >
-          <h2 className="text-2xl font-bold text-center">It's Your Turn</h2>
+          <h2 className="text-center text-2xl font-bold">It's Your Turn</h2>
         </div>
       ) : (
         <div
-          className={`rounded-xl bg-white py-4 text-[#489DDA] ${
+          className={`rounded-xl bg-white py-4 text-brand-primary ${
             turnToPlay ? "block" : "invisible"
           }`}
         >
-          <h2 className="text-2xl font-bold text-center">It's Your Turn</h2>
+          <h2 className="text-center text-2xl font-bold">It's Your Turn</h2>
         </div>
       )}
     </div>

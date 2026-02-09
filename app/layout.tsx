@@ -5,7 +5,6 @@ import Header from "./Header";
 
 // Install Poppins font:
 import { Poppins } from "@next/font/google";
-import { useEffect, useState } from "react";
 import { useMemoryStore } from "store/store";
 import shallow from "zustand/shallow";
 import WinnerAnnouncement from "components/WinnerAnnouncement";
@@ -29,18 +28,14 @@ export default function RootLayout({
     (state) => ({
       storeWinnerFound: state.winnerFound,
     }),
-    shallow,
+    shallow
   );
-
-  useEffect(() => {
-    if (storeWinnerFound) console.log("WINNER FOUND!");
-  }, [storeWinnerFound]);
 
   return (
     <html className={customFont.className}>
       <head />
 
-      <body className="relative mx-auto flex min-h-screen w-screen select-none flex-col items-center overflow-auto bg-gradient-radial bg-no-repeat p-4 text-white lg:max-w-[1440px] lg:overflow-hidden">
+      <body className="relative min-h-screen select-none overflow-x-hidden bg-gradient-radial bg-no-repeat text-white">
         {/* decorate page with background circles: */}
         <PageDecoration />
         {/* If a winner is found, show overlay of results:
@@ -50,9 +45,9 @@ export default function RootLayout({
           <WinnerAnnouncement />
         ) : (
           <>
-            <div className="grid w-full h-full px-2 my-auto text-center place-items-center landscape:hidden">
+            <div className="grid min-h-screen w-full place-items-center px-4 text-center landscape:hidden">
               <div className="flex flex-col items-center gap-8 justify-self-center">
-                <BsPhoneLandscape className="w-16 h-16 animate-bounce" />
+                <BsPhoneLandscape className="h-16 w-16 animate-bounce" />
 
                 <h1 className="text-3xl font-medium">
                   Please turn your device into landscape mode to play the game.
@@ -60,7 +55,7 @@ export default function RootLayout({
               </div>
             </div>
 
-            <div className="flex flex-col w-full h-full gap-2 portrait:hidden">
+            <div className="mx-auto flex min-h-screen w-full max-w-[1440px] flex-col gap-2 px-4 py-4 lg:px-8 lg:py-6 portrait:hidden">
               <Header />
               {children}
             </div>
