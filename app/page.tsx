@@ -16,6 +16,11 @@ type TInputs = {
   namePlayer2: string;
 };
 
+const FORM_ERRORS = {
+  PLAYER_1_REQUIRED: "Player 1 name is required.",
+  PLAYER_2_REQUIRED: "Player 2 name is required.",
+} as const;
+
 const Home = () => {
   // router for navigating pages:
   const router = useRouter();
@@ -35,7 +40,7 @@ const Home = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<TInputs>();
 
   const onSubmit: SubmitHandler<TInputs> = (data) => {
@@ -79,11 +84,27 @@ const Home = () => {
 
               <div className="w-full">
                 <input
-                  {...register("namePlayer1", { required: true })}
+                  {...register("namePlayer1", {
+                    required: FORM_ERRORS.PLAYER_1_REQUIRED,
+                    validate: (value) =>
+                      value.trim().length > 0 || FORM_ERRORS.PLAYER_1_REQUIRED,
+                  })}
                   type="text"
+                  aria-invalid={Boolean(errors.namePlayer1)}
+                  aria-describedby="name-player-1-error"
                   className="form-control m-0 block w-full rounded-lg border-2 border-solid border-blue-200 bg-white bg-clip-padding px-4 py-2 text-sm font-normal text-blue-900 transition ease-in-out placeholder:text-sm placeholder:text-gray-500 focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none md:text-base lg:border-blue-400 lg:py-4 lg:placeholder:text-base"
                   placeholder="Name of Player 1"
                 />
+
+                {errors.namePlayer1 && (
+                  <p
+                    id="name-player-1-error"
+                    role="alert"
+                    className="mt-2 text-sm font-semibold text-action-danger"
+                  >
+                    {errors.namePlayer1.message}
+                  </p>
+                )}
               </div>
             </div>
 
@@ -95,11 +116,27 @@ const Home = () => {
 
               <div className="w-full">
                 <input
-                  {...register("namePlayer2", { required: true })}
+                  {...register("namePlayer2", {
+                    required: FORM_ERRORS.PLAYER_2_REQUIRED,
+                    validate: (value) =>
+                      value.trim().length > 0 || FORM_ERRORS.PLAYER_2_REQUIRED,
+                  })}
                   type="text"
+                  aria-invalid={Boolean(errors.namePlayer2)}
+                  aria-describedby="name-player-2-error"
                   className="form-control m-0 block w-full rounded-lg border-2 border-solid border-blue-200 bg-white bg-clip-padding px-4 py-2 text-sm font-normal text-blue-900 transition ease-in-out placeholder:text-sm placeholder:text-gray-500 focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none md:text-base lg:border-blue-400 lg:py-4 lg:placeholder:text-base"
                   placeholder="Name of Player 2"
                 />
+
+                {errors.namePlayer2 && (
+                  <p
+                    id="name-player-2-error"
+                    role="alert"
+                    className="mt-2 text-sm font-semibold text-action-danger"
+                  >
+                    {errors.namePlayer2.message}
+                  </p>
+                )}
               </div>
             </div>
           </div>
@@ -107,11 +144,8 @@ const Home = () => {
 
           <button
             type="submit"
-            className={`mx-auto rounded-lg bg-action-info py-2 px-8 text-base font-bold uppercase text-brand-heading shadow-sm hover:opacity-90 lg:bg-action-success lg:px-16 lg:py-4 lg:text-xl lg:capitalize lg:text-white ${
-              errors.namePlayer1 || errors.namePlayer2
-                ? "cursor-not-allowed opacity-50"
-                : ""
-            }`}
+            disabled={isSubmitting}
+            className="mx-auto rounded-lg bg-action-info py-2 px-8 text-base font-bold uppercase text-brand-heading shadow-sm hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 lg:bg-action-success lg:px-16 lg:py-4 lg:text-xl lg:capitalize lg:text-white"
           >
             Let's Play
           </button>

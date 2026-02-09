@@ -5,6 +5,7 @@ import Header from "./Header";
 
 // Install Poppins font:
 import { Poppins } from "@next/font/google";
+import { useEffect, useState } from "react";
 import { useMemoryStore } from "store/store";
 import shallow from "zustand/shallow";
 import WinnerAnnouncement from "components/WinnerAnnouncement";
@@ -23,6 +24,12 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
   //access global state:
   const { storeWinnerFound } = useMemoryStore(
     (state) => ({
@@ -30,6 +37,19 @@ export default function RootLayout({
     }),
     shallow
   );
+
+  if (!hasMounted) {
+    return (
+      <html className={customFont.className}>
+        <head />
+
+        <body className="relative min-h-screen select-none overflow-x-hidden bg-gradient-radial bg-no-repeat text-white">
+          <PageDecoration />
+          <div className="min-h-screen w-full" />
+        </body>
+      </html>
+    );
+  }
 
   return (
     <html className={customFont.className}>

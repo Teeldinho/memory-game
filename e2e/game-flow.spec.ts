@@ -67,6 +67,20 @@ test("exit button is hidden on home and works in game flow", async ({
   await expect(page).toHaveURL(new RegExp(`${HOME_ROUTE}$`));
 });
 
+test("home form shows validation messages when names are empty", async ({
+  page,
+}) => {
+  await mockContentfulCards(page);
+  await page.setViewportSize({ width: 1080, height: 810 });
+  await page.goto(HOME_ROUTE);
+
+  await page.getByRole("button", { name: "Let's Play" }).click();
+
+  await expect(page).toHaveURL(new RegExp(`${HOME_ROUTE}$`));
+  await expect(page.getByText("Player 1 name is required.")).toBeVisible();
+  await expect(page.getByText("Player 2 name is required.")).toBeVisible();
+});
+
 test("game can complete and show winner announcement", async ({ page }) => {
   await mockContentfulCards(page);
   await page.setViewportSize({ width: 1080, height: 810 });
